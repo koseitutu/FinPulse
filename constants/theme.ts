@@ -82,38 +82,41 @@ export const darkPalette: Palette = {
 };
 
 // Polished light mode, tuned for readability and a warm, premium feel.
+// Color story pulled from the app icon: deep navy + rich gold cowry shell +
+// electric cyan. Backgrounds lean into a warm ivory/parchment to echo the
+// gold tones, while text stays deep navy and accents keep the cyan info hue.
 export const lightPalette: Palette = {
-  // Backgrounds — soft off-white with a gentle blue tint so the gold still pops.
-  bg: '#F5F7FB',
-  bgElevated: '#FFFFFF',
-  surface: '#FFFFFF',
-  surfaceAlt: '#EEF2F8',
-  surfaceHigh: '#E3E9F3',
-  border: '#D6DEEB',
-  borderSubtle: '#E7ECF4',
+  // Backgrounds — warm parchment/ivory that makes the gold feel native.
+  bg: '#F5ECD4',
+  bgElevated: '#FFFAE8',
+  surface: '#FFFDF3',
+  surfaceAlt: '#EFE3C1',
+  surfaceHigh: '#E4D4A7',
+  border: '#D6C38E',
+  borderSubtle: '#E8DCB6',
 
-  // Text — deep navy for maximum contrast against the near-white backgrounds.
+  // Text — deep navy straight from the icon for maximum contrast.
   text: '#0B1A33',
   textSecondary: '#3F4E6B',
-  textMuted: '#6B7890',
-  textDim: '#9AA5BA',
+  textMuted: '#6B6A5A',
+  textDim: '#A59C7F',
 
   // Gold accent (unchanged — pops on light too).
-  gold: '#F4B942',
-  goldSoft: '#F4B9421F',
-  goldDim: '#B98A28',
+  gold: '#C8921F',
+  goldSoft: '#C8921F26',
+  goldDim: '#8D6B26',
 
-  // Semantic — slightly deeper shades so they read well on light surfaces.
+  // Semantic — slightly deeper shades so they read well on warm surfaces.
   income: '#1FA463',
   incomeSoft: '#1FA46322',
   expense: '#D93A2B',
   expenseSoft: '#D93A2B1F',
-  info: '#3B82F6',
+  info: '#1E88E5',
   warn: '#E0A42F',
 
   chart: [
-    '#E0A42F',
-    '#3B82F6',
+    '#C8921F',
+    '#1E88E5',
     '#1FA463',
     '#D93A2B',
     '#8F3FD9',
@@ -122,9 +125,9 @@ export const lightPalette: Palette = {
     '#E6B73A',
   ],
 
-  shadow: 'rgba(11,26,51,0.12)',
+  shadow: 'rgba(11,26,51,0.14)',
   overlay: 'rgba(11,26,51,0.45)',
-  inverseText: '#FFFFFF',
+  inverseText: '#FFFAE8',
 };
 
 /**
