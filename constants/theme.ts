@@ -86,14 +86,16 @@ export const darkPalette: Palette = {
 // electric cyan. Backgrounds lean into a warm ivory/parchment to echo the
 // gold tones, while text stays deep navy and accents keep the cyan info hue.
 export const lightPalette: Palette = {
-  // Backgrounds — warm parchment/ivory that makes the gold feel native.
-  bg: '#F5ECD4',
-  bgElevated: '#FFFAE8',
-  surface: '#FFFDF3',
-  surfaceAlt: '#EFE3C1',
-  surfaceHigh: '#E4D4A7',
-  border: '#D6C38E',
-  borderSubtle: '#E8DCB6',
+  // Backgrounds — deeper warm amber-parchment pulled from the icon's gold.
+  // The base feels distinctly colored (not washed out), while cards sit as a
+  // lighter, warmer ivory on top so they read as elevated surfaces.
+  bg: '#EBDCA8',
+  bgElevated: '#F5EAC1',
+  surface: '#FAF1CE',
+  surfaceAlt: '#E2D097',
+  surfaceHigh: '#D1BC7C',
+  border: '#C2AA66',
+  borderSubtle: '#DBC78C',
 
   // Text — deep navy straight from the icon for maximum contrast.
   text: '#0B1A33',
