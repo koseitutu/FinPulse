@@ -5,34 +5,44 @@ import { Link } from 'expo-router';
 import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
 import { AppText, Card, IconCircle, ProgressBar, SectionHeader } from './ui';
 import { Sparkline } from './charts';
-import { activeTransactions, useAppStore } from '@/store/useAppStore';
+import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { daysInMonth, filterMonth, forecast, formatRelative, sumByType } from '@/utils/finance';
 import type { WidgetKey } from '@/store/types';
 
 export function BalanceWidget() {
   const accounts = useAppStore((s) => s.accounts);
-  const txs = useAppStore(activeTransactions);
+  const txs = useActiveTransactions();
   const rates = useAppStore((s) => s.exchangeRates);
   const preferredCcy = useAppStore((s) => s.preferences.currency);
 
-  const convertToBase = (amount: number, ccy: string) => {
-    const rate = rates[ccy] ?? 1;
-    const baseRate = rates[preferredCcy] ?? 1;
-    if (ccy === preferredCcy) return amount;
-    // amount ccy -> GHS base = amount / rate * (rates of base)
-    return (amount / rate) * baseRate;
-  };
-  const total = accounts.reduce((acc, a) => acc + convertToBase(a.balance, a.currency), 0);
+  const safeCcy = preferredCcy || 'USD';
+
+  const total = useMemo(() => {
+    const list = accounts ?? [];
+    const rateMap = rates ?? {};
+    const baseRate = rateMap[safeCcy] ?? 1;
+    return list.reduce((acc, a) => {
+      if (!a || typeof a.balance !== 'number' || Number.isNaN(a.balance)) return acc;
+      const ccy = a.currency || safeCcy;
+      if (ccy === safeCcy) return acc + a.balance;
+      const rate = rateMap[ccy] ?? 1;
+      if (!rate) return acc + a.balance;
+      return acc + (a.balance / rate) * baseRate;
+    }, 0);
+  }, [accounts, rates, safeCcy]);
 
   const spark = useMemo(() => {
     const n = new Date();
     const days = 30;
     const arr: number[] = new Array(days).fill(0);
-    txs.forEach((t) => {
+    (txs ?? []).forEach((t) => {
+      if (!t?.date) return;
       const d = new Date(t.date);
+      if (Number.isNaN(d.getTime())) return;
       const diff = Math.floor((n.getTime() - d.getTime()) / 86400000);
       if (diff >= 0 && diff < days) {
-        arr[days - 1 - diff] += t.type === 'income' ? t.amount : -t.amount;
+        const amt = typeof t.amount === 'number' && !Number.isNaN(t.amount) ? t.amount : 0;
+        arr[days - 1 - diff] += t.type === 'income' ? amt : -amt;
       }
     });
     const cum: number[] = [];
@@ -45,8 +55,11 @@ export function BalanceWidget() {
   }, [txs]);
 
   const now = new Date();
-  const thisMonthTx = filterMonth(txs, now.getFullYear(), now.getMonth());
+  const thisMonthTx = filterMonth(txs ?? [], now.getFullYear(), now.getMonth());
   const { income, expense } = sumByType(thisMonthTx);
+  const safeTotal = Number.isFinite(total) ? total : 0;
+  const safeIncome = Number.isFinite(income) ? income : 0;
+  const safeExpense = Number.isFinite(expense) ? expense : 0;
 
   return (
     <View
@@ -82,10 +95,10 @@ export function BalanceWidget() {
         }}
       />
       <AppText size={11} weight="semiBold" color={Colors.textMuted} style={{ letterSpacing: 1.2 }}>
-        TOTAL BALANCE · {preferredCcy}
+        TOTAL BALANCE · {safeCcy}
       </AppText>
       <AppText weight="bold" size={36} style={{ marginTop: 8, fontVariant: ['tabular-nums'] }} selectable>
-        {formatCurrency(total, preferredCcy)}
+        {formatCurrency(safeTotal, safeCcy)}
       </AppText>
 
       <View style={{ marginTop: Spacing.lg, flexDirection: 'row', gap: Spacing.md }}>
@@ -103,7 +116,7 @@ export function BalanceWidget() {
               Income this month
             </AppText>
             <AppText weight="semiBold" size={14} color={Colors.income}>
-              +{formatCompact(income, preferredCcy)}
+              +{formatCompact(safeIncome, safeCcy)}
             </AppText>
           </View>
         </View>
@@ -121,7 +134,7 @@ export function BalanceWidget() {
               Spent this month
             </AppText>
             <AppText weight="semiBold" size={14} color={Colors.expense}>
-              -{formatCompact(expense, preferredCcy)}
+              -{formatCompact(safeExpense, safeCcy)}
             </AppText>
           </View>
         </View>
@@ -137,7 +150,7 @@ export function BalanceWidget() {
 }
 
 export function ForecastWidget() {
-  const txs = useAppStore(activeTransactions);
+  const txs = useActiveTransactions();
   const now = new Date();
   const monthTx = filterMonth(txs, now.getFullYear(), now.getMonth());
   const spent = monthTx.filter((t) => t.type === 'expense').reduce((a, t) => a + t.amount, 0);
@@ -190,7 +203,7 @@ export function ForecastWidget() {
 
 export function BudgetsWidget() {
   const categories = useAppStore((s) => s.categories);
-  const txs = useAppStore(activeTransactions);
+  const txs = useActiveTransactions();
   const now = new Date();
   const monthTx = filterMonth(txs, now.getFullYear(), now.getMonth());
 
@@ -316,7 +329,7 @@ export function SavingsWidget() {
 }
 
 export function RecentWidget() {
-  const txs = useAppStore(activeTransactions).slice(0, 5);
+  const txs = useActiveTransactions().slice(0, 5);
   const categories = useAppStore((s) => s.categories);
   const accounts = useAppStore((s) => s.accounts);
 

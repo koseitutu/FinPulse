@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { useShallow } from 'zustand/react/shallow';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import type {
   Account,
@@ -336,5 +337,16 @@ export const useAppStore = create<AppState>()(
 );
 
 // Selectors
-export const activeTransactions = (s: AppState) => s.transactions.filter((t) => !t.isArchived);
-export const archivedTransactions = (s: AppState) => s.transactions.filter((t) => t.isArchived);
+// IMPORTANT: These derive a NEW array on every call. Using them with a bare
+// `useAppStore(selector)` call would break zustand v5's default strict-equality
+// snapshot check and cause an "infinite getSnapshot" loop. Always consume them
+// through the hooks below (which use `useShallow`) or `useAppStore(useShallow(selector))`.
+export const selectActiveTransactions = (s: AppState) => s.transactions.filter((t) => !t.isArchived);
+export const selectArchivedTransactions = (s: AppState) => s.transactions.filter((t) => t.isArchived);
+
+export const useActiveTransactions = () => useAppStore(useShallow(selectActiveTransactions));
+export const useArchivedTransactions = () => useAppStore(useShallow(selectArchivedTransactions));
+
+// Back-compat aliases (kept so existing imports don't break). Prefer the hooks above.
+export const activeTransactions = selectActiveTransactions;
+export const archivedTransactions = selectArchivedTransactions;

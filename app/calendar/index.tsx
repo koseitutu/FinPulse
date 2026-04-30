@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
 import { AppText, Card, IconButton } from '@/components/ui';
-import { activeTransactions, useAppStore } from '@/store/useAppStore';
+import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { daysInMonth, filterMonth, monthName } from '@/utils/finance';
 
 const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -13,7 +13,7 @@ const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 export default function CalendarScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const txs = useAppStore(activeTransactions);
+  const txs = useActiveTransactions();
   const categories = useAppStore((s) => s.categories);
   const accounts = useAppStore((s) => s.accounts);
 

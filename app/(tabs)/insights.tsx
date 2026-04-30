@@ -6,14 +6,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
 import { AppText, Card, Chip, ProgressBar, SectionHeader } from '@/components/ui';
 import { BarChart, Donut, LegendRow, LineChart } from '@/components/charts';
-import { activeTransactions, useAppStore } from '@/store/useAppStore';
+import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { daysInMonth, filterMonth, forecast, groupByCategory, sumByType } from '@/utils/finance';
 
 type Range = 'month' | '3m' | 'year';
 
 export default function InsightsScreen() {
   const insets = useSafeAreaInsets();
-  const txs = useAppStore(activeTransactions);
+  const txs = useActiveTransactions();
   const categories = useAppStore((s) => s.categories);
   const [range, setRange] = useState<Range>('month');
 
@@ -268,7 +268,7 @@ export default function InsightsScreen() {
 }
 
 function TopMerchantsCard() {
-  const txs = useAppStore(activeTransactions);
+  const txs = useActiveTransactions();
   const now = new Date();
   const month = filterMonth(txs, now.getFullYear(), now.getMonth());
   const byMerchant = new Map<string, number>();

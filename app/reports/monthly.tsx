@@ -6,14 +6,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
 import { AppText, Button, Card, IconButton, SectionHeader } from '@/components/ui';
 import { BarChart, Donut, LegendRow } from '@/components/charts';
-import { activeTransactions, useAppStore } from '@/store/useAppStore';
+import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { filterMonth, groupByCategory, monthName, sumByType } from '@/utils/finance';
 import { buildCSV, buildHTML, downloadWeb, openHtmlWeb, shareText } from '@/utils/export';
 
 export default function MonthlyReportScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const txs = useAppStore(activeTransactions);
+  const txs = useActiveTransactions();
   const categories = useAppStore((s) => s.categories);
 
   const now = new Date();

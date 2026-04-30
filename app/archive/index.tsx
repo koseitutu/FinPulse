@@ -5,13 +5,13 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
 import { AppText, Button, Card, Empty, IconButton } from '@/components/ui';
-import { archivedTransactions, useAppStore } from '@/store/useAppStore';
+import { useArchivedTransactions, useAppStore } from '@/store/useAppStore';
 import { formatDate } from '@/utils/finance';
 
 export default function ArchiveScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const archived = useAppStore(archivedTransactions);
+  const archived = useArchivedTransactions();
   const categories = useAppStore((s) => s.categories);
   const restoreTransaction = useAppStore((s) => s.restoreTransaction);
   const archiveConfig = useAppStore((s) => s.archiveConfig);
