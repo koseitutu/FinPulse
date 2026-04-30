@@ -3,7 +3,7 @@ import { Pressable, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing } from '@/constants/theme';
+import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
 import { AppText, Card, IconCircle, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 
@@ -15,26 +15,27 @@ interface Item {
   description?: string;
 }
 
-const MAIN: Item[] = [
-  { label: 'Accounts', icon: 'wallet', href: '/accounts', color: Colors.gold, description: 'Manage wallets & cards' },
-  { label: 'Categories', icon: 'pricetags', href: '/categories', color: '#2EC4B6', description: 'Organize spending' },
-  { label: 'Budgets', icon: 'speedometer', href: '/budgets', color: '#FF8C42', description: 'Track category limits' },
-  { label: 'Recurring', icon: 'repeat', href: '/recurring', color: '#B24DFF', description: 'Manage schedules' },
-  { label: 'Transfers', icon: 'swap-horizontal', href: '/transfers', color: '#2EC4B6', description: 'Move between accounts' },
-  { label: 'Global Search', icon: 'search', href: '/search', color: Colors.info, description: 'Find anything' },
-  { label: 'Archive', icon: 'archive', href: '/archive', color: Colors.textMuted, description: 'Old transactions' },
-];
-
-const TOOLS: Item[] = [
-  { label: 'Dashboard Widgets', icon: 'grid', href: '/dashboard/settings', color: Colors.text },
-  { label: 'Backup & Restore', icon: 'cloud-upload', href: '/data', color: Colors.info },
-  { label: 'Settings', icon: 'settings', href: '/settings', color: Colors.text },
-];
-
 export default function MoreScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const prefs = useAppStore((s) => s.preferences);
+
+  const MAIN: Item[] = [
+    { label: 'Accounts', icon: 'wallet', href: '/accounts', color: Colors.gold, description: 'Manage wallets & cards' },
+    { label: 'Categories', icon: 'pricetags', href: '/categories', color: '#2EC4B6', description: 'Organize spending' },
+    { label: 'Budgets', icon: 'speedometer', href: '/budgets', color: '#FF8C42', description: 'Track category limits' },
+    { label: 'Recurring', icon: 'repeat', href: '/recurring', color: '#B24DFF', description: 'Manage schedules' },
+    { label: 'Transfers', icon: 'swap-horizontal', href: '/transfers', color: '#2EC4B6', description: 'Move between accounts' },
+    { label: 'Global Search', icon: 'search', href: '/search', color: Colors.info, description: 'Find anything' },
+    { label: 'Archive', icon: 'archive', href: '/archive', color: Colors.textMuted, description: 'Old transactions' },
+  ];
+
+  const TOOLS: Item[] = [
+    { label: 'Dashboard Widgets', icon: 'grid', href: '/dashboard/settings', color: Colors.text },
+    { label: 'Backup & Restore', icon: 'cloud-upload', href: '/data', color: Colors.info },
+    { label: 'Settings', icon: 'settings', href: '/settings', color: Colors.text },
+  ];
 
   return (
     <ScrollView

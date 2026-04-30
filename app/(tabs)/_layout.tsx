@@ -3,7 +3,7 @@ import { Pressable, View } from 'react-native';
 import { Tabs, useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors } from '@/constants/theme';
+import { Colors, useTheme } from '@/constants/theme';
 import { AppText } from '@/components/ui';
 
 const TABS: { name: string; title: string; icon: keyof typeof Ionicons.glyphMap }[] = [
@@ -16,6 +16,7 @@ const TABS: { name: string; title: string; icon: keyof typeof Ionicons.glyphMap 
 export default function TabsLayout() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
 
   return (
     <Tabs

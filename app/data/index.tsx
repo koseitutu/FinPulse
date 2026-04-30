@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as DocumentPicker from 'expo-document-picker';
-import { Colors, Radius, Spacing } from '@/constants/theme';
+import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
 import { AppText, Card, IconButton, IconCircle, SectionHeader } from '@/components/ui';
 import { useAppStore, type BackupData } from '@/store/useAppStore';
 import { buildBackupJSON, parseBackupJSON, saveTextFile, backupFilename } from '@/utils/backup';
@@ -14,21 +14,23 @@ import type { Transaction, TxType } from '@/store/types';
 type StatusKind = 'info' | 'success' | 'error';
 type Status = { kind: StatusKind; message: string } | null;
 
-const COLORS_BY_KIND: Record<StatusKind, string> = {
-  info: Colors.info,
-  success: Colors.income,
-  error: Colors.expense,
-};
-
 const ICON_BY_KIND: Record<StatusKind, keyof typeof import('@expo/vector-icons').Ionicons.glyphMap> = {
   info: 'information-circle',
   success: 'checkmark-circle',
   error: 'alert-circle',
 };
 
+const getColorsByKind = (): Record<StatusKind, string> => ({
+  info: Colors.info,
+  success: Colors.income,
+  error: Colors.expense,
+});
+
 export default function ManageDataScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
+  const COLORS_BY_KIND = getColorsByKind();
 
   const preferences = useAppStore((s) => s.preferences);
   const accounts = useAppStore((s) => s.accounts);

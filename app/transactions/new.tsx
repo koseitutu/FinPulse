@@ -3,7 +3,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing } from '@/constants/theme';
+import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Chip, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { TxType } from '@/store/types';
@@ -11,6 +11,7 @@ import type { TxType } from '@/store/types';
 export default function NewTransactionScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const params = useLocalSearchParams<{
     amount?: string;
     merchant?: string;

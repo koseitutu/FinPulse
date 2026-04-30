@@ -3,7 +3,7 @@ import { Pressable, ScrollView, Switch, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing } from '@/constants/theme';
+import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
 import { AppText, Card, IconButton, IconCircle, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { WIDGETS } from '@/components/widgets';
@@ -12,6 +12,7 @@ import type { WidgetKey } from '@/store/types';
 export default function DashboardSettings() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const dashboard = useAppStore((s) => s.dashboard);
   const toggleWidget = useAppStore((s) => s.toggleWidget);
   const setOrder = useAppStore((s) => s.setDashboardOrder);

@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View } from 'react-native';
-import { Colors } from '@/constants/theme';
+import { Colors, useTheme } from '@/constants/theme';
 import { useAppStore } from '@/store/useAppStore';
 
 SplashScreen.preventAutoHideAsync();
@@ -15,6 +15,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts(FontMap);
   const processDueRecurring = useAppStore((s) => s.processDueRecurring);
+  const themeMode = useTheme();
 
   useEffect(() => {
     if (loaded || error) {
@@ -31,7 +32,7 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: Colors.bg }}>
       <SafeAreaProvider>
         <View style={{ flex: 1, backgroundColor: Colors.bg }}>
-          <StatusBar style="light" />
+          <StatusBar style={themeMode === 'light' ? 'dark' : 'light'} />
           <Stack
             screenOptions={{
               headerShown: false,

@@ -12,7 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Empty, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Account, AccountType } from '@/store/types';
@@ -31,6 +31,7 @@ const COLORS = ['#F4B942', '#4DA6FF', '#2ECC71', '#B24DFF', '#E74C3C', '#2EC4B6'
 export default function AccountsScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const accounts = useAppStore((s) => s.accounts);
   const transactions = useAppStore((s) => s.transactions);
   const addAccount = useAppStore((s) => s.addAccount);

@@ -3,7 +3,7 @@ import { Alert, Platform, Pressable, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCurrency } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCurrency, useTheme } from '@/constants/theme';
 import { AppText, Card, IconButton, IconCircle } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { formatDate } from '@/utils/finance';
@@ -12,6 +12,7 @@ export default function TransactionDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
 
   const tx = useAppStore((s) => s.transactions.find((t) => t.id === id));
   const categories = useAppStore((s) => s.categories);

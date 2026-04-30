@@ -3,24 +3,25 @@ import { Pressable, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Spacing } from '@/constants/theme';
+import { Colors, Spacing, useTheme } from '@/constants/theme';
 import { AppText, IconButton } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { WIDGETS } from '@/components/widgets';
 
-const QUICK_ACTIONS: { icon: keyof typeof Ionicons.glyphMap; label: string; href: string; color: string }[] = [
-  { icon: 'add', label: 'Add', href: '/transactions/new', color: Colors.gold },
-  { icon: 'wallet', label: 'Accounts', href: '/accounts', color: Colors.info },
-  { icon: 'pricetags', label: 'Categories', href: '/categories', color: '#2EC4B6' },
-  { icon: 'repeat', label: 'Recurring', href: '/recurring', color: '#B24DFF' },
-  { icon: 'stats-chart', label: 'Insights', href: '/insights', color: Colors.income },
-];
-
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const preferences = useAppStore((s) => s.preferences);
   const dashboard = useAppStore((s) => s.dashboard);
+
+  const QUICK_ACTIONS: { icon: keyof typeof Ionicons.glyphMap; label: string; href: string; color: string }[] = [
+    { icon: 'add', label: 'Add', href: '/transactions/new', color: Colors.gold },
+    { icon: 'wallet', label: 'Accounts', href: '/accounts', color: Colors.info },
+    { icon: 'pricetags', label: 'Categories', href: '/categories', color: '#2EC4B6' },
+    { icon: 'repeat', label: 'Recurring', href: '/recurring', color: '#B24DFF' },
+    { icon: 'stats-chart', label: 'Insights', href: '/insights', color: Colors.income },
+  ];
 
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';

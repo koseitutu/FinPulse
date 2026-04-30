@@ -11,7 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
 import { AppText, Button, IconButton } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Account } from '@/store/types';
@@ -19,6 +19,7 @@ import type { Account } from '@/store/types';
 export default function NewTransferScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const params = useLocalSearchParams<{ fromId?: string; toId?: string }>();
   const accounts = useAppStore((s) => s.accounts);
   const addTransfer = useAppStore((s) => s.addTransfer);

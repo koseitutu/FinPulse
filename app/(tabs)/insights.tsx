@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
+import { Colors, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
 import { AppText, Card, Chip, ProgressBar, SectionHeader } from '@/components/ui';
 import { BarChart, Donut, LegendRow, LineChart } from '@/components/charts';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
@@ -12,6 +12,7 @@ type Range = 'month' | '3m' | 'year';
 
 export default function InsightsScreen() {
   const insets = useSafeAreaInsets();
+  useTheme();
   const txs = useActiveTransactions();
   const categories = useAppStore((s) => s.categories);
   const [range, setRange] = useState<Range>('month');

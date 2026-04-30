@@ -3,7 +3,7 @@ import { Platform, Pressable, ScrollView, Switch, TextInput, View } from 'react-
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing } from '@/constants/theme';
+import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
 import { AppText, Card, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 
@@ -13,6 +13,7 @@ const RETENTIONS: (6 | 12 | 24)[] = [6, 12, 24];
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  const themeMode = useTheme();
   const preferences = useAppStore((s) => s.preferences);
   const setPreferences = useAppStore((s) => s.setPreferences);
   const setAlerts = useAppStore((s) => s.setAlerts);
@@ -69,6 +70,53 @@ export default function SettingsScreen() {
               paddingVertical: 6,
             }}
           />
+        </Card>
+
+        <Card>
+          <SectionHeader title="Appearance" subtitle="Light or dark, your call" />
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              paddingVertical: 6,
+            }}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1 }}>
+              <View
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 20,
+                  backgroundColor: Colors.goldSoft,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Ionicons
+                  name={themeMode === 'dark' ? 'moon' : 'sunny'}
+                  size={18}
+                  color={Colors.gold}
+                />
+              </View>
+              <View style={{ flex: 1 }}>
+                <AppText size={14} weight="semiBold" color={Colors.text}>
+                  Dark mode
+                </AppText>
+                <AppText size={11} color={Colors.textMuted}>
+                  {themeMode === 'dark'
+                    ? 'Easy on the eyes at night'
+                    : 'Crisp and bright by day'}
+                </AppText>
+              </View>
+            </View>
+            <Switch
+              value={themeMode === 'dark'}
+              onValueChange={(v) => setPreferences({ theme: v ? 'dark' : 'light' })}
+              trackColor={{ true: Colors.gold, false: Colors.surfaceHigh }}
+              thumbColor={Colors.bgElevated}
+            />
+          </View>
         </Card>
 
         <Card>

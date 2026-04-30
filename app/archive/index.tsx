@@ -3,7 +3,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Empty, IconButton } from '@/components/ui';
 import { useArchivedTransactions, useAppStore } from '@/store/useAppStore';
 import { formatDate } from '@/utils/finance';
@@ -11,6 +11,7 @@ import { formatDate } from '@/utils/finance';
 export default function ArchiveScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const archived = useArchivedTransactions();
   const categories = useAppStore((s) => s.categories);
   const restoreTransaction = useAppStore((s) => s.restoreTransaction);

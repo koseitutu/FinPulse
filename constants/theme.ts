@@ -1,5 +1,46 @@
-export const Colors = {
-  // Core palette
+import { useAppStore } from '@/store/useAppStore';
+
+export type ThemeMode = 'dark' | 'light';
+
+export interface Palette {
+  // Core
+  bg: string;
+  bgElevated: string;
+  surface: string;
+  surfaceAlt: string;
+  surfaceHigh: string;
+  border: string;
+  borderSubtle: string;
+
+  // Text
+  text: string;
+  textSecondary: string;
+  textMuted: string;
+  textDim: string;
+
+  // Accent (gold — consistent on both themes)
+  gold: string;
+  goldSoft: string;
+  goldDim: string;
+
+  // Semantic
+  income: string;
+  incomeSoft: string;
+  expense: string;
+  expenseSoft: string;
+  info: string;
+  warn: string;
+
+  // Chart palette
+  chart: string[];
+
+  // Platform / shadow hints
+  shadow: string;
+  overlay: string;
+  inverseText: string;
+}
+
+export const darkPalette: Palette = {
   bg: '#070E1C',
   bgElevated: '#0A1628',
   surface: '#111E33',
@@ -8,18 +49,15 @@ export const Colors = {
   border: '#22375A',
   borderSubtle: '#18283F',
 
-  // Text
   text: '#FFFFFF',
   textSecondary: '#A9B6CC',
   textMuted: '#6C7E9B',
   textDim: '#4A5A78',
 
-  // Accent
   gold: '#F4B942',
   goldSoft: '#F4B94233',
   goldDim: '#8D6B26',
 
-  // Semantic
   income: '#2ECC71',
   incomeSoft: '#2ECC7122',
   expense: '#E74C3C',
@@ -27,7 +65,6 @@ export const Colors = {
   info: '#4DA6FF',
   warn: '#F4B942',
 
-  // Chart palette
   chart: [
     '#F4B942',
     '#4DA6FF',
@@ -38,7 +75,85 @@ export const Colors = {
     '#2EC4B6',
     '#FFD166',
   ],
+
+  shadow: 'rgba(0,0,0,0.35)',
+  overlay: 'rgba(0,0,0,0.55)',
+  inverseText: '#0A1628',
 };
+
+// Polished light mode, tuned for readability and a warm, premium feel.
+export const lightPalette: Palette = {
+  // Backgrounds — soft off-white with a gentle blue tint so the gold still pops.
+  bg: '#F5F7FB',
+  bgElevated: '#FFFFFF',
+  surface: '#FFFFFF',
+  surfaceAlt: '#EEF2F8',
+  surfaceHigh: '#E3E9F3',
+  border: '#D6DEEB',
+  borderSubtle: '#E7ECF4',
+
+  // Text — deep navy for maximum contrast against the near-white backgrounds.
+  text: '#0B1A33',
+  textSecondary: '#3F4E6B',
+  textMuted: '#6B7890',
+  textDim: '#9AA5BA',
+
+  // Gold accent (unchanged — pops on light too).
+  gold: '#F4B942',
+  goldSoft: '#F4B9421F',
+  goldDim: '#B98A28',
+
+  // Semantic — slightly deeper shades so they read well on light surfaces.
+  income: '#1FA463',
+  incomeSoft: '#1FA46322',
+  expense: '#D93A2B',
+  expenseSoft: '#D93A2B1F',
+  info: '#3B82F6',
+  warn: '#E0A42F',
+
+  chart: [
+    '#E0A42F',
+    '#3B82F6',
+    '#1FA463',
+    '#D93A2B',
+    '#8F3FD9',
+    '#EE7420',
+    '#1FA6A0',
+    '#E6B73A',
+  ],
+
+  shadow: 'rgba(11,26,51,0.12)',
+  overlay: 'rgba(11,26,51,0.45)',
+  inverseText: '#FFFFFF',
+};
+
+/**
+ * `Colors` is a live, mutable snapshot of the active palette. Components read
+ * values off this object in inline styles, which means that once we swap the
+ * underlying palette and trigger a re-render, every component picks up the new
+ * colors automatically without having to thread a context through every prop.
+ */
+export const Colors: Palette = { ...darkPalette };
+
+export function applyPalette(mode: ThemeMode) {
+  const next = mode === 'light' ? lightPalette : darkPalette;
+  Object.assign(Colors, next);
+  // keep chart as a fresh array so consumers that memoize on identity re-key
+  Colors.chart = [...next.chart];
+}
+
+/**
+ * Subscribes a component to the active theme. Calling this in any screen-level
+ * component re-renders that screen when the user toggles light/dark mode,
+ * which in turn re-reads the mutated `Colors` object.
+ */
+export function useTheme(): ThemeMode {
+  const mode = useAppStore((s) => s.preferences.theme) as ThemeMode;
+  // Sync module-level Colors before returning so consumers reading Colors in
+  // the same render see the latest values.
+  applyPalette(mode);
+  return mode;
+}
 
 export const Spacing = {
   xs: 4,

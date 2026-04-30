@@ -3,7 +3,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing } from '@/constants/theme';
+import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Frequency, TxType } from '@/store/types';
@@ -13,6 +13,7 @@ const FREQ: Frequency[] = ['daily', 'weekly', 'biweekly', 'monthly', 'yearly'];
 export default function NewRecurringScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const accounts = useAppStore((s) => s.accounts);
   const categories = useAppStore((s) => s.categories);
   const addRecurring = useAppStore((s) => s.addRecurring);

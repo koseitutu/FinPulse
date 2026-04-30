@@ -3,7 +3,7 @@ import { Alert, Platform, Pressable, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, useTheme } from '@/constants/theme';
 import { AppText, Button, Empty, IconButton } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { formatRelative } from '@/utils/finance';
@@ -12,6 +12,7 @@ import type { Transfer } from '@/store/types';
 export default function TransfersScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const transfers = useAppStore((s) => s.transfers);
   const accounts = useAppStore((s) => s.accounts);
   const deleteTransfer = useAppStore((s) => s.deleteTransfer);

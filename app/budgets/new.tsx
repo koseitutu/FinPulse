@@ -3,7 +3,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, useTheme } from '@/constants/theme';
 import { AppText, Button, Empty, IconButton } from '@/components/ui';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { filterMonth } from '@/utils/finance';
@@ -11,6 +11,7 @@ import { filterMonth } from '@/utils/finance';
 export default function NewBudgetScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const categories = useAppStore((s) => s.categories);
   const txs = useActiveTransactions();
   const currency = useAppStore((s) => s.preferences.currency);

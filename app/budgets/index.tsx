@@ -3,7 +3,7 @@ import { Alert, Platform, Pressable, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
 import {
   AppText,
   Badge,
@@ -32,6 +32,7 @@ interface BudgetRow {
 export default function BudgetsScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const categories = useAppStore((s) => s.categories);
   const txs = useActiveTransactions();
   const currency = useAppStore((s) => s.preferences.currency);

@@ -12,7 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Chip, Empty, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Category, TxType } from '@/store/types';
@@ -66,6 +66,7 @@ const COLORS = [
 export default function CategoriesScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
+  useTheme();
   const categories = useAppStore((s) => s.categories);
   const transactions = useAppStore((s) => s.transactions);
   const addCategory = useAppStore((s) => s.addCategory);
