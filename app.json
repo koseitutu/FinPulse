@@ -36,7 +36,8 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": true
+      "typedRoutes": true,
+      "baseUrl": "/b00332d7-dc26-406b-9358-f7e9fa246165/dev-preview/"
     }
   }
 }
