@@ -34,11 +34,11 @@
           "resizeMode": "contain",
           "backgroundColor": "#0B1124"
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
-      "typedRoutes": true,
-      "baseUrl": "/b00332d7-dc26-406b-9358-f7e9fa246165/dev-preview/"
+      "typedRoutes": true
     },
     "owner": "ktutu",
     "extra": {
