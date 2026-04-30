@@ -12,24 +12,22 @@ import type { WidgetKey } from '@/store/types';
 export function BalanceWidget() {
   const accounts = useAppStore((s) => s.accounts);
   const txs = useActiveTransactions();
-  const rates = useAppStore((s) => s.exchangeRates);
   const preferredCcy = useAppStore((s) => s.preferences.currency);
 
   const safeCcy = preferredCcy || 'USD';
 
+  // Sum balances only from accounts that match the preferred display currency.
+  // Accounts in other currencies keep their native balance on the Accounts
+  // widget — we no longer do live FX conversion.
   const total = useMemo(() => {
     const list = accounts ?? [];
-    const rateMap = rates ?? {};
-    const baseRate = rateMap[safeCcy] ?? 1;
     return list.reduce((acc, a) => {
       if (!a || typeof a.balance !== 'number' || Number.isNaN(a.balance)) return acc;
       const ccy = a.currency || safeCcy;
-      if (ccy === safeCcy) return acc + a.balance;
-      const rate = rateMap[ccy] ?? 1;
-      if (!rate) return acc + a.balance;
-      return acc + (a.balance / rate) * baseRate;
+      if (ccy !== safeCcy) return acc;
+      return acc + a.balance;
     }, 0);
-  }, [accounts, rates, safeCcy]);
+  }, [accounts, safeCcy]);
 
   const spark = useMemo(() => {
     const n = new Date();

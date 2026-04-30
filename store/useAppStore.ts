@@ -55,8 +55,6 @@ interface AppState {
   recurring: RecurringTransaction[];
   dashboard: DashboardConfig;
   archiveConfig: ArchiveConfig;
-  exchangeRates: Record<string, number>;
-  lastRatesFetch?: string;
 
   // actions
   setPreferences: (p: Partial<Preferences>) => void;
@@ -90,7 +88,29 @@ interface AppState {
   restoreTransaction: (id: string) => void;
   setAutoArchive: (months: 6 | 12 | 24) => void;
 
-  setExchangeRates: (rates: Record<string, number>) => void;
+  /**
+   * Replace the entire store with a previously exported backup. Used by the
+   * Manage Data restore flow.
+   */
+  restoreFromBackup: (data: BackupData) => void;
+}
+
+/**
+ * FinPulse backup JSON format (v1). Any future format changes must bump this
+ * schemaVersion so the restore flow can detect incompatible files.
+ */
+export interface BackupData {
+  schemaVersion: 1;
+  app: 'finpulse';
+  exportedAt: string;
+  preferences?: Preferences;
+  accounts?: Account[];
+  categories?: Category[];
+  tags?: Tag[];
+  transactions?: Transaction[];
+  recurring?: RecurringTransaction[];
+  dashboard?: DashboardConfig;
+  archiveConfig?: ArchiveConfig;
 }
 
 const defaultDashboard: DashboardConfig = {
@@ -127,7 +147,6 @@ export const useAppStore = create<AppState>()(
       recurring: seedRecurring,
       dashboard: defaultDashboard,
       archiveConfig: { autoArchiveMonths: 12 },
-      exchangeRates: { GHS: 1, USD: 0.067, EUR: 0.061, GBP: 0.053, NGN: 107.2 },
 
       setPreferences: (p) => set((s) => ({ preferences: { ...s.preferences, ...p } })),
       setAlerts: (a) =>
@@ -282,8 +301,17 @@ export const useAppStore = create<AppState>()(
       setAutoArchive: (months) =>
         set((s) => ({ archiveConfig: { ...s.archiveConfig, autoArchiveMonths: months } })),
 
-      setExchangeRates: (rates) =>
-        set(() => ({ exchangeRates: rates, lastRatesFetch: new Date().toISOString() })),
+      restoreFromBackup: (data) =>
+        set((s) => ({
+          preferences: data.preferences ?? s.preferences,
+          accounts: data.accounts ?? s.accounts,
+          categories: data.categories ?? s.categories,
+          tags: data.tags ?? s.tags,
+          transactions: data.transactions ?? s.transactions,
+          recurring: data.recurring ?? s.recurring,
+          dashboard: data.dashboard ?? s.dashboard,
+          archiveConfig: data.archiveConfig ?? s.archiveConfig,
+        })),
     }),
     {
       name: 'finpulse-storage-v2',

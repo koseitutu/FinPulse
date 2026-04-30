@@ -26,6 +26,7 @@ const MAIN: Item[] = [
 
 const TOOLS: Item[] = [
   { label: 'Dashboard Widgets', icon: 'grid', href: '/dashboard/settings', color: Colors.text },
+  { label: 'Backup & Restore', icon: 'cloud-upload', href: '/data', color: Colors.info },
   { label: 'Settings', icon: 'settings', href: '/settings', color: Colors.text },
 ];
 

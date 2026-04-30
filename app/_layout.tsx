@@ -50,6 +50,7 @@ export default function RootLayout() {
             <Stack.Screen name="transactions/[id]" options={{ presentation: 'modal' }} />
             <Stack.Screen name="search" options={{ presentation: 'modal' }} />
             <Stack.Screen name="settings/index" />
+            <Stack.Screen name="data/index" />
           </Stack>
         </View>
       </SafeAreaProvider>
