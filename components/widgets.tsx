@@ -173,7 +173,7 @@ export function BudgetsWidget() {
         title="Budget pulse"
         subtitle={`${monthTx.filter((t) => t.type === 'expense').length} expenses this month`}
         action={
-          <Link href="/insights" asChild>
+          <Link href="/budgets" asChild>
             <Pressable>
               <AppText size={12} color={Colors.gold} weight="semiBold">
                 See all

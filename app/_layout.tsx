@@ -42,6 +42,9 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="accounts/index" />
             <Stack.Screen name="categories/index" />
+            <Stack.Screen name="budgets/index" />
+            <Stack.Screen name="budgets/new" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="budgets/[id]" options={{ presentation: 'modal' }} />
             <Stack.Screen name="recurring/index" />
             <Stack.Screen name="recurring/new" options={{ presentation: 'modal' }} />
             <Stack.Screen name="archive/index" />

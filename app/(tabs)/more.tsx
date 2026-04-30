@@ -18,7 +18,7 @@ interface Item {
 const MAIN: Item[] = [
   { label: 'Accounts', icon: 'wallet', href: '/accounts', color: Colors.gold, description: 'Manage wallets & cards' },
   { label: 'Categories', icon: 'pricetags', href: '/categories', color: '#2EC4B6', description: 'Organize spending' },
-  { label: 'Budgets', icon: 'speedometer', href: '/insights', color: '#FF8C42', description: 'Track category limits' },
+  { label: 'Budgets', icon: 'speedometer', href: '/budgets', color: '#FF8C42', description: 'Track category limits' },
   { label: 'Recurring', icon: 'repeat', href: '/recurring', color: '#B24DFF', description: 'Manage schedules' },
   { label: 'Global Search', icon: 'search', href: '/search', color: Colors.info, description: 'Find anything' },
   { label: 'Archive', icon: 'archive', href: '/archive', color: Colors.textMuted, description: 'Old transactions' },
