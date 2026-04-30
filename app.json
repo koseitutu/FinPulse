@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.ktutu.finpulse"
     },
     "web": {
       "bundler": "metro",
@@ -36,8 +37,14 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": true,
-      "baseUrl": "/b00332d7-dc26-406b-9358-f7e9fa246165/dev-preview/"
+      "typedRoutes": true
+    },
+    "owner": "ktutu",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "811887fb-128c-4887-97d2-ef7ca01c6d96"
+      }
     }
   }
 }
