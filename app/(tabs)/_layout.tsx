@@ -57,10 +57,10 @@ export default function TabsLayout() {
             );
           })}
 
-          {/* Center Scan */}
+          {/* Center Add button */}
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Pressable
-              onPress={() => router.push('/scanner')}
+              onPress={() => router.push('/transactions/new')}
               style={{
                 width: 56,
                 height: 56,
@@ -74,7 +74,7 @@ export default function TabsLayout() {
                 boxShadow: '0 8px 20px rgba(244,185,66,0.4)',
               }}
             >
-              <Ionicons name="scan" size={26} color={Colors.bg} />
+              <Ionicons name="add" size={28} color={Colors.bg} />
             </Pressable>
           </View>
 

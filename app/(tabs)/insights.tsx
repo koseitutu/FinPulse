@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Spacing, formatCompact, formatCurrency } from '@/constants/theme';
 import { AppText, Card, Chip, ProgressBar, SectionHeader } from '@/components/ui';
@@ -84,33 +83,13 @@ export default function InsightsScreen() {
         gap: Spacing.lg,
       }}
     >
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <View>
-          <AppText weight="bold" size={24}>
-            Insights
-          </AppText>
-          <AppText size={12} color={Colors.textMuted}>
-            Your financial pulse
-          </AppText>
-        </View>
-        <Link href="/reports/monthly" asChild>
-          <Pressable
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 6,
-              backgroundColor: Colors.gold + '22',
-              paddingHorizontal: 12,
-              paddingVertical: 8,
-              borderRadius: 10,
-            }}
-          >
-            <Ionicons name="document-text" size={14} color={Colors.gold} />
-            <AppText size={12} weight="semiBold" color={Colors.gold}>
-              Full Report
-            </AppText>
-          </Pressable>
-        </Link>
+      <View>
+        <AppText weight="bold" size={24}>
+          Insights
+        </AppText>
+        <AppText size={12} color={Colors.textMuted}>
+          Your financial pulse
+        </AppText>
       </View>
 
       {/* Financial health score */}

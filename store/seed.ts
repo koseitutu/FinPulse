@@ -1,9 +1,7 @@
 import type {
   Account,
   Category,
-  Debt,
   RecurringTransaction,
-  SavingsGoal,
   Tag,
   Transaction,
 } from './types';
@@ -151,55 +149,6 @@ export const seedTransactions: Transaction[] = [
   tx(210, 'expense', 'cat-food', 'acc-1', 420, 'Old dinner', [], 'Buka', 'sub-restaurant'),
 ];
 
-export const seedSavingsGoals: SavingsGoal[] = [
-  {
-    id: 'goal-1',
-    name: 'Emergency Fund',
-    targetAmount: 10000,
-    currentAmount: 4200,
-    deadline: daysAhead(180),
-    accountId: 'acc-2',
-    color: '#2ECC71',
-    icon: 'shield-checkmark',
-    createdAt: daysAgo(90),
-    contributions: [
-      { id: 'c1', amount: 1000, date: daysAgo(60) },
-      { id: 'c2', amount: 1200, date: daysAgo(30) },
-      { id: 'c3', amount: 2000, date: daysAgo(10) },
-    ],
-  },
-  {
-    id: 'goal-2',
-    name: 'Dubai Trip',
-    targetAmount: 8000,
-    currentAmount: 2350,
-    deadline: daysAhead(240),
-    accountId: 'acc-4',
-    color: '#F4B942',
-    icon: 'airplane',
-    createdAt: daysAgo(60),
-    contributions: [
-      { id: 'c4', amount: 1000, date: daysAgo(45) },
-      { id: 'c5', amount: 1350, date: daysAgo(12) },
-    ],
-  },
-  {
-    id: 'goal-3',
-    name: 'New MacBook',
-    targetAmount: 15000,
-    currentAmount: 3800,
-    deadline: daysAhead(300),
-    accountId: 'acc-4',
-    color: '#4DA6FF',
-    icon: 'laptop',
-    createdAt: daysAgo(30),
-    contributions: [
-      { id: 'c6', amount: 2000, date: daysAgo(20) },
-      { id: 'c7', amount: 1800, date: daysAgo(5) },
-    ],
-  },
-];
-
 export const seedRecurring: RecurringTransaction[] = [
   {
     id: 'rec-1',
@@ -261,54 +210,5 @@ export const seedRecurring: RecurringTransaction[] = [
     nextDueDate: daysAhead(22),
     isActive: false,
     createdAt: daysAgo(400),
-  },
-];
-
-export const seedDebts: Debt[] = [
-  {
-    id: 'debt-1',
-    name: 'Loan from Kofi',
-    contactName: 'Kofi Mensah',
-    amount: 1500,
-    amountPaid: 500,
-    type: 'owed',
-    dueDate: daysAhead(14),
-    isPaid: false,
-    notes: 'Agreed 3-month repayment',
-    createdAt: daysAgo(45),
-  },
-  {
-    id: 'debt-2',
-    name: 'Ama owes me',
-    contactName: 'Ama Osei',
-    amount: 800,
-    amountPaid: 0,
-    type: 'lent',
-    dueDate: daysAhead(-2),
-    isPaid: false,
-    notes: 'Borrowed for car repairs',
-    createdAt: daysAgo(30),
-  },
-  {
-    id: 'debt-3',
-    name: 'Credit union',
-    contactName: 'Credit Union',
-    amount: 4000,
-    amountPaid: 2000,
-    type: 'owed',
-    dueDate: daysAhead(60),
-    isPaid: false,
-    createdAt: daysAgo(120),
-  },
-  {
-    id: 'debt-4',
-    name: 'Yaw settled loan',
-    contactName: 'Yaw Asante',
-    amount: 300,
-    amountPaid: 300,
-    type: 'lent',
-    dueDate: daysAgo(5),
-    isPaid: true,
-    createdAt: daysAgo(60),
   },
 ];

@@ -15,8 +15,6 @@ export default function SearchScreen() {
   const categories = useAppStore((s) => s.categories);
   const accounts = useAppStore((s) => s.accounts);
   const tags = useAppStore((s) => s.tags);
-  const goals = useAppStore((s) => s.savingsGoals);
-  const debts = useAppStore((s) => s.debts);
   const recurring = useAppStore((s) => s.recurring);
 
   const [query, setQuery] = useState('');
@@ -36,13 +34,9 @@ export default function SearchScreen() {
     const catMatches = categories.filter((c) => c.name.toLowerCase().includes(q)).slice(0, 10);
     const accMatches = accounts.filter((a) => a.name.toLowerCase().includes(q)).slice(0, 10);
     const tagMatches = tags.filter((t) => t.name.toLowerCase().includes(q)).slice(0, 10);
-    const goalMatches = goals.filter((g) => g.name.toLowerCase().includes(q));
-    const debtMatches = debts.filter(
-      (d) => d.name.toLowerCase().includes(q) || d.contactName.toLowerCase().includes(q)
-    );
     const recMatches = recurring.filter((r) => r.name.toLowerCase().includes(q));
-    return { txMatches, catMatches, accMatches, tagMatches, goalMatches, debtMatches, recMatches };
-  }, [q, txs, categories, accounts, tags, goals, debts, recurring]);
+    return { txMatches, catMatches, accMatches, tagMatches, recMatches };
+  }, [q, txs, categories, accounts, tags, recurring]);
 
   return (
     <View style={{ flex: 1, backgroundColor: Colors.bg, paddingTop: insets.top }}>
@@ -96,7 +90,7 @@ export default function SearchScreen() {
           <View style={{ alignItems: 'center', paddingVertical: 60, gap: 10 }}>
             <Ionicons name="search" size={40} color={Colors.textDim} />
             <AppText size={14} color={Colors.textMuted}>
-              Search across transactions, categories, tags, goals & more.
+              Search across transactions, categories, tags & recurring.
             </AppText>
           </View>
         ) : null}
@@ -211,49 +205,6 @@ export default function SearchScreen() {
               </Group>
             ) : null}
 
-            {results.goalMatches.length > 0 ? (
-              <Group title="Savings Goals" count={results.goalMatches.length}>
-                {results.goalMatches.map((g) => (
-                  <View key={g.id} style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10 }}>
-                    <Ionicons name={g.icon as never} size={18} color={g.color} />
-                    <View style={{ flex: 1 }}>
-                      <AppText size={13} weight="semiBold">
-                        {g.name}
-                      </AppText>
-                      <AppText size={11} color={Colors.textMuted}>
-                        {formatCompact(g.currentAmount)} / {formatCompact(g.targetAmount)}
-                      </AppText>
-                    </View>
-                  </View>
-                ))}
-              </Group>
-            ) : null}
-
-            {results.debtMatches.length > 0 ? (
-              <Group title="Debts" count={results.debtMatches.length}>
-                {results.debtMatches.map((d) => (
-                  <View key={d.id} style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10 }}>
-                    <Ionicons
-                      name={d.type === 'owed' ? 'arrow-up-circle' : 'arrow-down-circle'}
-                      size={18}
-                      color={d.type === 'owed' ? Colors.expense : Colors.income}
-                    />
-                    <View style={{ flex: 1 }}>
-                      <AppText size={13} weight="semiBold">
-                        {d.name}
-                      </AppText>
-                      <AppText size={11} color={Colors.textMuted}>
-                        {d.contactName}
-                      </AppText>
-                    </View>
-                    <AppText size={13} weight="semiBold">
-                      {formatCompact(d.amount - d.amountPaid)}
-                    </AppText>
-                  </View>
-                ))}
-              </Group>
-            ) : null}
-
             {results.recMatches.length > 0 ? (
               <Group title="Recurring" count={results.recMatches.length}>
                 {results.recMatches.map((r) => (
@@ -274,8 +225,6 @@ export default function SearchScreen() {
               results.catMatches.length +
               results.accMatches.length +
               results.tagMatches.length +
-              results.goalMatches.length +
-              results.debtMatches.length +
               results.recMatches.length ===
             0 ? (
               <View style={{ alignItems: 'center', paddingVertical: 60, gap: 10 }}>

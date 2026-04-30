@@ -44,22 +44,8 @@ export interface Transaction {
   accountId: string;
   isRecurring?: boolean;
   recurringId?: string;
-  receiptImageUri?: string;
   isArchived?: boolean;
   merchant?: string;
-}
-
-export interface SavingsGoal {
-  id: string;
-  name: string;
-  targetAmount: number;
-  currentAmount: number;
-  deadline: string; // ISO
-  accountId?: string;
-  color: string;
-  icon: string;
-  createdAt: string;
-  contributions: { id: string; amount: number; date: string }[];
 }
 
 export type Frequency = 'daily' | 'weekly' | 'biweekly' | 'monthly' | 'yearly';
@@ -78,26 +64,10 @@ export interface RecurringTransaction {
   createdAt: string;
 }
 
-export interface Debt {
-  id: string;
-  name: string;
-  contactName: string;
-  amount: number;
-  amountPaid: number;
-  type: 'owed' | 'lent'; // owed = I owe, lent = someone owes me
-  dueDate: string;
-  isPaid: boolean;
-  notes?: string;
-  createdAt: string;
-}
-
 export type WidgetKey =
   | 'balance'
   | 'budgets'
-  | 'savings'
   | 'recent'
-  | 'forecast'
-  | 'debts'
   | 'accounts';
 
 export interface DashboardConfig {
@@ -116,12 +86,13 @@ export interface AlertConfig {
   budget100: boolean;
   dailyDigest: boolean;
   weeklyDigest: boolean;
-  debtReminders: boolean;
 }
 
 export interface Preferences {
   currency: string;
   theme: 'dark' | 'light';
   name: string;
+  pin?: string;
+  biometric?: boolean;
   alerts: AlertConfig;
 }

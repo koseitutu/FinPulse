@@ -10,10 +10,10 @@ import { WIDGETS } from '@/components/widgets';
 
 const QUICK_ACTIONS: { icon: keyof typeof Ionicons.glyphMap; label: string; href: string; color: string }[] = [
   { icon: 'add', label: 'Add', href: '/transactions/new', color: Colors.gold },
-  { icon: 'calendar', label: 'Calendar', href: '/calendar', color: Colors.info },
-  { icon: 'flag', label: 'Goals', href: '/goals', color: Colors.income },
+  { icon: 'swap-horizontal', label: 'Activity', href: '/transactions', color: Colors.info },
+  { icon: 'stats-chart', label: 'Insights', href: '/insights', color: Colors.income },
   { icon: 'repeat', label: 'Recurring', href: '/recurring', color: '#B24DFF' },
-  { icon: 'document-text', label: 'Reports', href: '/reports/monthly', color: '#2EC4B6' },
+  { icon: 'settings', label: 'Settings', href: '/settings', color: '#2EC4B6' },
 ];
 
 export default function HomeScreen() {
@@ -114,7 +114,7 @@ export default function HomeScreen() {
 
       {/* Extra quick links */}
       <View style={{ flexDirection: 'row', gap: 10 }}>
-        <Link href="/debts" asChild>
+        <Link href="/recurring" asChild>
           <Pressable
             style={{
               flex: 1,
@@ -128,9 +128,9 @@ export default function HomeScreen() {
               gap: 10,
             }}
           >
-            <Ionicons name="cash" size={18} color={Colors.gold} />
+            <Ionicons name="repeat" size={18} color={Colors.gold} />
             <AppText size={13} weight="medium">
-              Debts
+              Recurring
             </AppText>
           </Pressable>
         </Link>

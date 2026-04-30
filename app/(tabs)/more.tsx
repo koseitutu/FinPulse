@@ -16,17 +16,13 @@ interface Item {
 }
 
 const MAIN: Item[] = [
-  { label: 'Monthly Reports', icon: 'document-text', href: '/reports/monthly', color: Colors.gold, description: 'PDF/CSV exports' },
-  { label: 'Savings Goals', icon: 'flag', href: '/goals', color: Colors.income, description: 'Track progress' },
-  { label: 'Calendar', icon: 'calendar', href: '/calendar', color: Colors.info, description: 'Daily view' },
+  { label: 'Budgets', icon: 'speedometer', href: '/insights', color: Colors.gold, description: 'Track category limits' },
   { label: 'Recurring', icon: 'repeat', href: '/recurring', color: '#B24DFF', description: 'Manage schedules' },
-  { label: 'Debts & Loans', icon: 'cash', href: '/debts', color: Colors.expense, description: 'Track payments' },
-  { label: 'Receipt Scanner', icon: 'scan', href: '/scanner', color: '#2EC4B6', description: 'AI extract' },
+  { label: 'Global Search', icon: 'search', href: '/search', color: Colors.info, description: 'Find anything' },
+  { label: 'Archive', icon: 'archive', href: '/archive', color: Colors.textMuted, description: 'Old transactions' },
 ];
 
 const TOOLS: Item[] = [
-  { label: 'Global Search', icon: 'search', href: '/search', color: Colors.text },
-  { label: 'Archive', icon: 'archive', href: '/archive', color: Colors.textMuted },
   { label: 'Dashboard Widgets', icon: 'grid', href: '/dashboard/settings', color: Colors.text },
   { label: 'Settings', icon: 'settings', href: '/settings', color: Colors.text },
 ];

@@ -6,7 +6,7 @@ import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/consta
 import { AppText, Card, IconCircle, ProgressBar, SectionHeader } from './ui';
 import { Sparkline } from './charts';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
-import { daysInMonth, filterMonth, forecast, formatRelative, sumByType } from '@/utils/finance';
+import { filterMonth, formatRelative, sumByType } from '@/utils/finance';
 import type { WidgetKey } from '@/store/types';
 
 export function BalanceWidget() {
@@ -149,58 +149,6 @@ export function BalanceWidget() {
   );
 }
 
-export function ForecastWidget() {
-  const txs = useActiveTransactions();
-  const now = new Date();
-  const monthTx = filterMonth(txs, now.getFullYear(), now.getMonth());
-  const spent = monthTx.filter((t) => t.type === 'expense').reduce((a, t) => a + t.amount, 0);
-  const days = daysInMonth(now.getFullYear(), now.getMonth());
-  const currentDay = now.getDate();
-  const predicted = forecast(spent, currentDay, days);
-  const totalBudget = useAppStore((s) =>
-    s.categories
-      .filter((c) => c.type === 'expense' && !c.parentId && c.budget)
-      .reduce((acc, c) => acc + (c.budget ?? 0), 0)
-  );
-
-  const onPace = totalBudget > 0 && predicted <= totalBudget;
-
-  return (
-    <Card>
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-        <IconCircle icon="trending-up" color={onPace ? Colors.income : Colors.expense} size={44} />
-        <View style={{ flex: 1 }}>
-          <AppText size={11} weight="semiBold" color={Colors.textMuted} style={{ letterSpacing: 0.8 }}>
-            SPENDING FORECAST
-          </AppText>
-          <AppText weight="semiBold" size={16} style={{ marginTop: 2 }}>
-            {formatCompact(predicted)} by month-end
-          </AppText>
-        </View>
-      </View>
-      <View style={{ marginTop: Spacing.md }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-          <AppText size={11} color={Colors.textSecondary}>
-            Day {currentDay} of {days}
-          </AppText>
-          <AppText size={11} weight="semiBold" color={onPace ? Colors.income : Colors.expense}>
-            {onPace ? 'On track' : 'Over pace'}
-          </AppText>
-        </View>
-        <ProgressBar
-          value={predicted}
-          max={Math.max(totalBudget, predicted) || 1}
-          color={onPace ? Colors.income : Colors.expense}
-          showOverflow
-        />
-        <AppText size={11} color={Colors.textMuted} style={{ marginTop: 8 }}>
-          At this pace, you&apos;ll spend {formatCompact(predicted)} this month ({formatCompact(spent)} so far).
-        </AppText>
-      </View>
-    </Card>
-  );
-}
-
 export function BudgetsWidget() {
   const categories = useAppStore((s) => s.categories);
   const txs = useActiveTransactions();
@@ -271,63 +219,6 @@ export function BudgetsWidget() {
   );
 }
 
-export function SavingsWidget() {
-  const goals = useAppStore((s) => s.savingsGoals).slice(0, 3);
-  if (goals.length === 0) return null;
-  return (
-    <Card>
-      <SectionHeader
-        title="Savings goals"
-        subtitle={`${goals.length} active`}
-        action={
-          <Link href="/goals" asChild>
-            <Pressable>
-              <AppText size={12} color={Colors.gold} weight="semiBold">
-                Manage
-              </AppText>
-            </Pressable>
-          </Link>
-        }
-      />
-      <View style={{ gap: 14 }}>
-        {goals.map((g) => {
-          const pct = (g.currentAmount / g.targetAmount) * 100;
-          return (
-            <View key={g.id} style={{ gap: 6 }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                <View
-                  style={{
-                    width: 28,
-                    height: 28,
-                    borderRadius: 8,
-                    backgroundColor: g.color + '22',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Ionicons name={g.icon as never} size={15} color={g.color} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <AppText size={13} weight="semiBold">
-                    {g.name}
-                  </AppText>
-                  <AppText size={11} color={Colors.textMuted}>
-                    {formatCompact(g.currentAmount)} of {formatCompact(g.targetAmount)}
-                  </AppText>
-                </View>
-                <AppText size={12} weight="semiBold" color={g.color}>
-                  {pct.toFixed(0)}%
-                </AppText>
-              </View>
-              <ProgressBar value={g.currentAmount} max={g.targetAmount} color={g.color} />
-            </View>
-          );
-        })}
-      </View>
-    </Card>
-  );
-}
-
 export function RecentWidget() {
   const txs = useActiveTransactions().slice(0, 5);
   const categories = useAppStore((s) => s.categories);
@@ -388,67 +279,6 @@ export function RecentWidget() {
   );
 }
 
-export function DebtsWidget() {
-  const debts = useAppStore((s) => s.debts).filter((d) => !d.isPaid);
-  const owed = debts.filter((d) => d.type === 'owed').reduce((a, d) => a + (d.amount - d.amountPaid), 0);
-  const lent = debts.filter((d) => d.type === 'lent').reduce((a, d) => a + (d.amount - d.amountPaid), 0);
-  const overdue = debts.filter((d) => new Date(d.dueDate).getTime() < Date.now()).length;
-
-  return (
-    <Card>
-      <SectionHeader
-        title="Debt summary"
-        subtitle={overdue > 0 ? `${overdue} overdue` : 'All on schedule'}
-        action={
-          <Link href="/debts" asChild>
-            <Pressable>
-              <AppText size={12} color={Colors.gold} weight="semiBold">
-                Manage
-              </AppText>
-            </Pressable>
-          </Link>
-        }
-      />
-      <View style={{ flexDirection: 'row', gap: 12 }}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: Colors.expenseSoft,
-            borderRadius: Radius.md,
-            padding: Spacing.md,
-            borderWidth: 1,
-            borderColor: Colors.expense + '44',
-          }}
-        >
-          <AppText size={11} color={Colors.textMuted}>
-            You owe
-          </AppText>
-          <AppText weight="bold" size={18} color={Colors.expense}>
-            {formatCompact(owed)}
-          </AppText>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: Colors.incomeSoft,
-            borderRadius: Radius.md,
-            padding: Spacing.md,
-            borderWidth: 1,
-            borderColor: Colors.income + '44',
-          }}
-        >
-          <AppText size={11} color={Colors.textMuted}>
-            Owed to you
-          </AppText>
-          <AppText weight="bold" size={18} color={Colors.income}>
-            {formatCompact(lent)}
-          </AppText>
-        </View>
-      </View>
-    </Card>
-  );
-}
-
 export function AccountsWidget() {
   const accounts = useAppStore((s) => s.accounts);
   return (
@@ -478,10 +308,7 @@ export function AccountsWidget() {
 
 export const WIDGETS: Record<WidgetKey, { label: string; icon: keyof typeof Ionicons.glyphMap; render: () => React.ReactElement }> = {
   balance: { label: 'Total Balance', icon: 'wallet', render: () => <BalanceWidget /> },
-  forecast: { label: 'Spending Forecast', icon: 'trending-up', render: () => <ForecastWidget /> },
   budgets: { label: 'Budget Pulse', icon: 'speedometer', render: () => <BudgetsWidget /> },
-  savings: { label: 'Savings Goals', icon: 'flag', render: () => <SavingsWidget /> },
-  debts: { label: 'Debt Summary', icon: 'cash', render: () => <DebtsWidget /> },
   recent: { label: 'Recent Activity', icon: 'list', render: () => <RecentWidget /> },
   accounts: { label: 'Accounts', icon: 'grid', render: () => <AccountsWidget /> },
 };

@@ -17,7 +17,6 @@ export default function NewTransactionScreen() {
     notes?: string;
     categoryId?: string;
     date?: string;
-    receiptImageUri?: string;
   }>();
 
   const accounts = useAppStore((s) => s.accounts);
@@ -69,7 +68,6 @@ export default function NewTransactionScreen() {
       notes: notes || undefined,
       accountId,
       merchant: merchant || undefined,
-      receiptImageUri: params.receiptImageUri,
     });
     router.back();
   };

@@ -40,16 +40,9 @@ export default function RootLayout() {
             }}
           >
             <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="goals/index" />
-            <Stack.Screen name="goals/new" options={{ presentation: 'modal' }} />
             <Stack.Screen name="recurring/index" />
             <Stack.Screen name="recurring/new" options={{ presentation: 'modal' }} />
-            <Stack.Screen name="calendar/index" />
-            <Stack.Screen name="debts/index" />
-            <Stack.Screen name="debts/new" options={{ presentation: 'modal' }} />
-            <Stack.Screen name="scanner/index" options={{ presentation: 'modal' }} />
             <Stack.Screen name="archive/index" />
-            <Stack.Screen name="reports/monthly" />
             <Stack.Screen name="dashboard/settings" />
             <Stack.Screen name="transactions/new" options={{ presentation: 'modal' }} />
             <Stack.Screen name="transactions/[id]" options={{ presentation: 'modal' }} />

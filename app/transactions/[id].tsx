@@ -1,7 +1,6 @@
 import React from 'react';
 import { Alert, Platform, Pressable, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Image } from 'expo-image';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing, formatCurrency } from '@/constants/theme';
@@ -145,18 +144,6 @@ export default function TransactionDetailScreen() {
           </Card>
         ) : null}
 
-        {tx.receiptImageUri ? (
-          <Card>
-            <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1, marginBottom: 8 }}>
-              RECEIPT
-            </AppText>
-            <Image
-              source={{ uri: tx.receiptImageUri }}
-              style={{ width: '100%', height: 240, borderRadius: Radius.md }}
-              contentFit="cover"
-            />
-          </Card>
-        ) : null}
       </ScrollView>
     </View>
   );

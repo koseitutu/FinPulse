@@ -223,9 +223,6 @@ export default function TransactionsScreen() {
                             {t.isRecurring ? (
                               <Ionicons name="repeat" size={11} color={Colors.gold} />
                             ) : null}
-                            {t.receiptImageUri ? (
-                              <Ionicons name="receipt" size={11} color={Colors.info} />
-                            ) : null}
                           </View>
                           <AppText size={11} color={Colors.textMuted}>
                             {cat?.name}

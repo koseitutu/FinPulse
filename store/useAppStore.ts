@@ -7,11 +7,9 @@ import type {
   ArchiveConfig,
   Category,
   DashboardConfig,
-  Debt,
   Frequency,
   Preferences,
   RecurringTransaction,
-  SavingsGoal,
   Tag,
   Transaction,
   WidgetKey,
@@ -19,9 +17,7 @@ import type {
 import {
   seedAccounts,
   seedCategories,
-  seedDebts,
   seedRecurring,
-  seedSavingsGoals,
   seedTags,
   seedTransactions,
 } from './seed';
@@ -56,9 +52,7 @@ interface AppState {
   categories: Category[];
   tags: Tag[];
   transactions: Transaction[];
-  savingsGoals: SavingsGoal[];
   recurring: RecurringTransaction[];
-  debts: Debt[];
   dashboard: DashboardConfig;
   archiveConfig: ArchiveConfig;
   exchangeRates: Record<string, number>;
@@ -69,31 +63,23 @@ interface AppState {
   setAlerts: (a: Partial<Preferences['alerts']>) => void;
 
   addTransaction: (t: Omit<Transaction, 'id'>) => Transaction;
+  addTransactions: (ts: Omit<Transaction, 'id'>[]) => Transaction[];
   updateTransaction: (id: string, patch: Partial<Transaction>) => void;
   deleteTransaction: (id: string) => void;
 
   addCategory: (c: Omit<Category, 'id'>) => Category;
   updateCategory: (id: string, patch: Partial<Category>) => void;
+  deleteCategory: (id: string) => void;
 
   addAccount: (a: Omit<Account, 'id'>) => Account;
 
   addTag: (t: Omit<Tag, 'id'>) => Tag;
-
-  addGoal: (g: Omit<SavingsGoal, 'id' | 'contributions' | 'createdAt'>) => SavingsGoal;
-  updateGoal: (id: string, patch: Partial<SavingsGoal>) => void;
-  deleteGoal: (id: string) => void;
-  contributeGoal: (id: string, amount: number) => void;
 
   addRecurring: (r: Omit<RecurringTransaction, 'id' | 'createdAt'>) => RecurringTransaction;
   updateRecurring: (id: string, patch: Partial<RecurringTransaction>) => void;
   deleteRecurring: (id: string) => void;
   toggleRecurring: (id: string) => void;
   processDueRecurring: () => void;
-
-  addDebt: (d: Omit<Debt, 'id' | 'createdAt' | 'amountPaid' | 'isPaid'>) => Debt;
-  updateDebt: (id: string, patch: Partial<Debt>) => void;
-  deleteDebt: (id: string) => void;
-  payDebt: (id: string, amount: number) => void;
 
   setDashboardOrder: (order: WidgetKey[]) => void;
   toggleWidget: (key: WidgetKey) => void;
@@ -106,13 +92,10 @@ interface AppState {
 }
 
 const defaultDashboard: DashboardConfig = {
-  widgetOrder: ['balance', 'forecast', 'budgets', 'savings', 'debts', 'recent', 'accounts'],
+  widgetOrder: ['balance', 'budgets', 'recent', 'accounts'],
   visibleWidgets: {
     balance: true,
-    forecast: true,
     budgets: true,
-    savings: true,
-    debts: true,
     recent: true,
     accounts: true,
   },
@@ -128,7 +111,6 @@ const defaultPrefs: Preferences = {
     budget100: true,
     dailyDigest: false,
     weeklyDigest: true,
-    debtReminders: true,
   },
 };
 
@@ -140,9 +122,7 @@ export const useAppStore = create<AppState>()(
       categories: seedCategories,
       tags: seedTags,
       transactions: seedTransactions,
-      savingsGoals: seedSavingsGoals,
       recurring: seedRecurring,
-      debts: seedDebts,
       dashboard: defaultDashboard,
       archiveConfig: { autoArchiveMonths: 12 },
       exchangeRates: { GHS: 1, USD: 0.067, EUR: 0.061, GBP: 0.053, NGN: 107.2 },
@@ -162,6 +142,22 @@ export const useAppStore = create<AppState>()(
           ),
         }));
         return tx;
+      },
+      addTransactions: (ts) => {
+        const added: Transaction[] = ts.map((t) => ({ ...t, id: uid() }));
+        set((s) => {
+          const newAccounts = s.accounts.map((a) => {
+            const delta = added
+              .filter((t) => t.accountId === a.id)
+              .reduce((acc, t) => acc + (t.type === 'income' ? t.amount : -t.amount), 0);
+            return { ...a, balance: a.balance + delta };
+          });
+          return {
+            transactions: [...added, ...s.transactions],
+            accounts: newAccounts,
+          };
+        });
+        return added;
       },
       updateTransaction: (id, patch) => {
         set((s) => ({
@@ -189,6 +185,9 @@ export const useAppStore = create<AppState>()(
       updateCategory: (id, patch) => {
         set((s) => ({ categories: s.categories.map((c) => (c.id === id ? { ...c, ...patch } : c)) }));
       },
+      deleteCategory: (id) => {
+        set((s) => ({ categories: s.categories.filter((c) => c.id !== id && c.parentId !== id) }));
+      },
 
       addAccount: (a) => {
         const acc: Account = { ...a, id: uid() };
@@ -200,37 +199,6 @@ export const useAppStore = create<AppState>()(
         const tag: Tag = { ...t, id: uid() };
         set((s) => ({ tags: [...s.tags, tag] }));
         return tag;
-      },
-
-      addGoal: (g) => {
-        const goal: SavingsGoal = {
-          ...g,
-          id: uid(),
-          createdAt: new Date().toISOString(),
-          contributions: [],
-        };
-        set((s) => ({ savingsGoals: [...s.savingsGoals, goal] }));
-        return goal;
-      },
-      updateGoal: (id, patch) => {
-        set((s) => ({ savingsGoals: s.savingsGoals.map((g) => (g.id === id ? { ...g, ...patch } : g)) }));
-      },
-      deleteGoal: (id) => set((s) => ({ savingsGoals: s.savingsGoals.filter((g) => g.id !== id) })),
-      contributeGoal: (id, amount) => {
-        set((s) => ({
-          savingsGoals: s.savingsGoals.map((g) =>
-            g.id === id
-              ? {
-                  ...g,
-                  currentAmount: g.currentAmount + amount,
-                  contributions: [
-                    ...g.contributions,
-                    { id: uid(), amount, date: new Date().toISOString() },
-                  ],
-                }
-              : g
-          ),
-        }));
       },
 
       addRecurring: (r) => {
@@ -266,30 +234,6 @@ export const useAppStore = create<AppState>()(
           });
           get().updateRecurring(r.id, { nextDueDate: addFrequency(r.nextDueDate, r.frequency) });
         });
-      },
-
-      addDebt: (d) => {
-        const debt: Debt = {
-          ...d,
-          id: uid(),
-          createdAt: new Date().toISOString(),
-          amountPaid: 0,
-          isPaid: false,
-        };
-        set((s) => ({ debts: [...s.debts, debt] }));
-        return debt;
-      },
-      updateDebt: (id, patch) =>
-        set((s) => ({ debts: s.debts.map((d) => (d.id === id ? { ...d, ...patch } : d)) })),
-      deleteDebt: (id) => set((s) => ({ debts: s.debts.filter((d) => d.id !== id) })),
-      payDebt: (id, amount) => {
-        set((s) => ({
-          debts: s.debts.map((d) => {
-            if (d.id !== id) return d;
-            const paid = Math.min(d.amount, d.amountPaid + amount);
-            return { ...d, amountPaid: paid, isPaid: paid >= d.amount };
-          }),
-        }));
       },
 
       setDashboardOrder: (order) =>
@@ -330,7 +274,7 @@ export const useAppStore = create<AppState>()(
         set(() => ({ exchangeRates: rates, lastRatesFetch: new Date().toISOString() })),
     }),
     {
-      name: 'finpulse-storage-v1',
+      name: 'finpulse-storage-v2',
       storage: createJSONStorage(() => AsyncStorage),
     }
   )
