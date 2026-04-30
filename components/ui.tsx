@@ -11,7 +11,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { CardTone, Colors, Radius, Spacing } from '@/constants/theme';
+import { CardTone, Colors, Radius, Spacing, useFontScale } from '@/constants/theme';
 import { Fonts } from '@/constants/Typography';
 
 export function Card({
@@ -71,13 +71,14 @@ type TypographyProps = TextProps & {
 };
 
 export function AppText({ weight = 'regular', size = 14, color = Colors.text, style, ...rest }: TypographyProps) {
+  const fontScale = useFontScale();
   return (
     <Text
       {...rest}
       style={[
         {
           fontFamily: Fonts[weight],
-          fontSize: size,
+          fontSize: Math.round(size * fontScale),
           color,
         },
         style,

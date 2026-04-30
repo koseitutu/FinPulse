@@ -12,7 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, cycleTone, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, cycleTone, formatCompact, formatCurrency, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Empty, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Account, AccountType } from '@/store/types';
@@ -285,6 +285,7 @@ function AccountEditor({
   onSave: (data: Partial<Account>, id?: string) => void;
 }) {
   const insets = useSafeAreaInsets();
+  const scaled = useScaledFont();
   const [name, setName] = useState(account?.name ?? '');
   const [type, setType] = useState<AccountType>(account?.type ?? 'bank');
   const [currency, setCurrency] = useState(account?.currency ?? 'GHS');
@@ -365,7 +366,7 @@ function AccountEditor({
                   style={{
                     color: Colors.text,
                     fontFamily: 'Inter_600SemiBold',
-                    fontSize: 16,
+                    fontSize: scaled(16),
                     backgroundColor: Colors.surface,
                     borderWidth: 1,
                     borderColor: Colors.border,
@@ -457,7 +458,7 @@ function AccountEditor({
                       flex: 1,
                       color: Colors.text,
                       fontFamily: 'Inter_700Bold',
-                      fontSize: 24,
+                      fontSize: scaled(24),
                       paddingVertical: 12,
                     }}
                   />

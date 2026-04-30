@@ -3,7 +3,7 @@ import { FlatList, Pressable, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, formatCurrency, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Chip, Empty, IconButton } from '@/components/ui';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { formatRelative } from '@/utils/finance';
@@ -14,6 +14,7 @@ export default function TransactionsScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   useTheme();
+  const scaled = useScaledFont();
   const txs = useActiveTransactions();
   const categories = useAppStore((s) => s.categories);
   const accounts = useAppStore((s) => s.accounts);
@@ -102,7 +103,7 @@ export default function TransactionsScreen() {
               color: Colors.text,
               paddingVertical: 12,
               fontFamily: 'Inter_400Regular',
-              fontSize: 14,
+              fontSize: scaled(14),
             }}
           />
           {query ? (

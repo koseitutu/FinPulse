@@ -3,7 +3,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Frequency, TxType } from '@/store/types';
@@ -14,6 +14,7 @@ export default function NewRecurringScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   useTheme();
+  const scaled = useScaledFont();
   const accounts = useAppStore((s) => s.accounts);
   const categories = useAppStore((s) => s.categories);
   const addRecurring = useAppStore((s) => s.addRecurring);
@@ -109,7 +110,7 @@ export default function NewRecurringScreen() {
             onChangeText={setName}
             placeholder="e.g. Netflix subscription"
             placeholderTextColor={Colors.textDim}
-            style={{ color: Colors.text, fontFamily: 'Inter_600SemiBold', fontSize: 18, paddingVertical: 6 }}
+            style={{ color: Colors.text, fontFamily: 'Inter_600SemiBold', fontSize: scaled(18), paddingVertical: 6 }}
           />
         </Card>
 
@@ -127,7 +128,7 @@ export default function NewRecurringScreen() {
               placeholder="0.00"
               placeholderTextColor={Colors.textDim}
               keyboardType="decimal-pad"
-              style={{ flex: 1, color: Colors.text, fontFamily: 'Inter_700Bold', fontSize: 32 }}
+              style={{ flex: 1, color: Colors.text, fontFamily: 'Inter_700Bold', fontSize: scaled(32) }}
             />
           </View>
         </Card>
@@ -222,7 +223,7 @@ export default function NewRecurringScreen() {
             placeholder="7"
             placeholderTextColor={Colors.textDim}
             keyboardType="number-pad"
-            style={{ color: Colors.text, fontFamily: 'Inter_600SemiBold', fontSize: 18, paddingVertical: 6 }}
+            style={{ color: Colors.text, fontFamily: 'Inter_600SemiBold', fontSize: scaled(18), paddingVertical: 6 }}
           />
         </Card>
 

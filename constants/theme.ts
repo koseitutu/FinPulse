@@ -1,6 +1,31 @@
+import React from 'react';
 import { useAppStore } from '@/store/useAppStore';
+import type { FontScale } from '@/store/types';
 
 export type ThemeMode = 'dark' | 'light';
+
+/**
+ * Multipliers applied to every font size in the app. The user picks one via
+ * Settings → Font Size. The hooks below read the preference reactively so
+ * text re-renders the instant the preference changes.
+ */
+export const FONT_SCALE_MULTIPLIERS: Record<FontScale, number> = {
+  small: 0.88,
+  medium: 1.0,
+  large: 1.18,
+};
+
+/**
+ * Mutable snapshot of the current font-scale multiplier, mirrored from the
+ * store so non-component code paths (style objects built outside render) can
+ * read it synchronously. Components should prefer `useFontScale()` which
+ * re-renders on change.
+ */
+export const FontScaleState = { multiplier: 1 };
+
+export function scaleFont(size: number, multiplier = FontScaleState.multiplier): number {
+  return Math.round(size * multiplier);
+}
 
 export type CardTone = 'purple' | 'blue' | 'teal' | 'coral' | 'amber';
 
@@ -191,6 +216,33 @@ export function useTheme(): ThemeMode {
   // the same render see the latest values.
   applyPalette(mode);
   return mode;
+}
+
+/**
+ * Subscribes a component to the current font-scale preference. Returns the
+ * active multiplier (e.g. 1.0 for Medium) and keeps the shared
+ * `FontScaleState.multiplier` in sync so every scaled text re-reads the new
+ * value on the same render.
+ */
+export function useFontScale(): number {
+  const pref = useAppStore((s) => s.preferences.fontScale) as FontScale | undefined;
+  const key: FontScale = pref ?? 'medium';
+  const multiplier = FONT_SCALE_MULTIPLIERS[key] ?? 1;
+  FontScaleState.multiplier = multiplier;
+  return multiplier;
+}
+
+/**
+ * Convenience hook: returns a function that scales a raw font size using the
+ * current preference. Handy for inline styles on components that don't use
+ * `AppText` (e.g. `TextInput`).
+ */
+export function useScaledFont() {
+  const multiplier = useFontScale();
+  return React.useCallback(
+    (size: number) => Math.round(size * multiplier),
+    [multiplier]
+  );
 }
 
 /**

@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View } from 'react-native';
-import { Colors, useTheme } from '@/constants/theme';
+import { Colors, useFontScale, useTheme } from '@/constants/theme';
 import { useAppStore } from '@/store/useAppStore';
 
 SplashScreen.preventAutoHideAsync();
@@ -16,6 +16,9 @@ export default function RootLayout() {
   const [loaded, error] = useFonts(FontMap);
   const processDueRecurring = useAppStore((s) => s.processDueRecurring);
   const themeMode = useTheme();
+  // Subscribe globally so FontScaleState stays fresh for non-component style
+  // code paths (e.g. util helpers building styles outside a render).
+  useFontScale();
 
   useEffect(() => {
     if (loaded || error) {

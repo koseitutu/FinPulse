@@ -3,7 +3,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, IconButton } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import { formatRelative } from '@/utils/finance';
@@ -12,6 +12,7 @@ export default function SearchScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   useTheme();
+  const scaled = useScaledFont();
   const txs = useAppStore((s) => s.transactions);
   const categories = useAppStore((s) => s.categories);
   const accounts = useAppStore((s) => s.accounts);
@@ -75,7 +76,7 @@ export default function SearchScreen() {
               color: Colors.text,
               paddingVertical: 12,
               fontFamily: 'Inter_400Regular',
-              fontSize: 14,
+              fontSize: scaled(14),
             }}
           />
           {query ? (

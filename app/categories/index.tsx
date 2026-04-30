@@ -12,7 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, cycleTone, formatCompact, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, cycleTone, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Chip, Empty, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Category, TxType } from '@/store/types';
@@ -286,6 +286,7 @@ function CategoryEditor({
   onSave: (data: Partial<Category>, id?: string) => void;
 }) {
   const insets = useSafeAreaInsets();
+  const scaled = useScaledFont();
   const [name, setName] = useState(category?.name ?? '');
   const [type, setType] = useState<TxType>(category?.type ?? defaultType);
   const [icon, setIcon] = useState<string>(category?.icon ?? 'pricetag');
@@ -384,7 +385,7 @@ function CategoryEditor({
                   style={{
                     color: Colors.text,
                     fontFamily: 'Inter_600SemiBold',
-                    fontSize: 16,
+                    fontSize: scaled(16),
                     backgroundColor: Colors.surface,
                     borderWidth: 1,
                     borderColor: Colors.border,
@@ -516,7 +517,7 @@ function CategoryEditor({
                         flex: 1,
                         color: Colors.text,
                         fontFamily: 'Inter_700Bold',
-                        fontSize: 20,
+                        fontSize: scaled(20),
                         paddingVertical: 12,
                       }}
                     />

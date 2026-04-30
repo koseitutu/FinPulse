@@ -3,7 +3,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Chip, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { TxType } from '@/store/types';
@@ -12,6 +12,7 @@ export default function NewTransactionScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   useTheme();
+  const scaled = useScaledFont();
   const params = useLocalSearchParams<{
     amount?: string;
     merchant?: string;
@@ -143,7 +144,7 @@ export default function NewTransactionScreen() {
                 flex: 1,
                 color: Colors.text,
                 fontFamily: 'Inter_700Bold',
-                fontSize: 36,
+                fontSize: scaled(36),
               }}
             />
           </View>
@@ -255,7 +256,7 @@ export default function NewTransactionScreen() {
             onChangeText={setMerchant}
             placeholder="e.g. Shoprite"
             placeholderTextColor={Colors.textDim}
-            style={{ color: Colors.text, fontFamily: 'Inter_400Regular', fontSize: 15, paddingVertical: 4 }}
+            style={{ color: Colors.text, fontFamily: 'Inter_400Regular', fontSize: scaled(15), paddingVertical: 4 }}
           />
         </Card>
 
@@ -274,7 +275,7 @@ export default function NewTransactionScreen() {
             style={{
               color: Colors.text,
               fontFamily: 'Inter_400Regular',
-              fontSize: 14,
+              fontSize: scaled(14),
               minHeight: 60,
               textAlignVertical: 'top',
             }}

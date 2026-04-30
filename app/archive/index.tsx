@@ -3,7 +3,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, formatCurrency, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Empty, IconButton } from '@/components/ui';
 import { useArchivedTransactions, useAppStore } from '@/store/useAppStore';
 import { formatDate } from '@/utils/finance';
@@ -12,6 +12,7 @@ export default function ArchiveScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   useTheme();
+  const scaled = useScaledFont();
   const archived = useArchivedTransactions();
   const categories = useAppStore((s) => s.categories);
   const restoreTransaction = useAppStore((s) => s.restoreTransaction);
@@ -106,7 +107,7 @@ export default function ArchiveScreen() {
             onChangeText={setQuery}
             placeholder="Search archived…"
             placeholderTextColor={Colors.textDim}
-            style={{ flex: 1, color: Colors.text, paddingVertical: 12, fontFamily: 'Inter_400Regular', fontSize: 14 }}
+            style={{ flex: 1, color: Colors.text, paddingVertical: 12, fontFamily: 'Inter_400Regular', fontSize: scaled(14) }}
           />
         </View>
 

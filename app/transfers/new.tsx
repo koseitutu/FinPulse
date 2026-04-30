@@ -11,7 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, formatCurrency, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, IconButton } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Account } from '@/store/types';
@@ -20,6 +20,7 @@ export default function NewTransferScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   useTheme();
+  const scaled = useScaledFont();
   const params = useLocalSearchParams<{ fromId?: string; toId?: string }>();
   const accounts = useAppStore((s) => s.accounts);
   const addTransfer = useAppStore((s) => s.addTransfer);
@@ -402,7 +403,7 @@ export default function NewTransferScreen() {
                   style={{
                     color: Colors.text,
                     fontFamily: 'Inter_500Medium',
-                    fontSize: 14,
+                    fontSize: scaled(14),
                     backgroundColor: Colors.surface,
                     borderWidth: 1,
                     borderColor: Colors.border,
@@ -566,6 +567,7 @@ function AmountInput({
   balance?: number;
   showBalance?: boolean;
 }) {
+  const scaled = useScaledFont();
   const parsed = parseFloat(value.replace(/,/g, '')) || 0;
   return (
     <View>
@@ -625,7 +627,7 @@ function AmountInput({
             flex: 1,
             color: Colors.text,
             fontFamily: 'Inter_700Bold',
-            fontSize: 28,
+            fontSize: scaled(28),
             paddingVertical: 12,
           }}
         />

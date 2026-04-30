@@ -101,6 +101,8 @@ export interface AlertConfig {
   weeklyDigest: boolean;
 }
 
+export type FontScale = 'small' | 'medium' | 'large';
+
 export interface Preferences {
   currency: string;
   theme: 'dark' | 'light';
@@ -108,4 +110,9 @@ export interface Preferences {
   pin?: string;
   biometric?: boolean;
   alerts: AlertConfig;
+  /**
+   * Global font-size preference. Multiplies every text size across the app.
+   * Defaults to 'medium' (1.0×). Small = 0.88×, Large = 1.15×.
+   */
+  fontScale: FontScale;
 }

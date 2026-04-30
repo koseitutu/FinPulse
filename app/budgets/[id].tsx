@@ -11,7 +11,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, IconButton, ProgressBar } from '@/components/ui';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { daysInMonth, filterMonth } from '@/utils/finance';
@@ -22,6 +22,7 @@ export default function BudgetEditScreen() {
   const insets = useSafeAreaInsets();
   const router = useRouter();
   useTheme();
+  const scaled = useScaledFont();
   const { id } = useLocalSearchParams<{ id: string }>();
   const categories = useAppStore((s) => s.categories);
   const updateCategory = useAppStore((s) => s.updateCategory);
@@ -216,7 +217,7 @@ export default function BudgetEditScreen() {
                   flex: 1,
                   color: Colors.text,
                   fontFamily: 'Inter_700Bold',
-                  fontSize: 28,
+                  fontSize: scaled(28),
                   paddingVertical: 12,
                 }}
               />

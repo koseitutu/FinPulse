@@ -133,6 +133,7 @@ const defaultPrefs: Preferences = {
   currency: 'GHS',
   theme: 'dark',
   name: 'Kwame',
+  fontScale: 'medium',
   alerts: {
     budget50: true,
     budget80: true,
@@ -357,6 +358,19 @@ export const useAppStore = create<AppState>()(
     {
       name: 'finpulse-storage-v2',
       storage: createJSONStorage(() => AsyncStorage),
+      // Backfill new preference fields for users upgrading from an older
+      // persisted state that didn't include them (e.g. fontScale).
+      merge: (persisted, current) => {
+        const p = (persisted ?? {}) as Partial<AppState>;
+        return {
+          ...current,
+          ...p,
+          preferences: {
+            ...current.preferences,
+            ...(p.preferences ?? {}),
+          },
+        };
+      },
     }
   )
 );

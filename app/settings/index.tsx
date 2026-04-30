@@ -3,12 +3,19 @@ import { Platform, Pressable, ScrollView, Switch, TextInput, View } from 'react-
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Card, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
+import type { FontScale } from '@/store/types';
 
 const CURRENCIES = ['GHS', 'USD', 'EUR', 'GBP', 'NGN'];
 const RETENTIONS: (6 | 12 | 24)[] = [6, 12, 24];
+
+const FONT_SIZES: { key: FontScale; label: string; preview: number }[] = [
+  { key: 'small', label: 'Small', preview: 12 },
+  { key: 'medium', label: 'Medium', preview: 14 },
+  { key: 'large', label: 'Large', preview: 17 },
+];
 
 export default function SettingsScreen() {
   const insets = useSafeAreaInsets();
@@ -27,6 +34,8 @@ export default function SettingsScreen() {
   const [name, setName] = useState(preferences.name);
   const [pin, setPin] = useState(preferences.pin ?? '');
   const [archiveMsg, setArchiveMsg] = useState<string | null>(null);
+  const scaled = useScaledFont();
+  const fontScale: FontScale = preferences.fontScale ?? 'medium';
 
   const handleArchive = () => {
     const n = archiveOld(archiveConfig.autoArchiveMonths);
@@ -66,7 +75,7 @@ export default function SettingsScreen() {
             style={{
               color: Colors.text,
               fontFamily: 'Inter_600SemiBold',
-              fontSize: 16,
+              fontSize: scaled(16),
               paddingVertical: 6,
             }}
           />
@@ -119,6 +128,82 @@ export default function SettingsScreen() {
           </View>
         </Card>
 
+        <Card tone="teal">
+          <SectionHeader
+            title="Font size"
+            subtitle="Scales every text in the app. Changes apply instantly."
+          />
+          <View style={{ flexDirection: 'row', gap: 8 }}>
+            {FONT_SIZES.map((opt) => {
+              const active = fontScale === opt.key;
+              return (
+                <Pressable
+                  key={opt.key}
+                  onPress={() => setPreferences({ fontScale: opt.key })}
+                  accessibilityRole="button"
+                  accessibilityState={{ selected: active }}
+                  accessibilityLabel={`${opt.label} font size`}
+                  style={{
+                    flex: 1,
+                    minHeight: 64,
+                    paddingVertical: Spacing.md,
+                    paddingHorizontal: Spacing.sm,
+                    borderRadius: Radius.md,
+                    backgroundColor: active ? Colors.gold + '22' : Colors.surface,
+                    borderWidth: 1,
+                    borderColor: active ? Colors.gold : Colors.border,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 4,
+                  }}
+                >
+                  <AppText
+                    weight="bold"
+                    size={opt.preview}
+                    color={active ? Colors.gold : Colors.text}
+                  >
+                    Aa
+                  </AppText>
+                  <AppText
+                    size={11}
+                    weight="semiBold"
+                    color={active ? Colors.gold : Colors.textSecondary}
+                  >
+                    {opt.label}
+                  </AppText>
+                </Pressable>
+              );
+            })}
+          </View>
+          <View
+            style={{
+              marginTop: Spacing.md,
+              padding: Spacing.md,
+              borderRadius: Radius.md,
+              backgroundColor: Colors.surface,
+              borderWidth: 1,
+              borderColor: Colors.borderSubtle,
+              gap: 4,
+            }}
+          >
+            <AppText
+              size={10}
+              weight="semiBold"
+              color={Colors.textMuted}
+              style={{ letterSpacing: 1 }}
+            >
+              PREVIEW
+            </AppText>
+            <AppText weight="bold" size={18}>
+              The quick brown fox jumps
+            </AppText>
+            <AppText size={13} color={Colors.textSecondary}>
+              Over the lazy dog. This preview updates live to show how the selected size looks in
+              everyday copy.
+            </AppText>
+          </View>
+        </Card>
+
         <Card tone="blue">
           <SectionHeader title="Currency" subtitle="Display totals in your preferred currency" />
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
@@ -166,7 +251,7 @@ export default function SettingsScreen() {
             style={{
               color: Colors.text,
               fontFamily: 'Inter_600SemiBold',
-              fontSize: 16,
+              fontSize: scaled(16),
               paddingVertical: 8,
               letterSpacing: 4,
             }}
