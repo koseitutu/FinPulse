@@ -92,6 +92,45 @@ export default function AccountsScreen() {
         contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 120, gap: Spacing.lg }}
         showsVerticalScrollIndicator={false}
       >
+        {accounts.length >= 2 ? (
+          <Pressable
+            onPress={() => router.push('/transfers/new')}
+            style={({ pressed }) => ({
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 12,
+              padding: Spacing.md,
+              borderRadius: Radius.lg,
+              backgroundColor: Colors.gold + '18',
+              borderWidth: 1,
+              borderColor: Colors.gold + '55',
+              opacity: pressed ? 0.8 : 1,
+            })}
+          >
+            <View
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 12,
+                backgroundColor: Colors.gold,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Ionicons name="swap-horizontal" size={18} color={Colors.bg} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <AppText weight="bold" size={14} color={Colors.gold}>
+                Transfer between accounts
+              </AppText>
+              <AppText size={11} color={Colors.textSecondary}>
+                Move money without affecting income or expenses
+              </AppText>
+            </View>
+            <Ionicons name="chevron-forward" size={16} color={Colors.gold} />
+          </Pressable>
+        ) : null}
+
         {accounts.length > 0 ? (
           <View
             style={{
@@ -178,6 +217,21 @@ export default function AccountsScreen() {
               </View>
 
               <View style={{ flexDirection: 'row', gap: 10, marginTop: Spacing.md }}>
+                {accounts.length >= 2 ? (
+                  <Button
+                    label="Transfer"
+                    icon="swap-horizontal"
+                    variant="secondary"
+                    onPress={() =>
+                      router.push({
+                        pathname: '/transfers/new',
+                        params: { fromId: a.id },
+                      })
+                    }
+                    style={{ flex: 1 }}
+                    small
+                  />
+                ) : null}
                 <Button
                   label="Edit"
                   icon="create"

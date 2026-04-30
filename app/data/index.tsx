@@ -36,6 +36,7 @@ export default function ManageDataScreen() {
   const tags = useAppStore((s) => s.tags);
   const transactions = useAppStore((s) => s.transactions);
   const recurring = useAppStore((s) => s.recurring);
+  const transfers = useAppStore((s) => s.transfers);
   const dashboard = useAppStore((s) => s.dashboard);
   const archiveConfig = useAppStore((s) => s.archiveConfig);
   const addTransactions = useAppStore((s) => s.addTransactions);
@@ -52,6 +53,7 @@ export default function ManageDataScreen() {
       tags,
       transactions,
       recurring,
+      transfers,
       dashboard,
       archiveConfig,
     });
@@ -59,7 +61,7 @@ export default function ManageDataScreen() {
     if (bytes < 1024) return `${bytes} B`;
     if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
     return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
-  }, [preferences, accounts, categories, tags, transactions, recurring, dashboard, archiveConfig]);
+  }, [preferences, accounts, categories, tags, transactions, recurring, transfers, dashboard, archiveConfig]);
 
   const flash = (kind: StatusKind, message: string, ms = 4000) => {
     setStatus({ kind, message });

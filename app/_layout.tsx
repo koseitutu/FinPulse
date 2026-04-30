@@ -49,6 +49,8 @@ export default function RootLayout() {
             <Stack.Screen name="recurring/new" options={{ presentation: 'modal' }} />
             <Stack.Screen name="archive/index" />
             <Stack.Screen name="dashboard/settings" />
+            <Stack.Screen name="transfers/index" />
+            <Stack.Screen name="transfers/new" options={{ presentation: 'modal' }} />
             <Stack.Screen name="transactions/new" options={{ presentation: 'modal' }} />
             <Stack.Screen name="transactions/[id]" options={{ presentation: 'modal' }} />
             <Stack.Screen name="search" options={{ presentation: 'modal' }} />

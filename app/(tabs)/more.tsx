@@ -20,6 +20,7 @@ const MAIN: Item[] = [
   { label: 'Categories', icon: 'pricetags', href: '/categories', color: '#2EC4B6', description: 'Organize spending' },
   { label: 'Budgets', icon: 'speedometer', href: '/budgets', color: '#FF8C42', description: 'Track category limits' },
   { label: 'Recurring', icon: 'repeat', href: '/recurring', color: '#B24DFF', description: 'Manage schedules' },
+  { label: 'Transfers', icon: 'swap-horizontal', href: '/transfers', color: '#2EC4B6', description: 'Move between accounts' },
   { label: 'Global Search', icon: 'search', href: '/search', color: Colors.info, description: 'Find anything' },
   { label: 'Archive', icon: 'archive', href: '/archive', color: Colors.textMuted, description: 'Old transactions' },
 ];

@@ -12,6 +12,7 @@ import type {
   RecurringTransaction,
   Tag,
   Transaction,
+  Transfer,
   WidgetKey,
 } from './types';
 import {
@@ -53,6 +54,7 @@ interface AppState {
   tags: Tag[];
   transactions: Transaction[];
   recurring: RecurringTransaction[];
+  transfers: Transfer[];
   dashboard: DashboardConfig;
   archiveConfig: ArchiveConfig;
 
@@ -74,6 +76,9 @@ interface AppState {
   deleteAccount: (id: string) => void;
 
   addTag: (t: Omit<Tag, 'id'>) => Tag;
+
+  addTransfer: (t: Omit<Transfer, 'id'>) => Transfer;
+  deleteTransfer: (id: string) => void;
 
   addRecurring: (r: Omit<RecurringTransaction, 'id' | 'createdAt'>) => RecurringTransaction;
   updateRecurring: (id: string, patch: Partial<RecurringTransaction>) => void;
@@ -109,6 +114,7 @@ export interface BackupData {
   tags?: Tag[];
   transactions?: Transaction[];
   recurring?: RecurringTransaction[];
+  transfers?: Transfer[];
   dashboard?: DashboardConfig;
   archiveConfig?: ArchiveConfig;
 }
@@ -145,6 +151,7 @@ export const useAppStore = create<AppState>()(
       tags: seedTags,
       transactions: seedTransactions,
       recurring: seedRecurring,
+      transfers: [],
       dashboard: defaultDashboard,
       archiveConfig: { autoArchiveMonths: 12 },
 
@@ -232,6 +239,39 @@ export const useAppStore = create<AppState>()(
         return tag;
       },
 
+      addTransfer: (t) => {
+        const transfer: Transfer = { ...t, id: uid() };
+        set((s) => ({
+          transfers: [transfer, ...s.transfers],
+          accounts: s.accounts.map((a) => {
+            if (a.id === transfer.fromAccountId) {
+              return { ...a, balance: a.balance - transfer.fromAmount };
+            }
+            if (a.id === transfer.toAccountId) {
+              return { ...a, balance: a.balance + transfer.toAmount };
+            }
+            return a;
+          }),
+        }));
+        return transfer;
+      },
+      deleteTransfer: (id) => {
+        const t = get().transfers.find((x) => x.id === id);
+        if (!t) return;
+        set((s) => ({
+          transfers: s.transfers.filter((x) => x.id !== id),
+          accounts: s.accounts.map((a) => {
+            if (a.id === t.fromAccountId) {
+              return { ...a, balance: a.balance + t.fromAmount };
+            }
+            if (a.id === t.toAccountId) {
+              return { ...a, balance: a.balance - t.toAmount };
+            }
+            return a;
+          }),
+        }));
+      },
+
       addRecurring: (r) => {
         const rec: RecurringTransaction = { ...r, id: uid(), createdAt: new Date().toISOString() };
         set((s) => ({ recurring: [...s.recurring, rec] }));
@@ -309,6 +349,7 @@ export const useAppStore = create<AppState>()(
           tags: data.tags ?? s.tags,
           transactions: data.transactions ?? s.transactions,
           recurring: data.recurring ?? s.recurring,
+          transfers: data.transfers ?? s.transfers,
           dashboard: data.dashboard ?? s.dashboard,
           archiveConfig: data.archiveConfig ?? s.archiveConfig,
         })),

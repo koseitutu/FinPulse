@@ -48,6 +48,19 @@ export interface Transaction {
   merchant?: string;
 }
 
+export interface Transfer {
+  id: string;
+  fromAccountId: string;
+  toAccountId: string;
+  fromAmount: number;
+  toAmount: number;
+  fromCurrency: string;
+  toCurrency: string;
+  date: string; // ISO
+  fee?: number; // amount deducted from source in source currency, already included in fromAmount when present
+  notes?: string;
+}
+
 export type Frequency = 'daily' | 'weekly' | 'biweekly' | 'monthly' | 'yearly';
 
 export interface RecurringTransaction {
