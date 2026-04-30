@@ -72,6 +72,8 @@ interface AppState {
   deleteCategory: (id: string) => void;
 
   addAccount: (a: Omit<Account, 'id'>) => Account;
+  updateAccount: (id: string, patch: Partial<Account>) => void;
+  deleteAccount: (id: string) => void;
 
   addTag: (t: Omit<Tag, 'id'>) => Tag;
 
@@ -193,6 +195,16 @@ export const useAppStore = create<AppState>()(
         const acc: Account = { ...a, id: uid() };
         set((s) => ({ accounts: [...s.accounts, acc] }));
         return acc;
+      },
+      updateAccount: (id, patch) => {
+        set((s) => ({ accounts: s.accounts.map((a) => (a.id === id ? { ...a, ...patch } : a)) }));
+      },
+      deleteAccount: (id) => {
+        set((s) => ({
+          accounts: s.accounts.filter((a) => a.id !== id),
+          // Orphan transactions keep their accountId but the account won't appear in lists.
+          // We intentionally do NOT delete transactions to preserve history.
+        }));
       },
 
       addTag: (t) => {

@@ -595,6 +595,79 @@ export default function SettingsScreen() {
         </Card>
 
         <Card>
+          <SectionHeader title="Manage data" subtitle="Accounts, categories & more" />
+          <View style={{ gap: 2 }}>
+            <Link href="/accounts" asChild>
+              <Pressable
+                style={({ pressed }) => ({
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 12,
+                  paddingVertical: 12,
+                  opacity: pressed ? 0.6 : 1,
+                })}
+              >
+                <View
+                  style={{
+                    width: 34,
+                    height: 34,
+                    borderRadius: 10,
+                    backgroundColor: Colors.gold + '22',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Ionicons name="wallet" size={16} color={Colors.gold} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <AppText size={14} weight="semiBold">
+                    Accounts
+                  </AppText>
+                  <AppText size={11} color={Colors.textMuted}>
+                    {accounts.length} accounts · Add, edit, delete
+                  </AppText>
+                </View>
+                <Ionicons name="chevron-forward" size={16} color={Colors.textMuted} />
+              </Pressable>
+            </Link>
+            <View style={{ height: 1, backgroundColor: Colors.borderSubtle }} />
+            <Link href="/categories" asChild>
+              <Pressable
+                style={({ pressed }) => ({
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 12,
+                  paddingVertical: 12,
+                  opacity: pressed ? 0.6 : 1,
+                })}
+              >
+                <View
+                  style={{
+                    width: 34,
+                    height: 34,
+                    borderRadius: 10,
+                    backgroundColor: '#2EC4B622',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Ionicons name="pricetags" size={16} color="#2EC4B6" />
+                </View>
+                <View style={{ flex: 1 }}>
+                  <AppText size={14} weight="semiBold">
+                    Categories
+                  </AppText>
+                  <AppText size={11} color={Colors.textMuted}>
+                    {categories.filter((c) => !c.parentId).length} top-level categories
+                  </AppText>
+                </View>
+                <Ionicons name="chevron-forward" size={16} color={Colors.textMuted} />
+              </Pressable>
+            </Link>
+          </View>
+        </Card>
+
+        <Card>
           <SectionHeader title="Dashboard widgets" subtitle="Customize what you see first" />
           <Link href="/dashboard/settings" asChild>
             <Pressable

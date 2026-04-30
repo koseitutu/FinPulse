@@ -10,10 +10,10 @@ import { WIDGETS } from '@/components/widgets';
 
 const QUICK_ACTIONS: { icon: keyof typeof Ionicons.glyphMap; label: string; href: string; color: string }[] = [
   { icon: 'add', label: 'Add', href: '/transactions/new', color: Colors.gold },
-  { icon: 'swap-horizontal', label: 'Activity', href: '/transactions', color: Colors.info },
-  { icon: 'stats-chart', label: 'Insights', href: '/insights', color: Colors.income },
+  { icon: 'wallet', label: 'Accounts', href: '/accounts', color: Colors.info },
+  { icon: 'pricetags', label: 'Categories', href: '/categories', color: '#2EC4B6' },
   { icon: 'repeat', label: 'Recurring', href: '/recurring', color: '#B24DFF' },
-  { icon: 'settings', label: 'Settings', href: '/settings', color: '#2EC4B6' },
+  { icon: 'stats-chart', label: 'Insights', href: '/insights', color: Colors.income },
 ];
 
 export default function HomeScreen() {
