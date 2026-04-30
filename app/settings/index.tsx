@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing } from '@/constants/theme';
 import { AppText, Card, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
+import { buildCSV, downloadWeb, shareFileNative } from '@/utils/export';
 
 const CURRENCIES = ['GHS', 'USD', 'EUR', 'GBP', 'NGN'];
 const RETENTIONS: (6 | 12 | 24)[] = [6, 12, 24];
@@ -19,10 +20,31 @@ export default function SettingsScreen() {
   const archiveConfig = useAppStore((s) => s.archiveConfig);
   const setAutoArchive = useAppStore((s) => s.setAutoArchive);
   const transactions = useAppStore((s) => s.transactions);
+  const categories = useAppStore((s) => s.categories);
   const archiveOld = useAppStore((s) => s.archiveOld);
 
   const [name, setName] = useState(preferences.name);
   const [archiveMsg, setArchiveMsg] = useState<string | null>(null);
+  const [exportMsg, setExportMsg] = useState<string | null>(null);
+
+  const handleExportAllCSV = async () => {
+    try {
+      const csv = buildCSV(transactions, categories);
+      const filename = `finpulse-all-transactions-${new Date()
+        .toISOString()
+        .slice(0, 10)}.csv`;
+      if (Platform.OS === 'web') {
+        downloadWeb(filename, csv, 'text/csv');
+      } else {
+        await shareFileNative(csv, filename, 'text/csv');
+      }
+      setExportMsg(`Exported ${transactions.length} transactions.`);
+      setTimeout(() => setExportMsg(null), 3000);
+    } catch {
+      setExportMsg('Export failed.');
+      setTimeout(() => setExportMsg(null), 3000);
+    }
+  };
 
   const storageSize = useStorageSize();
 
@@ -246,6 +268,67 @@ export default function SettingsScreen() {
           <View style={{ height: 8, backgroundColor: Colors.surfaceHigh, borderRadius: 4, marginTop: 8, overflow: 'hidden' }}>
             <View style={{ width: `${Math.min(100, transactions.length / 5)}%`, height: '100%', backgroundColor: Colors.gold }} />
           </View>
+        </Card>
+
+        <Card>
+          <SectionHeader
+            title="Export data"
+            subtitle="Download all your transactions as CSV"
+          />
+          <Pressable
+            onPress={handleExportAllCSV}
+            style={({ pressed }) => ({
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 12,
+              padding: Spacing.md,
+              borderRadius: Radius.md,
+              backgroundColor: Colors.gold + '15',
+              borderWidth: 1,
+              borderColor: Colors.gold + '55',
+              opacity: pressed ? 0.7 : 1,
+            })}
+          >
+            <View
+              style={{
+                width: 38,
+                height: 38,
+                borderRadius: 19,
+                backgroundColor: Colors.gold + '33',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Ionicons name="download" size={18} color={Colors.gold} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <AppText weight="semiBold" size={14}>
+                Export all transactions
+              </AppText>
+              <AppText size={11} color={Colors.textMuted}>
+                {transactions.length} entries · CSV format
+              </AppText>
+            </View>
+            <Ionicons name="chevron-forward" size={16} color={Colors.gold} />
+          </Pressable>
+          {exportMsg ? (
+            <View
+              style={{
+                backgroundColor: Colors.income + '22',
+                padding: 10,
+                borderRadius: 8,
+                marginTop: 10,
+                flexDirection: 'row',
+                gap: 8,
+                alignItems: 'center',
+              }}
+            >
+              <Ionicons name="checkmark-circle" size={14} color={Colors.income} />
+              <AppText size={12} color={Colors.income}>
+                {exportMsg}
+              </AppText>
+            </View>
+          ) : null}
         </Card>
 
         <Card>

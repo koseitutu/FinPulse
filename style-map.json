@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": 1777565517209,
+  "generatedAt": 1777566090301,
   "entries": {
     "RootLayout@app/_layout.tsx:31": {
       "element": {
@@ -5942,616 +5942,6 @@
         }
       ]
     },
-    "MonthlyReportScreen@app/reports/monthly.tsx:109": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 109
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flex": {
-              "line": 109,
-              "col": 25,
-              "endCol": 26,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:110": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 110
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 112,
-              "col": 25,
-              "endCol": 30,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 113,
-              "col": 22,
-              "endCol": 30,
-              "raw": "'center'"
-            },
-            "justifyContent": {
-              "line": 114,
-              "col": 26,
-              "endCol": 41,
-              "raw": "'space-between'"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:123": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 123
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "width": {
-              "line": 123,
-              "col": 30,
-              "endCol": 32,
-              "raw": "40"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:131": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 131
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 133,
-              "col": 27,
-              "endCol": 32,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 134,
-              "col": 24,
-              "endCol": 32,
-              "raw": "'center'"
-            },
-            "justifyContent": {
-              "line": 135,
-              "col": 28,
-              "endCol": 43,
-              "raw": "'space-between'"
-            },
-            "padding": {
-              "line": 138,
-              "col": 21,
-              "endCol": 22,
-              "raw": "8"
-            },
-            "borderWidth": {
-              "line": 139,
-              "col": 25,
-              "endCol": 26,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:144": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 144
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "alignItems": {
-              "line": 144,
-              "col": 37,
-              "endCol": 45,
-              "raw": "'center'"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:156": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 156
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 156,
-              "col": 38,
-              "endCol": 43,
-              "raw": "'row'"
-            },
-            "gap": {
-              "line": 156,
-              "col": 50,
-              "endCol": 52,
-              "raw": "12"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:161": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 161
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 161,
-              "col": 40,
-              "endCol": 45,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 161,
-              "col": 59,
-              "endCol": 67,
-              "raw": "'center'"
-            },
-            "gap": {
-              "line": 161,
-              "col": 74,
-              "endCol": 76,
-              "raw": "12"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:162": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 162
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "width": {
-              "line": 164,
-              "col": 23,
-              "endCol": 25,
-              "raw": "44"
-            },
-            "height": {
-              "line": 165,
-              "col": 24,
-              "endCol": 26,
-              "raw": "44"
-            },
-            "borderRadius": {
-              "line": 166,
-              "col": 30,
-              "endCol": 32,
-              "raw": "22"
-            },
-            "alignItems": {
-              "line": 168,
-              "col": 28,
-              "endCol": 36,
-              "raw": "'center'"
-            },
-            "justifyContent": {
-              "line": 169,
-              "col": 32,
-              "endCol": 40,
-              "raw": "'center'"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:178": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 178
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flex": {
-              "line": 178,
-              "col": 33,
-              "endCol": 34,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:179": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 179
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "letterSpacing": {
-              "line": 179,
-              "col": 100,
-              "endCol": 101,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:187": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 187
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "alignItems": {
-              "line": 187,
-              "col": 39,
-              "endCol": 49,
-              "raw": "'flex-end'"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:202": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 202
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 202,
-              "col": 42,
-              "endCol": 47,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 202,
-              "col": 61,
-              "endCol": 69,
-              "raw": "'center'"
-            },
-            "gap": {
-              "line": 202,
-              "col": 76,
-              "endCol": 78,
-              "raw": "16"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:224": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 224
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 224,
-              "col": 38,
-              "endCol": 43,
-              "raw": "'row'"
-            },
-            "gap": {
-              "line": 224,
-              "col": 50,
-              "endCol": 52,
-              "raw": "10"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:225": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 225
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flex": {
-              "line": 229,
-              "col": 27,
-              "endCol": 28,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:232": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 232
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flex": {
-              "line": 236,
-              "col": 27,
-              "endCol": 28,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:245": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 245
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "gap": {
-              "line": 245,
-              "col": 32,
-              "endCol": 34,
-              "raw": "10"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:253": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 253
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 253,
-              "col": 61,
-              "endCol": 66,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 253,
-              "col": 80,
-              "endCol": 88,
-              "raw": "'center'"
-            },
-            "gap": {
-              "line": 253,
-              "col": 95,
-              "endCol": 97,
-              "raw": "10"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:254": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 254
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "width": {
-              "line": 256,
-              "col": 33,
-              "endCol": 35,
-              "raw": "32"
-            },
-            "height": {
-              "line": 257,
-              "col": 34,
-              "endCol": 36,
-              "raw": "32"
-            },
-            "borderRadius": {
-              "line": 258,
-              "col": 40,
-              "endCol": 42,
-              "raw": "16"
-            },
-            "alignItems": {
-              "line": 260,
-              "col": 38,
-              "endCol": 46,
-              "raw": "'center'"
-            },
-            "justifyContent": {
-              "line": 261,
-              "col": 42,
-              "endCol": 50,
-              "raw": "'center'"
-            }
-          }
-        }
-      ]
-    },
-    "MonthlyReportScreen@app/reports/monthly.tsx:266": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 266
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flex": {
-              "line": 266,
-              "col": 43,
-              "endCol": 44,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "SummaryBox@app/reports/monthly.tsx:301": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 301
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flex": {
-              "line": 303,
-              "col": 14,
-              "endCol": 15,
-              "raw": "1"
-            },
-            "borderWidth": {
-              "line": 307,
-              "col": 21,
-              "endCol": 22,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "SummaryBox@app/reports/monthly.tsx:311": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 311
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 311,
-              "col": 36,
-              "endCol": 41,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 311,
-              "col": 55,
-              "endCol": 63,
-              "raw": "'center'"
-            },
-            "gap": {
-              "line": 311,
-              "col": 70,
-              "endCol": 71,
-              "raw": "6"
-            }
-          }
-        }
-      ]
-    },
-    "SummaryBox@app/reports/monthly.tsx:313": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 313
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "letterSpacing": {
-              "line": 313,
-              "col": 83,
-              "endCol": 84,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "SummaryBox@app/reports/monthly.tsx:317": {
-      "element": {
-        "file": "app/reports/monthly.tsx",
-        "line": 317
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/reports/monthly.tsx",
-          "properties": {
-            "marginTop": {
-              "line": 317,
-              "col": 73,
-              "endCol": 74,
-              "raw": "6"
-            }
-          }
-        }
-      ]
-    },
     "ScannerScreen@app/scanner/index.tsx:117": {
       "element": {
         "file": "app/scanner/index.tsx",
@@ -8239,696 +7629,6 @@
               "col": 35,
               "endCol": 36,
               "raw": "6"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:36": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 36
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flex": {
-              "line": 36,
-              "col": 25,
-              "endCol": 26,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:37": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 37
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 39,
-              "col": 25,
-              "endCol": 30,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 40,
-              "col": 22,
-              "endCol": 30,
-              "raw": "'center'"
-            },
-            "justifyContent": {
-              "line": 41,
-              "col": 26,
-              "endCol": 41,
-              "raw": "'space-between'"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:49": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 49
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "width": {
-              "line": 49,
-              "col": 30,
-              "endCol": 32,
-              "raw": "40"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:55": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 55
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "letterSpacing": {
-              "line": 55,
-              "col": 96,
-              "endCol": 97,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:58": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 58
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "fontFamily": {
-              "line": 66,
-              "col": 26,
-              "endCol": 45,
-              "raw": "'Inter_600SemiBold'"
-            },
-            "fontSize": {
-              "line": 67,
-              "col": 24,
-              "endCol": 26,
-              "raw": "16"
-            },
-            "paddingVertical": {
-              "line": 68,
-              "col": 31,
-              "endCol": 32,
-              "raw": "6"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:75": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 75
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 75,
-              "col": 40,
-              "endCol": 45,
-              "raw": "'row'"
-            },
-            "flexWrap": {
-              "line": 75,
-              "col": 57,
-              "endCol": 63,
-              "raw": "'wrap'"
-            },
-            "gap": {
-              "line": 75,
-              "col": 70,
-              "endCol": 71,
-              "raw": "8"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:77": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 77
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "paddingHorizontal": {
-              "line": 81,
-              "col": 37,
-              "endCol": 39,
-              "raw": "14"
-            },
-            "paddingVertical": {
-              "line": 82,
-              "col": 35,
-              "endCol": 36,
-              "raw": "8"
-            },
-            "borderWidth": {
-              "line": 85,
-              "col": 31,
-              "endCol": 32,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:134": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 134
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 134,
-              "col": 40,
-              "endCol": 45,
-              "raw": "'row'"
-            },
-            "gap": {
-              "line": 134,
-              "col": 52,
-              "endCol": 53,
-              "raw": "8"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:136": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 136
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flex": {
-              "line": 140,
-              "col": 24,
-              "endCol": 25,
-              "raw": "1"
-            },
-            "paddingVertical": {
-              "line": 141,
-              "col": 35,
-              "endCol": 37,
-              "raw": "12"
-            },
-            "borderWidth": {
-              "line": 144,
-              "col": 31,
-              "endCol": 32,
-              "raw": "1"
-            },
-            "alignItems": {
-              "line": 146,
-              "col": 30,
-              "endCol": 38,
-              "raw": "'center'"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:155": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 155
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 155,
-              "col": 40,
-              "endCol": 45,
-              "raw": "'row'"
-            },
-            "gap": {
-              "line": 155,
-              "col": 52,
-              "endCol": 54,
-              "raw": "10"
-            },
-            "marginTop": {
-              "line": 155,
-              "col": 67,
-              "endCol": 68,
-              "raw": "4"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:156": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 156
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flex": {
-              "line": 159,
-              "col": 22,
-              "endCol": 23,
-              "raw": "1"
-            },
-            "paddingVertical": {
-              "line": 161,
-              "col": 33,
-              "endCol": 35,
-              "raw": "12"
-            },
-            "alignItems": {
-              "line": 163,
-              "col": 28,
-              "endCol": 36,
-              "raw": "'center'"
-            },
-            "flexDirection": {
-              "line": 164,
-              "col": 31,
-              "endCol": 36,
-              "raw": "'row'"
-            },
-            "justifyContent": {
-              "line": 165,
-              "col": 32,
-              "endCol": 40,
-              "raw": "'center'"
-            },
-            "gap": {
-              "line": 166,
-              "col": 21,
-              "endCol": 22,
-              "raw": "8"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:175": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 175
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flex": {
-              "line": 177,
-              "col": 24,
-              "endCol": 25,
-              "raw": "1"
-            },
-            "paddingVertical": {
-              "line": 179,
-              "col": 35,
-              "endCol": 37,
-              "raw": "12"
-            },
-            "alignItems": {
-              "line": 181,
-              "col": 30,
-              "endCol": 38,
-              "raw": "'center'"
-            },
-            "borderWidth": {
-              "line": 182,
-              "col": 31,
-              "endCol": 32,
-              "raw": "1"
-            },
-            "flexDirection": {
-              "line": 184,
-              "col": 33,
-              "endCol": 38,
-              "raw": "'row'"
-            },
-            "justifyContent": {
-              "line": 185,
-              "col": 34,
-              "endCol": 42,
-              "raw": "'center'"
-            },
-            "gap": {
-              "line": 186,
-              "col": 23,
-              "endCol": 24,
-              "raw": "8"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:195": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 195
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "padding": {
-              "line": 198,
-              "col": 25,
-              "endCol": 27,
-              "raw": "10"
-            },
-            "borderRadius": {
-              "line": 199,
-              "col": 30,
-              "endCol": 31,
-              "raw": "8"
-            },
-            "marginTop": {
-              "line": 200,
-              "col": 27,
-              "endCol": 29,
-              "raw": "10"
-            },
-            "flexDirection": {
-              "line": 201,
-              "col": 31,
-              "endCol": 36,
-              "raw": "'row'"
-            },
-            "gap": {
-              "line": 202,
-              "col": 21,
-              "endCol": 22,
-              "raw": "8"
-            },
-            "alignItems": {
-              "line": 203,
-              "col": 28,
-              "endCol": 36,
-              "raw": "'center'"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:216": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 216
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 218,
-              "col": 29,
-              "endCol": 34,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 219,
-              "col": 26,
-              "endCol": 34,
-              "raw": "'center'"
-            },
-            "justifyContent": {
-              "line": 220,
-              "col": 30,
-              "endCol": 45,
-              "raw": "'space-between'"
-            },
-            "paddingVertical": {
-              "line": 221,
-              "col": 31,
-              "endCol": 32,
-              "raw": "6"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:231": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 231
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 233,
-              "col": 29,
-              "endCol": 34,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 234,
-              "col": 26,
-              "endCol": 34,
-              "raw": "'center'"
-            },
-            "justifyContent": {
-              "line": 235,
-              "col": 30,
-              "endCol": 45,
-              "raw": "'space-between'"
-            },
-            "paddingVertical": {
-              "line": 236,
-              "col": 31,
-              "endCol": 32,
-              "raw": "6"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:246": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 246
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "height": {
-              "line": 246,
-              "col": 33,
-              "endCol": 34,
-              "raw": "8"
-            },
-            "borderRadius": {
-              "line": 246,
-              "col": 87,
-              "endCol": 88,
-              "raw": "4"
-            },
-            "marginTop": {
-              "line": 246,
-              "col": 101,
-              "endCol": 102,
-              "raw": "8"
-            },
-            "overflow": {
-              "line": 246,
-              "col": 114,
-              "endCol": 122,
-              "raw": "'hidden'"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:247": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 247
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "height": {
-              "line": 247,
-              "col": 88,
-              "endCol": 94,
-              "raw": "'100%'"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:254": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 254
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 256,
-              "col": 31,
-              "endCol": 36,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 257,
-              "col": 28,
-              "endCol": 36,
-              "raw": "'center'"
-            },
-            "gap": {
-              "line": 258,
-              "col": 21,
-              "endCol": 23,
-              "raw": "10"
-            },
-            "paddingVertical": {
-              "line": 259,
-              "col": 33,
-              "endCol": 35,
-              "raw": "12"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:263": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 263
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flex": {
-              "line": 263,
-              "col": 64,
-              "endCol": 65,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "SettingsScreen@app/settings/index.tsx:271": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 271
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "textAlign": {
-              "line": 271,
-              "col": 70,
-              "endCol": 78,
-              "raw": "'center'"
-            }
-          }
-        }
-      ]
-    },
-    "AlertRow@app/settings/index.tsx:291": {
-      "element": {
-        "file": "app/settings/index.tsx",
-        "line": 291
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/settings/index.tsx",
-          "properties": {
-            "flexDirection": {
-              "line": 293,
-              "col": 23,
-              "endCol": 28,
-              "raw": "'row'"
-            },
-            "alignItems": {
-              "line": 294,
-              "col": 20,
-              "endCol": 28,
-              "raw": "'center'"
-            },
-            "justifyContent": {
-              "line": 295,
-              "col": 24,
-              "endCol": 39,
-              "raw": "'space-between'"
-            },
-            "paddingVertical": {
-              "line": 296,
-              "col": 25,
-              "endCol": 27,
-              "raw": "12"
             }
           }
         }
@@ -11221,6 +9921,1432 @@
               "col": 33,
               "endCol": 34,
               "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:117": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 117
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flex": {
+              "line": 117,
+              "col": 25,
+              "endCol": 26,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:118": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 118
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 120,
+              "col": 25,
+              "endCol": 30,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 121,
+              "col": 22,
+              "endCol": 30,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 122,
+              "col": 26,
+              "endCol": 41,
+              "raw": "'space-between'"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:131": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 131
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "width": {
+              "line": 131,
+              "col": 30,
+              "endCol": 32,
+              "raw": "40"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:139": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 139
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 141,
+              "col": 27,
+              "endCol": 32,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 142,
+              "col": 24,
+              "endCol": 32,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 143,
+              "col": 28,
+              "endCol": 43,
+              "raw": "'space-between'"
+            },
+            "padding": {
+              "line": 146,
+              "col": 21,
+              "endCol": 22,
+              "raw": "8"
+            },
+            "borderWidth": {
+              "line": 147,
+              "col": 25,
+              "endCol": 26,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:152": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 152
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "alignItems": {
+              "line": 152,
+              "col": 37,
+              "endCol": 45,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:164": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 164
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 164,
+              "col": 38,
+              "endCol": 43,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 164,
+              "col": 50,
+              "endCol": 52,
+              "raw": "12"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:169": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 169
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 169,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 169,
+              "col": 59,
+              "endCol": 67,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 169,
+              "col": 74,
+              "endCol": 76,
+              "raw": "12"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:170": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 170
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "width": {
+              "line": 172,
+              "col": 23,
+              "endCol": 25,
+              "raw": "44"
+            },
+            "height": {
+              "line": 173,
+              "col": 24,
+              "endCol": 26,
+              "raw": "44"
+            },
+            "borderRadius": {
+              "line": 174,
+              "col": 30,
+              "endCol": 32,
+              "raw": "22"
+            },
+            "alignItems": {
+              "line": 176,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 177,
+              "col": 32,
+              "endCol": 40,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:186": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 186
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flex": {
+              "line": 186,
+              "col": 33,
+              "endCol": 34,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:187": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 187
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 187,
+              "col": 100,
+              "endCol": 101,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:195": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 195
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "alignItems": {
+              "line": 195,
+              "col": 39,
+              "endCol": 49,
+              "raw": "'flex-end'"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:210": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 210
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 210,
+              "col": 42,
+              "endCol": 47,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 210,
+              "col": 61,
+              "endCol": 69,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 210,
+              "col": 76,
+              "endCol": 78,
+              "raw": "16"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:232": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 232
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 232,
+              "col": 38,
+              "endCol": 43,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 232,
+              "col": 50,
+              "endCol": 52,
+              "raw": "10"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:233": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 233
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flex": {
+              "line": 237,
+              "col": 27,
+              "endCol": 28,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:240": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 240
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flex": {
+              "line": 244,
+              "col": 27,
+              "endCol": 28,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:253": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 253
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "gap": {
+              "line": 253,
+              "col": 32,
+              "endCol": 34,
+              "raw": "10"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:261": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 261
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 261,
+              "col": 61,
+              "endCol": 66,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 261,
+              "col": 80,
+              "endCol": 88,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 261,
+              "col": 95,
+              "endCol": 97,
+              "raw": "10"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:262": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 262
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "width": {
+              "line": 264,
+              "col": 33,
+              "endCol": 35,
+              "raw": "32"
+            },
+            "height": {
+              "line": 265,
+              "col": 34,
+              "endCol": 36,
+              "raw": "32"
+            },
+            "borderRadius": {
+              "line": 266,
+              "col": 40,
+              "endCol": 42,
+              "raw": "16"
+            },
+            "alignItems": {
+              "line": 268,
+              "col": 38,
+              "endCol": 46,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 269,
+              "col": 42,
+              "endCol": 50,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "MonthlyReportScreen@app/reports/monthly.tsx:274": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 274
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flex": {
+              "line": 274,
+              "col": 43,
+              "endCol": 44,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SummaryBox@app/reports/monthly.tsx:309": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 309
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flex": {
+              "line": 311,
+              "col": 14,
+              "endCol": 15,
+              "raw": "1"
+            },
+            "borderWidth": {
+              "line": 315,
+              "col": 21,
+              "endCol": 22,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SummaryBox@app/reports/monthly.tsx:319": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 319
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 319,
+              "col": 36,
+              "endCol": 41,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 319,
+              "col": 55,
+              "endCol": 63,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 319,
+              "col": 70,
+              "endCol": 71,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "SummaryBox@app/reports/monthly.tsx:321": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 321
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 321,
+              "col": 83,
+              "endCol": 84,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SummaryBox@app/reports/monthly.tsx:325": {
+      "element": {
+        "file": "app/reports/monthly.tsx",
+        "line": 325
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/reports/monthly.tsx",
+          "properties": {
+            "marginTop": {
+              "line": 325,
+              "col": 73,
+              "endCol": 74,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:58": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 58
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 58,
+              "col": 25,
+              "endCol": 26,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:59": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 59
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 61,
+              "col": 25,
+              "endCol": 30,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 62,
+              "col": 22,
+              "endCol": 30,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 63,
+              "col": 26,
+              "endCol": 41,
+              "raw": "'space-between'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:71": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 71
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "width": {
+              "line": 71,
+              "col": 30,
+              "endCol": 32,
+              "raw": "40"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:77": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 77
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 77,
+              "col": 96,
+              "endCol": 97,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:80": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 80
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "fontFamily": {
+              "line": 88,
+              "col": 26,
+              "endCol": 45,
+              "raw": "'Inter_600SemiBold'"
+            },
+            "fontSize": {
+              "line": 89,
+              "col": 24,
+              "endCol": 26,
+              "raw": "16"
+            },
+            "paddingVertical": {
+              "line": 90,
+              "col": 31,
+              "endCol": 32,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:97": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 97
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 97,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "flexWrap": {
+              "line": 97,
+              "col": 57,
+              "endCol": 63,
+              "raw": "'wrap'"
+            },
+            "gap": {
+              "line": 97,
+              "col": 70,
+              "endCol": 71,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:99": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 99
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "paddingHorizontal": {
+              "line": 103,
+              "col": 37,
+              "endCol": 39,
+              "raw": "14"
+            },
+            "paddingVertical": {
+              "line": 104,
+              "col": 35,
+              "endCol": 36,
+              "raw": "8"
+            },
+            "borderWidth": {
+              "line": 107,
+              "col": 31,
+              "endCol": 32,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:156": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 156
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 156,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 156,
+              "col": 52,
+              "endCol": 53,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:158": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 158
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 162,
+              "col": 24,
+              "endCol": 25,
+              "raw": "1"
+            },
+            "paddingVertical": {
+              "line": 163,
+              "col": 35,
+              "endCol": 37,
+              "raw": "12"
+            },
+            "borderWidth": {
+              "line": 166,
+              "col": 31,
+              "endCol": 32,
+              "raw": "1"
+            },
+            "alignItems": {
+              "line": 168,
+              "col": 30,
+              "endCol": 38,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:177": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 177
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 177,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 177,
+              "col": 52,
+              "endCol": 54,
+              "raw": "10"
+            },
+            "marginTop": {
+              "line": 177,
+              "col": 67,
+              "endCol": 68,
+              "raw": "4"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:178": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 178
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 181,
+              "col": 22,
+              "endCol": 23,
+              "raw": "1"
+            },
+            "paddingVertical": {
+              "line": 183,
+              "col": 33,
+              "endCol": 35,
+              "raw": "12"
+            },
+            "alignItems": {
+              "line": 185,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            },
+            "flexDirection": {
+              "line": 186,
+              "col": 31,
+              "endCol": 36,
+              "raw": "'row'"
+            },
+            "justifyContent": {
+              "line": 187,
+              "col": 32,
+              "endCol": 40,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 188,
+              "col": 21,
+              "endCol": 22,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:197": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 197
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 199,
+              "col": 24,
+              "endCol": 25,
+              "raw": "1"
+            },
+            "paddingVertical": {
+              "line": 201,
+              "col": 35,
+              "endCol": 37,
+              "raw": "12"
+            },
+            "alignItems": {
+              "line": 203,
+              "col": 30,
+              "endCol": 38,
+              "raw": "'center'"
+            },
+            "borderWidth": {
+              "line": 204,
+              "col": 31,
+              "endCol": 32,
+              "raw": "1"
+            },
+            "flexDirection": {
+              "line": 206,
+              "col": 33,
+              "endCol": 38,
+              "raw": "'row'"
+            },
+            "justifyContent": {
+              "line": 207,
+              "col": 34,
+              "endCol": 42,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 208,
+              "col": 23,
+              "endCol": 24,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:217": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 217
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "padding": {
+              "line": 220,
+              "col": 25,
+              "endCol": 27,
+              "raw": "10"
+            },
+            "borderRadius": {
+              "line": 221,
+              "col": 30,
+              "endCol": 31,
+              "raw": "8"
+            },
+            "marginTop": {
+              "line": 222,
+              "col": 27,
+              "endCol": 29,
+              "raw": "10"
+            },
+            "flexDirection": {
+              "line": 223,
+              "col": 31,
+              "endCol": 36,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 224,
+              "col": 21,
+              "endCol": 22,
+              "raw": "8"
+            },
+            "alignItems": {
+              "line": 225,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:238": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 238
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 240,
+              "col": 29,
+              "endCol": 34,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 241,
+              "col": 26,
+              "endCol": 34,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 242,
+              "col": 30,
+              "endCol": 45,
+              "raw": "'space-between'"
+            },
+            "paddingVertical": {
+              "line": 243,
+              "col": 31,
+              "endCol": 32,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:253": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 253
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 255,
+              "col": 29,
+              "endCol": 34,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 256,
+              "col": 26,
+              "endCol": 34,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 257,
+              "col": 30,
+              "endCol": 45,
+              "raw": "'space-between'"
+            },
+            "paddingVertical": {
+              "line": 258,
+              "col": 31,
+              "endCol": 32,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:268": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 268
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "height": {
+              "line": 268,
+              "col": 33,
+              "endCol": 34,
+              "raw": "8"
+            },
+            "borderRadius": {
+              "line": 268,
+              "col": 87,
+              "endCol": 88,
+              "raw": "4"
+            },
+            "marginTop": {
+              "line": 268,
+              "col": 101,
+              "endCol": 102,
+              "raw": "8"
+            },
+            "overflow": {
+              "line": 268,
+              "col": 114,
+              "endCol": 122,
+              "raw": "'hidden'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:269": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 269
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "height": {
+              "line": 269,
+              "col": 88,
+              "endCol": 94,
+              "raw": "'100%'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:278": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 278
+      },
+      "styles": [
+        {
+          "origin": "dynamic",
+          "resolvable": false
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:292": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 292
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "width": {
+              "line": 294,
+              "col": 23,
+              "endCol": 25,
+              "raw": "38"
+            },
+            "height": {
+              "line": 295,
+              "col": 24,
+              "endCol": 26,
+              "raw": "38"
+            },
+            "borderRadius": {
+              "line": 296,
+              "col": 30,
+              "endCol": 32,
+              "raw": "19"
+            },
+            "alignItems": {
+              "line": 298,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 299,
+              "col": 32,
+              "endCol": 40,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:304": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 304
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 304,
+              "col": 33,
+              "endCol": 34,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:315": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 315
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "padding": {
+              "line": 318,
+              "col": 25,
+              "endCol": 27,
+              "raw": "10"
+            },
+            "borderRadius": {
+              "line": 319,
+              "col": 30,
+              "endCol": 31,
+              "raw": "8"
+            },
+            "marginTop": {
+              "line": 320,
+              "col": 27,
+              "endCol": 29,
+              "raw": "10"
+            },
+            "flexDirection": {
+              "line": 321,
+              "col": 31,
+              "endCol": 36,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 322,
+              "col": 21,
+              "endCol": 22,
+              "raw": "8"
+            },
+            "alignItems": {
+              "line": 323,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:337": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 337
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 339,
+              "col": 31,
+              "endCol": 36,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 340,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 341,
+              "col": 21,
+              "endCol": 23,
+              "raw": "10"
+            },
+            "paddingVertical": {
+              "line": 342,
+              "col": 33,
+              "endCol": 35,
+              "raw": "12"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:346": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 346
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 346,
+              "col": 64,
+              "endCol": 65,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:354": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 354
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "textAlign": {
+              "line": 354,
+              "col": 70,
+              "endCol": 78,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "AlertRow@app/settings/index.tsx:374": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 374
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 376,
+              "col": 23,
+              "endCol": 28,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 377,
+              "col": 20,
+              "endCol": 28,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 378,
+              "col": 24,
+              "endCol": 39,
+              "raw": "'space-between'"
+            },
+            "paddingVertical": {
+              "line": 379,
+              "col": 25,
+              "endCol": 27,
+              "raw": "12"
             }
           }
         }

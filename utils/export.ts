@@ -1,4 +1,6 @@
 import { Platform, Share } from 'react-native';
+import * as Print from 'expo-print';
+import * as Sharing from 'expo-sharing';
 import type { Category, Transaction } from '@/store/types';
 import { formatDate } from './finance';
 
@@ -111,5 +113,57 @@ export const shareText = async (title: string, message: string) => {
     await Share.share({ title, message });
   } catch {
     // ignore
+  }
+};
+
+export const exportPdfNative = async (html: string, filename: string): Promise<boolean> => {
+  if (Platform.OS === 'web') return false;
+  try {
+    const { uri } = await Print.printToFileAsync({ html });
+    const canShare = await Sharing.isAvailableAsync();
+    if (canShare) {
+      await Sharing.shareAsync(uri, {
+        mimeType: 'application/pdf',
+        dialogTitle: filename,
+        UTI: 'com.adobe.pdf',
+      });
+    }
+    return true;
+  } catch (e) {
+    console.warn('PDF export failed', e);
+    return false;
+  }
+};
+
+export const shareFileNative = async (
+  content: string,
+  filename: string,
+  mime: string
+): Promise<boolean> => {
+  if (Platform.OS === 'web') return false;
+  try {
+    const FileSystem = await import('expo-file-system/legacy').catch(() => null);
+    if (!FileSystem) {
+      await Share.share({ title: filename, message: content.slice(0, 3000) });
+      return true;
+    }
+    const path = `${FileSystem.cacheDirectory}${filename}`;
+    await FileSystem.writeAsStringAsync(path, content, {
+      encoding: FileSystem.EncodingType.UTF8,
+    });
+    const canShare = await Sharing.isAvailableAsync();
+    if (canShare) {
+      await Sharing.shareAsync(path, { mimeType: mime, dialogTitle: filename });
+    } else {
+      await Share.share({ title: filename, message: content.slice(0, 3000) });
+    }
+    return true;
+  } catch {
+    try {
+      await Share.share({ title: filename, message: content.slice(0, 3000) });
+    } catch {
+      // ignore
+    }
+    return false;
   }
 };

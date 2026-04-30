@@ -8,7 +8,14 @@ import { AppText, Button, Card, IconButton, SectionHeader } from '@/components/u
 import { BarChart, Donut, LegendRow } from '@/components/charts';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { filterMonth, groupByCategory, monthName, sumByType } from '@/utils/finance';
-import { buildCSV, buildHTML, downloadWeb, openHtmlWeb, shareText } from '@/utils/export';
+import {
+  buildCSV,
+  buildHTML,
+  downloadWeb,
+  exportPdfNative,
+  openHtmlWeb,
+  shareFileNative,
+} from '@/utils/export';
 
 export default function MonthlyReportScreen() {
   const insets = useSafeAreaInsets();
@@ -62,7 +69,7 @@ export default function MonthlyReportScreen() {
     if (Platform.OS === 'web') {
       downloadWeb(filename, csv, 'text/csv');
     } else {
-      shareText(title, csv.slice(0, 3000));
+      shareFileNative(csv, filename, 'text/csv');
     }
   };
 
@@ -101,7 +108,8 @@ export default function MonthlyReportScreen() {
     if (Platform.OS === 'web') {
       openHtmlWeb(html);
     } else {
-      shareText(title, html.slice(0, 3000));
+      const filename = `finpulse-${year}-${String(month + 1).padStart(2, '0')}.pdf`;
+      exportPdfNative(html, filename);
     }
   };
 
