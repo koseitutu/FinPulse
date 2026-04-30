@@ -59,14 +59,15 @@ export function BalanceWidget() {
   const safeIncome = Number.isFinite(income) ? income : 0;
   const safeExpense = Number.isFinite(expense) ? expense : 0;
 
+  const tone = Colors.tones.purple;
   return (
     <View
       style={{
-        backgroundColor: Colors.bgElevated,
+        backgroundColor: tone.bg,
         borderRadius: Radius.xl,
         padding: Spacing.xl,
         borderWidth: 1,
-        borderColor: Colors.border,
+        borderColor: tone.border,
         overflow: 'hidden',
       }}
     >
@@ -78,7 +79,7 @@ export function BalanceWidget() {
           width: 200,
           height: 200,
           borderRadius: 100,
-          backgroundColor: Colors.gold + '15',
+          backgroundColor: tone.accent + '22',
         }}
       />
       <View
@@ -89,7 +90,7 @@ export function BalanceWidget() {
           width: 160,
           height: 160,
           borderRadius: 80,
-          backgroundColor: Colors.info + '10',
+          backgroundColor: Colors.info + '1A',
         }}
       />
       <AppText size={11} weight="semiBold" color={Colors.textMuted} style={{ letterSpacing: 1.2 }}>
@@ -168,7 +169,7 @@ export function BudgetsWidget() {
     .slice(0, 4);
 
   return (
-    <Card>
+    <Card tone="teal">
       <SectionHeader
         title="Budget pulse"
         subtitle={`${monthTx.filter((t) => t.type === 'expense').length} expenses this month`}
@@ -223,7 +224,7 @@ export function RecentWidget() {
   const accounts = useAppStore((s) => s.accounts);
 
   return (
-    <Card>
+    <Card tone="blue">
       <SectionHeader
         title="Recent activity"
         action={
@@ -280,7 +281,7 @@ export function RecentWidget() {
 export function AccountsWidget() {
   const accounts = useAppStore((s) => s.accounts);
   return (
-    <Card>
+    <Card tone="amber">
       <SectionHeader title="Accounts" subtitle={`${accounts.length} connected`} />
       <View style={{ gap: 10 }}>
         {accounts.map((a) => (

@@ -52,7 +52,7 @@ export default function SettingsScreen() {
       </View>
 
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 120, gap: Spacing.lg }}>
-        <Card>
+        <Card tone="purple">
           <SectionHeader title="Profile" />
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1 }}>
             NAME
@@ -72,7 +72,7 @@ export default function SettingsScreen() {
           />
         </Card>
 
-        <Card>
+        <Card tone="amber">
           <SectionHeader title="Appearance" subtitle="Light or dark, your call" />
           <View
             style={{
@@ -119,7 +119,7 @@ export default function SettingsScreen() {
           </View>
         </Card>
 
-        <Card>
+        <Card tone="blue">
           <SectionHeader title="Currency" subtitle="Display totals in your preferred currency" />
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 8 }}>
             {CURRENCIES.map((c) => (
@@ -147,7 +147,7 @@ export default function SettingsScreen() {
           </AppText>
         </Card>
 
-        <Card>
+        <Card tone="coral">
           <SectionHeader title="Security" subtitle="Protect your data" />
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1, marginBottom: 6 }}>
             PIN CODE (4–6 DIGITS)
@@ -199,7 +199,7 @@ export default function SettingsScreen() {
           </View>
         </Card>
 
-        <Card>
+        <Card tone="teal">
           <SectionHeader title="Smart Budget Alerts" subtitle="Push notifications about spending" />
           <AlertRow
             label="At 50% of budget"
@@ -229,7 +229,7 @@ export default function SettingsScreen() {
           />
         </Card>
 
-        <Card>
+        <Card tone="purple">
           <SectionHeader title="Data retention" subtitle="Auto-archive older transactions" />
           <View style={{ flexDirection: 'row', gap: 8, marginBottom: Spacing.md }}>
             {RETENTIONS.map((m) => (
@@ -311,7 +311,7 @@ export default function SettingsScreen() {
           ) : null}
         </Card>
 
-        <Card>
+        <Card tone="blue">
           <SectionHeader title="Manage data" subtitle="Backup, restore, CSV and records" />
           <View style={{ gap: 2 }}>
             <Link href="/data" asChild>
@@ -418,7 +418,7 @@ export default function SettingsScreen() {
           </View>
         </Card>
 
-        <Card>
+        <Card tone="amber">
           <SectionHeader title="Dashboard widgets" subtitle="Customize what you see first" />
           <Link href="/dashboard/settings" asChild>
             <Pressable

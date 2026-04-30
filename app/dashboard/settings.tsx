@@ -45,7 +45,7 @@ export default function DashboardSettings() {
       </View>
 
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 120, gap: Spacing.lg }}>
-        <Card>
+        <Card tone="purple">
           <SectionHeader
             title="Customize your home"
             subtitle="Toggle what shows up. Use arrows to reorder."

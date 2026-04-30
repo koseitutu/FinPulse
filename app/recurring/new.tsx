@@ -100,7 +100,7 @@ export default function NewRecurringScreen() {
           ))}
         </View>
 
-        <Card>
+        <Card tone="purple">
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1 }}>
             NAME
           </AppText>
@@ -113,7 +113,7 @@ export default function NewRecurringScreen() {
           />
         </Card>
 
-        <Card>
+        <Card tone="amber">
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1 }}>
             AMOUNT
           </AppText>
@@ -212,7 +212,7 @@ export default function NewRecurringScreen() {
           </View>
         </View>
 
-        <Card>
+        <Card tone="teal">
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1 }}>
             FIRST PAYMENT IN (DAYS)
           </AppText>

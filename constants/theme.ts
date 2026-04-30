@@ -2,6 +2,14 @@ import { useAppStore } from '@/store/useAppStore';
 
 export type ThemeMode = 'dark' | 'light';
 
+export type CardTone = 'purple' | 'blue' | 'teal' | 'coral' | 'amber';
+
+export interface ToneColor {
+  bg: string;
+  border: string;
+  accent: string;
+}
+
 export interface Palette {
   // Core
   bg: string;
@@ -38,6 +46,11 @@ export interface Palette {
   shadow: string;
   overlay: string;
   inverseText: string;
+
+  // Card tones — bold, colorful variants for the light theme. In dark
+  // mode these all map to the standard surface so cards keep the
+  // existing dark look.
+  tones: Record<CardTone, ToneColor>;
 }
 
 export const darkPalette: Palette = {
@@ -79,6 +92,16 @@ export const darkPalette: Palette = {
   shadow: 'rgba(0,0,0,0.35)',
   overlay: 'rgba(0,0,0,0.55)',
   inverseText: '#0A1628',
+
+  // Dark mode keeps the neutral navy card — tones collapse to the
+  // regular surface so the existing dark design is preserved.
+  tones: {
+    purple: { bg: '#111E33', border: '#22375A', accent: '#B24DFF' },
+    blue: { bg: '#111E33', border: '#22375A', accent: '#4DA6FF' },
+    teal: { bg: '#111E33', border: '#22375A', accent: '#2EC4B6' },
+    coral: { bg: '#111E33', border: '#22375A', accent: '#FF8C7A' },
+    amber: { bg: '#111E33', border: '#22375A', accent: '#F4B942' },
+  },
 };
 
 // Polished light mode, tuned for readability and a warm, premium feel.
@@ -86,16 +109,15 @@ export const darkPalette: Palette = {
 // electric cyan. Backgrounds lean into a warm ivory/parchment to echo the
 // gold tones, while text stays deep navy and accents keep the cyan info hue.
 export const lightPalette: Palette = {
-  // Backgrounds — deeper warm amber-parchment pulled from the icon's gold.
-  // The base feels distinctly colored (not washed out), while cards sit as a
-  // lighter, warmer ivory on top so they read as elevated surfaces.
-  bg: '#EBDCA8',
-  bgElevated: '#F5EAC1',
-  surface: '#FAF1CE',
-  surfaceAlt: '#E2D097',
-  surfaceHigh: '#D1BC7C',
-  border: '#C2AA66',
-  borderSubtle: '#DBC78C',
+  // Backgrounds — near-white canvas so the colorful cards pop.
+  // A hint of warmth keeps it from feeling sterile.
+  bg: '#FBF9F4',
+  bgElevated: '#FFFFFF',
+  surface: '#FFFFFF',
+  surfaceAlt: '#F1EEE6',
+  surfaceHigh: '#E4E0D4',
+  border: '#D9D3C2',
+  borderSubtle: '#ECE7D9',
 
   // Text — deep navy straight from the icon for maximum contrast.
   text: '#0B1A33',
@@ -130,6 +152,17 @@ export const lightPalette: Palette = {
   shadow: 'rgba(11,26,51,0.14)',
   overlay: 'rgba(11,26,51,0.45)',
   inverseText: '#FFFAE8',
+
+  // Bold, colorful card tones. Backgrounds are saturated enough to
+  // stand out against the near-white canvas but light enough that the
+  // deep-navy body text remains legible (contrast > 7:1 on all tones).
+  tones: {
+    purple: { bg: '#E7DEFB', border: '#C9B6F3', accent: '#6D3FD9' },
+    blue: { bg: '#D9E8FD', border: '#A8C9F5', accent: '#1E6FE0' },
+    teal: { bg: '#CFEEE5', border: '#8FD6C5', accent: '#0F9E86' },
+    coral: { bg: '#FBDDD6', border: '#F4B2A3', accent: '#D94B32' },
+    amber: { bg: '#FAE6BB', border: '#E9C87A', accent: '#B87A10' },
+  },
 };
 
 /**
@@ -158,6 +191,17 @@ export function useTheme(): ThemeMode {
   // the same render see the latest values.
   applyPalette(mode);
   return mode;
+}
+
+/**
+ * Deterministic tone picker for list cards — rotates through the colorful
+ * tone set so a list of cards gets a pleasing, predictable color story
+ * without every card looking identical.
+ */
+const TONE_CYCLE: CardTone[] = ['purple', 'blue', 'teal', 'coral', 'amber'];
+export function cycleTone(index: number): CardTone {
+  const i = ((index % TONE_CYCLE.length) + TONE_CYCLE.length) % TONE_CYCLE.length;
+  return TONE_CYCLE[i];
 }
 
 export const Spacing = {

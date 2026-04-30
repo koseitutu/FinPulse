@@ -11,23 +11,25 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors, Radius, Spacing } from '@/constants/theme';
+import { CardTone, Colors, Radius, Spacing } from '@/constants/theme';
 import { Fonts } from '@/constants/Typography';
 
 export function Card({
   style,
   children,
+  tone,
   ...rest
-}: ViewProps & { children?: React.ReactNode }) {
+}: ViewProps & { children?: React.ReactNode; tone?: CardTone }) {
+  const toned = tone ? Colors.tones[tone] : null;
   return (
     <View
       style={[
         {
-          backgroundColor: Colors.surface,
+          backgroundColor: toned?.bg ?? Colors.surface,
           borderRadius: Radius.lg,
           padding: Spacing.lg,
           borderWidth: 1,
-          borderColor: Colors.borderSubtle,
+          borderColor: toned?.border ?? Colors.borderSubtle,
           borderCurve: 'continuous',
         },
         style,

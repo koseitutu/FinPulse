@@ -97,7 +97,7 @@ export default function TransactionDetailScreen() {
           </AppText>
         </View>
 
-        <Card>
+        <Card tone="purple">
           <Row label="Type" value={tx.type === 'income' ? 'Income' : 'Expense'} />
           <Row label="Category" value={cat?.name ?? '-'} icon={cat?.icon as never} iconColor={cat?.color} />
           {sub ? <Row label="Subcategory" value={sub.name} icon={sub.icon as never} iconColor={sub.color} /> : null}
@@ -106,7 +106,7 @@ export default function TransactionDetailScreen() {
         </Card>
 
         {tx.tagIds.length > 0 ? (
-          <Card>
+          <Card tone="teal">
             <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1, marginBottom: 8 }}>
               TAGS
             </AppText>
@@ -135,7 +135,7 @@ export default function TransactionDetailScreen() {
         ) : null}
 
         {tx.notes ? (
-          <Card>
+          <Card tone="amber">
             <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1, marginBottom: 8 }}>
               NOTES
             </AppText>

@@ -12,7 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, cycleTone, formatCompact, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Chip, Empty, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Category, TxType } from '@/store/types';
@@ -165,11 +165,11 @@ export default function CategoriesScreen() {
           />
         ) : null}
 
-        {listed.map((c) => {
+        {listed.map((c, idx) => {
           const subs = categories.filter((s) => s.parentId === c.id);
           const used = countFor(c.id);
           return (
-            <Card key={c.id}>
+            <Card key={c.id} tone={cycleTone(idx)}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
                 <View
                   style={{

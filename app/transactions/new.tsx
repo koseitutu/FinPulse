@@ -125,7 +125,7 @@ export default function NewTransactionScreen() {
         </View>
 
         {/* Amount */}
-        <Card>
+        <Card tone="purple">
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1 }}>
             AMOUNT
           </AppText>
@@ -246,7 +246,7 @@ export default function NewTransactionScreen() {
         </View>
 
         {/* Merchant */}
-        <Card>
+        <Card tone="blue">
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1, marginBottom: 6 }}>
             MERCHANT
           </AppText>
@@ -260,7 +260,7 @@ export default function NewTransactionScreen() {
         </Card>
 
         {/* Notes */}
-        <Card>
+        <Card tone="amber">
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1, marginBottom: 6 }}>
             NOTES
           </AppText>

@@ -290,7 +290,7 @@ export default function ManageDataScreen() {
           gap: Spacing.lg,
         }}
       >
-        <Card>
+        <Card tone="purple">
           <SectionHeader
             title="Local storage"
             subtitle="Everything stays on this device until you export it."
@@ -304,7 +304,7 @@ export default function ManageDataScreen() {
           </View>
         </Card>
 
-        <Card>
+        <Card tone="blue">
           <SectionHeader
             title="Full backup"
             subtitle="Exports accounts, categories, transactions, budgets, recurring, and preferences as a single JSON file you can save anywhere."
@@ -349,7 +349,7 @@ export default function ManageDataScreen() {
           </View>
         </Card>
 
-        <Card>
+        <Card tone="teal">
           <SectionHeader
             title="Transactions CSV"
             subtitle="For spreadsheets or importing into other apps · Date, Type, Amount, Currency, Category, Subcategory, Merchant, Notes"

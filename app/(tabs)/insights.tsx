@@ -94,7 +94,7 @@ export default function InsightsScreen() {
       </View>
 
       {/* Financial health score */}
-      <Card>
+      <Card tone="purple">
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
           <View
             style={{
@@ -129,7 +129,7 @@ export default function InsightsScreen() {
       </Card>
 
       {/* Forecast card */}
-      <Card>
+      <Card tone="amber">
         <SectionHeader
           title="Month forecast"
           subtitle={`Day ${now.getDate()} of ${days}`}
@@ -163,7 +163,7 @@ export default function InsightsScreen() {
       </View>
 
       {/* Income vs Expense */}
-      <Card>
+      <Card tone="blue">
         <SectionHeader title="Income vs Expense" subtitle="6-month trend" />
         <BarChart data={bars} height={160} />
         <View style={{ flexDirection: 'row', gap: 16, marginTop: 12 }}>
@@ -187,7 +187,7 @@ export default function InsightsScreen() {
       </Card>
 
       {/* Category breakdown */}
-      <Card>
+      <Card tone="coral">
         <SectionHeader title="Where your money goes" />
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: Spacing.lg }}>
           <Donut
@@ -205,7 +205,7 @@ export default function InsightsScreen() {
       <TopMerchantsCard />
 
       {/* Budget status */}
-      <Card>
+      <Card tone="teal">
         <SectionHeader title="Budget status" subtitle={`${categories.filter(c => c.budget && !c.parentId).length} active budgets`} />
         <View style={{ gap: 12 }}>
           {categories
@@ -265,7 +265,7 @@ function TopMerchantsCard() {
 
   const max = list[0][1];
   return (
-    <Card>
+    <Card tone="purple">
       <SectionHeader title="Top merchants" subtitle="This month" />
       <View style={{ gap: 10 }}>
         {list.map(([m, total], i) => (

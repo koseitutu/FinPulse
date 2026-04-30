@@ -53,7 +53,7 @@ export default function ArchiveScreen() {
       </View>
 
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 120, gap: Spacing.lg }}>
-        <Card>
+        <Card tone="blue">
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
             <View
               style={{

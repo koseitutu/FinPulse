@@ -525,8 +525,8 @@ export default function BudgetsScreen() {
         {/* Tips card */}
         {budgeted.length > 0 && isCurrentMonth ? (
           <Card
+            tone="blue"
             style={{
-              backgroundColor: Colors.surfaceAlt,
               flexDirection: 'row',
               gap: 12,
               alignItems: 'flex-start',

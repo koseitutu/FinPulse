@@ -60,7 +60,7 @@ export default function RecurringScreen() {
       </View>
 
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, paddingBottom: 120, gap: Spacing.lg }}>
-        <Card>
+        <Card tone="purple">
           <AppText size={11} color={Colors.textMuted} weight="semiBold" style={{ letterSpacing: 1 }}>
             MONTHLY NET IMPACT
           </AppText>

@@ -103,7 +103,7 @@ export default function MoreScreen() {
         </Pressable>
       </View>
 
-      <Card>
+      <Card tone="purple">
         <SectionHeader title="Features" />
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
           {MAIN.map((item) => (
@@ -135,7 +135,7 @@ export default function MoreScreen() {
         </View>
       </Card>
 
-      <Card>
+      <Card tone="teal">
         <SectionHeader title="Tools" />
         <View style={{ gap: 2 }}>
           {TOOLS.map((item, i) => (

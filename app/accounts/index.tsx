@@ -12,7 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, cycleTone, formatCompact, formatCurrency, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Empty, IconButton, SectionHeader } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
 import type { Account, AccountType } from '@/store/types';
@@ -181,11 +181,11 @@ export default function AccountsScreen() {
           />
         ) : null}
 
-        {accounts.map((a) => {
+        {accounts.map((a, idx) => {
           const typeDef = TYPES.find((t) => t.key === a.type);
           const txCount = transactions.filter((t) => t.accountId === a.id).length;
           return (
-            <Card key={a.id}>
+            <Card key={a.id} tone={cycleTone(idx)}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
                 <View
                   style={{
