@@ -66,6 +66,7 @@ interface AppState {
   addTransactions: (ts: Omit<Transaction, 'id'>[]) => Transaction[];
   updateTransaction: (id: string, patch: Partial<Transaction>) => void;
   deleteTransaction: (id: string) => void;
+  deleteTransactions: (ids: string[]) => void;
 
   addCategory: (c: Omit<Category, 'id'>) => Category;
   updateCategory: (id: string, patch: Partial<Category>) => void;
@@ -221,6 +222,24 @@ export const useAppStore = create<AppState>()(
               ? { ...a, balance: a.balance - (t.type === 'income' ? t.amount : -t.amount) }
               : a
           ),
+        }));
+      },
+      deleteTransactions: (ids) => {
+        const idSet = new Set(ids);
+        const toDelete = get().transactions.filter((x) => idSet.has(x.id));
+        if (toDelete.length === 0) return;
+        // Compute net balance adjustment per account
+        const adjustments = new Map<string, number>();
+        toDelete.forEach((t) => {
+          const prev = adjustments.get(t.accountId) ?? 0;
+          adjustments.set(t.accountId, prev + (t.type === 'income' ? t.amount : -t.amount));
+        });
+        set((s) => ({
+          transactions: s.transactions.filter((x) => !idSet.has(x.id)),
+          accounts: s.accounts.map((a) => {
+            const adj = adjustments.get(a.id);
+            return adj !== undefined ? { ...a, balance: a.balance - adj } : a;
+          }),
         }));
       },
 

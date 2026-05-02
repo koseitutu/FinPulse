@@ -1,8 +1,15 @@
-import React, { useMemo, useState } from 'react';
-import { FlatList, Pressable, TextInput, View } from 'react-native';
+import React, { useCallback, useMemo, useState } from 'react';
+import { Alert, FlatList, Pressable, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Animated, {
+  FadeIn,
+  FadeOut,
+  LinearTransition,
+  SlideInDown,
+  SlideOutDown,
+} from 'react-native-reanimated';
 import { Colors, Radius, Spacing, formatCompact, formatCurrency, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Chip, Empty, IconButton } from '@/components/ui';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
@@ -19,10 +26,34 @@ export default function TransactionsScreen() {
   const categories = useAppStore((s) => s.categories);
   const accounts = useAppStore((s) => s.accounts);
   const tags = useAppStore((s) => s.tags);
+  const deleteTransactions = useAppStore((s) => s.deleteTransactions);
 
   const [query, setQuery] = useState('');
   const [filterType, setFilterType] = useState<FilterType>('all');
   const [activeTag, setActiveTag] = useState<string | null>(null);
+
+  // Multi-select state
+  const [selectMode, setSelectMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+
+  const enterSelectMode = useCallback(() => {
+    setSelectMode(true);
+    setSelectedIds(new Set());
+  }, []);
+
+  const exitSelectMode = useCallback(() => {
+    setSelectMode(false);
+    setSelectedIds(new Set());
+  }, []);
+
+  const toggleSelect = useCallback((id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -56,8 +87,47 @@ export default function TransactionsScreen() {
     }));
   }, [filtered]);
 
+  const allFilteredIds = useMemo(() => filtered.map((t) => t.id), [filtered]);
+  const allSelected = allFilteredIds.length > 0 && allFilteredIds.every((id) => selectedIds.has(id));
+
+  const toggleSelectAll = useCallback(() => {
+    if (allSelected) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(allFilteredIds));
+    }
+  }, [allSelected, allFilteredIds]);
+
+  const handleBulkDelete = useCallback(() => {
+    const count = selectedIds.size;
+    if (count === 0) return;
+
+    const doDelete = () => {
+      deleteTransactions(Array.from(selectedIds));
+      exitSelectMode();
+    };
+
+    if (typeof window !== 'undefined' && typeof (window as Window & { confirm?: (msg: string) => boolean }).confirm === 'function') {
+      // Web
+      const ok = (window as Window & { confirm?: (msg: string) => boolean }).confirm?.(
+        `Delete ${count} transaction${count === 1 ? '' : 's'}? This cannot be undone.`
+      );
+      if (ok) doDelete();
+    } else {
+      Alert.alert(
+        `Delete ${count} Transaction${count === 1 ? '' : 's'}`,
+        `Are you sure you want to permanently delete ${count} transaction${count === 1 ? '' : 's'}? This cannot be undone.`,
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: `Delete (${count})`, style: 'destructive', onPress: doDelete },
+        ]
+      );
+    }
+  }, [selectedIds, deleteTransactions, exitSelectMode]);
+
   return (
     <View style={{ flex: 1, backgroundColor: Colors.bg, paddingTop: insets.top }}>
+      {/* Header */}
       <View style={{ padding: Spacing.lg, gap: Spacing.md }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
           <View>
@@ -69,49 +139,108 @@ export default function TransactionsScreen() {
             </AppText>
           </View>
           <View style={{ flexDirection: 'row', gap: 10 }}>
-            <IconButton icon="search" onPress={() => router.push('/search')} />
-            <IconButton
-              icon="add"
-              background={Colors.gold}
-              color={Colors.bg}
-              onPress={() => router.push('/transactions/new')}
-            />
+            {!selectMode ? (
+              <>
+                <Pressable
+                  onPress={enterSelectMode}
+                  style={({ pressed }) => ({
+                    paddingHorizontal: 12,
+                    paddingVertical: 8,
+                    borderRadius: Radius.md,
+                    backgroundColor: Colors.surface,
+                    borderWidth: 1,
+                    borderColor: Colors.border,
+                    opacity: pressed ? 0.7 : 1,
+                  })}
+                >
+                  <AppText size={13} weight="semiBold" color={Colors.textSecondary}>
+                    Select
+                  </AppText>
+                </Pressable>
+                <IconButton icon="search" onPress={() => router.push('/search')} />
+                <IconButton
+                  icon="add"
+                  background={Colors.gold}
+                  color={Colors.bg}
+                  onPress={() => router.push('/transactions/new')}
+                />
+              </>
+            ) : (
+              <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}
+                style={{ flexDirection: 'row', gap: 10, alignItems: 'center' }}
+              >
+                <Pressable
+                  onPress={toggleSelectAll}
+                  style={({ pressed }) => ({
+                    paddingHorizontal: 12,
+                    paddingVertical: 8,
+                    borderRadius: Radius.md,
+                    backgroundColor: allSelected ? Colors.gold + '22' : Colors.surface,
+                    borderWidth: 1,
+                    borderColor: allSelected ? Colors.gold : Colors.border,
+                    opacity: pressed ? 0.7 : 1,
+                  })}
+                >
+                  <AppText size={13} weight="semiBold" color={allSelected ? Colors.gold : Colors.textSecondary}>
+                    {allSelected ? 'Deselect All' : 'Select All'}
+                  </AppText>
+                </Pressable>
+                <Pressable
+                  onPress={exitSelectMode}
+                  style={({ pressed }) => ({
+                    paddingHorizontal: 12,
+                    paddingVertical: 8,
+                    borderRadius: Radius.md,
+                    backgroundColor: Colors.surface,
+                    borderWidth: 1,
+                    borderColor: Colors.border,
+                    opacity: pressed ? 0.7 : 1,
+                  })}
+                >
+                  <AppText size={13} weight="semiBold" color={Colors.textSecondary}>
+                    Cancel
+                  </AppText>
+                </Pressable>
+              </Animated.View>
+            )}
           </View>
         </View>
 
-        {/* Search */}
-        <View
-          style={{
-            backgroundColor: Colors.surface,
-            borderRadius: Radius.md,
-            borderWidth: 1,
-            borderColor: Colors.border,
-            paddingHorizontal: 12,
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 8,
-          }}
-        >
-          <Ionicons name="search" size={16} color={Colors.textMuted} />
-          <TextInput
-            value={query}
-            onChangeText={setQuery}
-            placeholder="Search notes, merchants, categories…"
-            placeholderTextColor={Colors.textDim}
+        {/* Search — hidden in select mode */}
+        {!selectMode && (
+          <View
             style={{
-              flex: 1,
-              color: Colors.text,
-              paddingVertical: 12,
-              fontFamily: 'Inter_400Regular',
-              fontSize: scaled(14),
+              backgroundColor: Colors.surface,
+              borderRadius: Radius.md,
+              borderWidth: 1,
+              borderColor: Colors.border,
+              paddingHorizontal: 12,
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 8,
             }}
-          />
-          {query ? (
-            <Pressable onPress={() => setQuery('')}>
-              <Ionicons name="close-circle" size={16} color={Colors.textMuted} />
-            </Pressable>
-          ) : null}
-        </View>
+          >
+            <Ionicons name="search" size={16} color={Colors.textMuted} />
+            <TextInput
+              value={query}
+              onChangeText={setQuery}
+              placeholder="Search notes, merchants, categories…"
+              placeholderTextColor={Colors.textDim}
+              style={{
+                flex: 1,
+                color: Colors.text,
+                paddingVertical: 12,
+                fontFamily: 'Inter_400Regular',
+                fontSize: scaled(14),
+              }}
+            />
+            {query ? (
+              <Pressable onPress={() => setQuery('')}>
+                <Ionicons name="close-circle" size={16} color={Colors.textMuted} />
+              </Pressable>
+            ) : null}
+          </View>
+        )}
 
         {/* Type filter */}
         <View style={{ flexDirection: 'row', gap: 8 }}>
@@ -156,10 +285,11 @@ export default function TransactionsScreen() {
         <FlatList
           data={sections}
           keyExtractor={(s) => s.date}
-          contentContainerStyle={{ paddingBottom: 120, paddingHorizontal: Spacing.lg }}
+          contentContainerStyle={{ paddingBottom: selectMode ? 140 : 120, paddingHorizontal: Spacing.lg }}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View style={{ marginBottom: Spacing.lg }}>
+            <Animated.View layout={LinearTransition} style={{ marginBottom: Spacing.lg }}>
+              {/* Date header */}
               <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10 }}>
                 <AppText size={11} weight="semiBold" color={Colors.textMuted} style={{ letterSpacing: 1 }}>
                   {formatRelative(item.items[0].date).toUpperCase()} · {new Date(item.date).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}
@@ -174,6 +304,8 @@ export default function TransactionsScreen() {
                   {formatCompact(item.total)}
                 </AppText>
               </View>
+
+              {/* Transaction rows */}
               <View
                 style={{
                   backgroundColor: Colors.surface,
@@ -188,90 +320,188 @@ export default function TransactionsScreen() {
                   const sub = t.subcategoryId ? categories.find((c) => c.id === t.subcategoryId) : null;
                   const acc = accounts.find((a) => a.id === t.accountId);
                   const color = t.type === 'income' ? Colors.income : cat?.color ?? Colors.expense;
+                  const isSelected = selectedIds.has(t.id);
+
+                  const rowContent = (
+                    <Pressable
+                      onLongPress={selectMode ? undefined : enterSelectMode}
+                      onPress={
+                        selectMode
+                          ? () => toggleSelect(t.id)
+                          : undefined
+                      }
+                      style={({ pressed }) => ({
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 12,
+                        padding: Spacing.md,
+                        borderTopWidth: idx === 0 ? 0 : 1,
+                        borderTopColor: Colors.borderSubtle,
+                        opacity: pressed ? 0.7 : 1,
+                        backgroundColor: isSelected ? Colors.gold + '15' : 'transparent',
+                      })}
+                    >
+                      {/* Checkbox in select mode */}
+                      {selectMode && (
+                        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
+                          <View
+                            style={{
+                              width: 22,
+                              height: 22,
+                              borderRadius: 11,
+                              borderWidth: 2,
+                              borderColor: isSelected ? Colors.gold : Colors.border,
+                              backgroundColor: isSelected ? Colors.gold : 'transparent',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            {isSelected && (
+                              <Ionicons name="checkmark" size={13} color={Colors.bg} />
+                            )}
+                          </View>
+                        </Animated.View>
+                      )}
+
+                      {/* Category icon */}
+                      <View
+                        style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: 20,
+                          backgroundColor: color + '22',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <Ionicons name={(cat?.icon as never) ?? 'pricetag'} size={18} color={color} />
+                      </View>
+
+                      {/* Details */}
+                      <View style={{ flex: 1 }}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                          <AppText weight="semiBold" size={14}>
+                            {t.merchant || cat?.name || 'Transaction'}
+                          </AppText>
+                          {t.isRecurring ? (
+                            <Ionicons name="repeat" size={11} color={Colors.gold} />
+                          ) : null}
+                        </View>
+                        <AppText size={11} color={Colors.textMuted}>
+                          {cat?.name}
+                          {sub ? ` · ${sub.name}` : ''}
+                          {acc ? ` · ${acc.name}` : ''}
+                        </AppText>
+                        {t.tagIds.length > 0 ? (
+                          <View style={{ flexDirection: 'row', gap: 4, marginTop: 4 }}>
+                            {t.tagIds.slice(0, 3).map((tid) => {
+                              const tag = tags.find((x) => x.id === tid);
+                              if (!tag) return null;
+                              return (
+                                <View
+                                  key={tid}
+                                  style={{
+                                    paddingHorizontal: 6,
+                                    paddingVertical: 1,
+                                    borderRadius: 4,
+                                    backgroundColor: tag.color + '22',
+                                  }}
+                                >
+                                  <AppText size={9} weight="medium" color={tag.color}>
+                                    #{tag.name}
+                                  </AppText>
+                                </View>
+                              );
+                            })}
+                          </View>
+                        ) : null}
+                      </View>
+
+                      {/* Amount */}
+                      <AppText
+                        weight="semiBold"
+                        size={14}
+                        color={t.type === 'income' ? Colors.income : Colors.text}
+                        style={{ fontVariant: ['tabular-nums'] }}
+                      >
+                        {t.type === 'income' ? '+' : '-'}
+                        {formatCurrency(t.amount, t.currency)}
+                      </AppText>
+                    </Pressable>
+                  );
+
+                  if (selectMode) {
+                    return <View key={t.id}>{rowContent}</View>;
+                  }
+
                   return (
                     <Link
                       key={t.id}
                       href={{ pathname: '/transactions/[id]', params: { id: t.id } }}
                       asChild
                     >
-                      <Pressable
-                        style={({ pressed }) => ({
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          gap: 12,
-                          padding: Spacing.md,
-                          borderTopWidth: idx === 0 ? 0 : 1,
-                          borderTopColor: Colors.borderSubtle,
-                          opacity: pressed ? 0.7 : 1,
-                        })}
-                      >
-                        <View
-                          style={{
-                            width: 40,
-                            height: 40,
-                            borderRadius: 20,
-                            backgroundColor: color + '22',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <Ionicons name={(cat?.icon as never) ?? 'pricetag'} size={18} color={color} />
-                        </View>
-                        <View style={{ flex: 1 }}>
-                          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                            <AppText weight="semiBold" size={14}>
-                              {t.merchant || cat?.name || 'Transaction'}
-                            </AppText>
-                            {t.isRecurring ? (
-                              <Ionicons name="repeat" size={11} color={Colors.gold} />
-                            ) : null}
-                          </View>
-                          <AppText size={11} color={Colors.textMuted}>
-                            {cat?.name}
-                            {sub ? ` · ${sub.name}` : ''}
-                            {acc ? ` · ${acc.name}` : ''}
-                          </AppText>
-                          {t.tagIds.length > 0 ? (
-                            <View style={{ flexDirection: 'row', gap: 4, marginTop: 4 }}>
-                              {t.tagIds.slice(0, 3).map((tid) => {
-                                const tag = tags.find((x) => x.id === tid);
-                                if (!tag) return null;
-                                return (
-                                  <View
-                                    key={tid}
-                                    style={{
-                                      paddingHorizontal: 6,
-                                      paddingVertical: 1,
-                                      borderRadius: 4,
-                                      backgroundColor: tag.color + '22',
-                                    }}
-                                  >
-                                    <AppText size={9} weight="medium" color={tag.color}>
-                                      #{tag.name}
-                                    </AppText>
-                                  </View>
-                                );
-                              })}
-                            </View>
-                          ) : null}
-                        </View>
-                        <AppText
-                          weight="semiBold"
-                          size={14}
-                          color={t.type === 'income' ? Colors.income : Colors.text}
-                          style={{ fontVariant: ['tabular-nums'] }}
-                        >
-                          {t.type === 'income' ? '+' : '-'}
-                          {formatCurrency(t.amount, t.currency)}
-                        </AppText>
-                      </Pressable>
+                      {rowContent}
                     </Link>
                   );
                 })}
               </View>
-            </View>
+            </Animated.View>
           )}
         />
+      )}
+
+      {/* Bulk delete bottom bar */}
+      {selectMode && (
+        <Animated.View
+          entering={SlideInDown.springify().damping(20).stiffness(200)}
+          exiting={SlideOutDown.duration(200)}
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            paddingBottom: insets.bottom + Spacing.md,
+            paddingHorizontal: Spacing.lg,
+            paddingTop: Spacing.md,
+            backgroundColor: Colors.surface,
+            borderTopWidth: 1,
+            borderTopColor: Colors.border,
+            gap: Spacing.sm,
+            boxShadow: '0 -4px 20px rgba(0,0,0,0.15)',
+          }}
+        >
+          {/* Selection count label */}
+          <AppText size={12} color={Colors.textMuted} style={{ textAlign: 'center' }}>
+            {selectedIds.size === 0
+              ? 'Tap transactions to select'
+              : `${selectedIds.size} transaction${selectedIds.size === 1 ? '' : 's'} selected`}
+          </AppText>
+
+          {/* Delete button */}
+          <Pressable
+            onPress={handleBulkDelete}
+            disabled={selectedIds.size === 0}
+            style={({ pressed }) => ({
+              backgroundColor: selectedIds.size === 0 ? Colors.border : '#FF3B30',
+              borderRadius: Radius.md,
+              paddingVertical: 14,
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              gap: 8,
+              opacity: pressed ? 0.8 : 1,
+            })}
+          >
+            <Ionicons name="trash" size={16} color={selectedIds.size === 0 ? Colors.textMuted : '#fff'} />
+            <AppText
+              weight="semiBold"
+              size={15}
+              color={selectedIds.size === 0 ? Colors.textMuted : '#fff'}
+            >
+              {selectedIds.size === 0 ? 'Delete' : `Delete (${selectedIds.size})`}
+            </AppText>
+          </Pressable>
+        </Animated.View>
       )}
     </View>
   );
