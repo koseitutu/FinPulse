@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from 'react';
-import { Alert, Platform, Pressable, ScrollView, View } from 'react-native';
+import { Platform, Pressable, ScrollView, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as DocumentPicker from 'expo-document-picker';
+import Animated, { FadeIn, FadeOut, Layout } from 'react-native-reanimated';
 import { Colors, Radius, Spacing, useTheme } from '@/constants/theme';
 import { AppText, Card, IconButton, IconCircle, SectionHeader } from '@/components/ui';
 import { useAppStore, type BackupData } from '@/store/useAppStore';
@@ -46,6 +47,8 @@ export default function ManageDataScreen() {
 
   const [busy, setBusy] = useState<null | 'backup' | 'restore' | 'csv-export' | 'csv-import'>(null);
   const [status, setStatus] = useState<Status>(null);
+  // Holds parsed backup data awaiting user confirmation — shown as inline preview card
+  const [pendingRestore, setPendingRestore] = useState<BackupData | null>(null);
 
   const storageSize = useMemo(() => {
     const json = JSON.stringify({
@@ -98,33 +101,40 @@ export default function ManageDataScreen() {
     }
   };
 
-  const confirmRestore = (data: BackupData) =>
-    new Promise<boolean>((resolve) => {
-      const txCount = data.transactions?.length ?? 0;
-      const accCount = data.accounts?.length ?? 0;
-      const summary = `This will REPLACE all current data with:\n\n• ${accCount} accounts\n• ${txCount} transactions\n• ${data.categories?.length ?? 0} categories\n• ${data.recurring?.length ?? 0} recurring items\n\nExported ${new Date(data.exportedAt).toLocaleString()}.\n\nContinue?`;
-      if (Platform.OS === 'web') {
-        const ok = typeof window !== 'undefined' && window.confirm(summary);
-        resolve(!!ok);
-        return;
-      }
-      Alert.alert('Restore backup?', summary, [
-        { text: 'Cancel', style: 'cancel', onPress: () => resolve(false) },
-        { text: 'Restore', style: 'destructive', onPress: () => resolve(true) },
-      ]);
-    });
-
+  /**
+   * Read the file content from a DocumentPickerAsset.
+   *
+   * On web the picker exposes `asset.file` (a native File object) whose `.text()`
+   * method reliably returns the raw content regardless of the `base64` option.
+   * On native `fetch(asset.uri)` works for the `file://` URIs returned when
+   * `copyToCacheDirectory: true` is set.
+   */
   const readPickedFile = async (asset: DocumentPicker.DocumentPickerAsset): Promise<string> => {
-    if (Platform.OS === 'web' && asset.file) {
-      return asset.file.text();
+    if (Platform.OS === 'web') {
+      // Prefer the native File object — synchronous, no network hop
+      if (asset.file && typeof asset.file.text === 'function') {
+        return asset.file.text();
+      }
+      // Fall back to blob URL created by the picker
+      if (asset.uri) {
+        const res = await fetch(asset.uri);
+        if (!res.ok) throw new Error(`Failed to read file (HTTP ${res.status}).`);
+        return res.text();
+      }
+      throw new Error('Selected file has no readable content.');
     }
-    if (!asset.uri) throw new Error('Selected file has no readable uri.');
+
+    // Native — fetch works reliably for file:// URIs when copyToCacheDirectory is true
+    if (!asset.uri) throw new Error('Selected file has no readable URI.');
     const res = await fetch(asset.uri);
+    if (!res.ok) throw new Error(`Failed to read file (HTTP ${res.status}).`);
     return res.text();
   };
 
   const handleRestore = async () => {
     if (busy) return;
+    // Clear any previous pending restore before starting a new pick
+    setPendingRestore(null);
     setBusy('restore');
     try {
       const res = await DocumentPicker.getDocumentAsync({
@@ -133,7 +143,6 @@ export default function ManageDataScreen() {
         copyToCacheDirectory: true,
       });
       if (res.canceled || !res.assets?.[0]) {
-        setBusy(null);
         return;
       }
       const text = await readPickedFile(res.assets[0]);
@@ -145,21 +154,40 @@ export default function ManageDataScreen() {
       try {
         data = parseBackupJSON(text);
       } catch (e) {
-        flash('error', `Invalid backup: ${e instanceof Error ? e.message : 'unknown error'}`);
+        flash('error', `Invalid backup: ${e instanceof Error ? e.message : 'Unknown error'}`);
         return;
       }
-      const ok = await confirmRestore(data);
-      if (!ok) {
-        flash('info', 'Restore cancelled.');
-        return;
-      }
-      restoreFromBackup(data);
-      flash('success', `Restored ${data.transactions?.length ?? 0} transactions and all settings.`, 5000);
+      // Show inline confirmation — avoids window.confirm() which is blocked in
+      // sandboxed iframe previews and provides a much richer preview experience.
+      setPendingRestore(data);
     } catch (e) {
-      flash('error', `Restore failed: ${e instanceof Error ? e.message : 'unknown error'}`);
+      flash('error', `Restore failed: ${e instanceof Error ? e.message : 'Unknown error'}`);
     } finally {
       setBusy(null);
     }
+  };
+
+  const handleConfirmRestore = () => {
+    if (!pendingRestore) return;
+    try {
+      restoreFromBackup(pendingRestore);
+      const txCount = pendingRestore.transactions?.length ?? 0;
+      const accCount = pendingRestore.accounts?.length ?? 0;
+      setPendingRestore(null);
+      flash(
+        'success',
+        `Restored ${accCount} accounts, ${txCount} transactions and all settings.`,
+        5000
+      );
+    } catch (e) {
+      setPendingRestore(null);
+      flash('error', `Restore failed: ${e instanceof Error ? e.message : 'Unknown error'}`);
+    }
+  };
+
+  const handleCancelRestore = () => {
+    setPendingRestore(null);
+    flash('info', 'Restore cancelled.');
   };
 
   const handleExportCSV = async () => {
@@ -195,7 +223,6 @@ export default function ManageDataScreen() {
         copyToCacheDirectory: true,
       });
       if (res.canceled || !res.assets?.[0]) {
-        setBusy(null);
         return;
       }
       const text = await readPickedFile(res.assets[0]);
@@ -330,9 +357,146 @@ export default function ManageDataScreen() {
               disabled={!!busy && busy !== 'restore'}
             />
           </View>
+
+          {/* Inline restore confirmation — appears after a valid backup file is parsed.
+              Using an inline UI instead of window.confirm() / Alert.alert() so this
+              works in sandboxed web preview iframes where modal dialogs are blocked. */}
+          {pendingRestore ? (
+            <Animated.View
+              entering={FadeIn.duration(220)}
+              exiting={FadeOut.duration(180)}
+              layout={Layout.springify()}
+              style={{
+                marginTop: Spacing.md,
+                borderRadius: Radius.md,
+                borderWidth: 1.5,
+                borderColor: Colors.expense + '77',
+                backgroundColor: Colors.expenseSoft,
+                overflow: 'hidden',
+              }}
+            >
+              {/* Header */}
+              <View
+                style={{
+                  paddingHorizontal: Spacing.md,
+                  paddingTop: Spacing.md,
+                  paddingBottom: Spacing.sm,
+                  borderBottomWidth: 1,
+                  borderBottomColor: Colors.expense + '33',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 8,
+                }}
+              >
+                <Ionicons name="alert-circle" size={18} color={Colors.expense} />
+                <AppText weight="semiBold" size={14} color={Colors.expense}>
+                  Restore this backup?
+                </AppText>
+              </View>
+
+              {/* Summary stats */}
+              <View style={{ padding: Spacing.md, gap: Spacing.sm }}>
+                <AppText size={12} color={Colors.textSecondary} style={{ lineHeight: 18 }}>
+                  This will{' '}
+                  <AppText weight="semiBold" size={12} color={Colors.text}>
+                    replace all current data
+                  </AppText>{' '}
+                  with the following:
+                </AppText>
+
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    gap: Spacing.sm,
+                    marginTop: 2,
+                  }}
+                >
+                  <RestoreStat
+                    icon="wallet-outline"
+                    label="Accounts"
+                    value={pendingRestore.accounts?.length ?? 0}
+                  />
+                  <RestoreStat
+                    icon="swap-horizontal-outline"
+                    label="Transactions"
+                    value={pendingRestore.transactions?.length ?? 0}
+                  />
+                  <RestoreStat
+                    icon="grid-outline"
+                    label="Categories"
+                    value={pendingRestore.categories?.length ?? 0}
+                  />
+                  <RestoreStat
+                    icon="repeat-outline"
+                    label="Recurring"
+                    value={pendingRestore.recurring?.length ?? 0}
+                  />
+                </View>
+
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 6,
+                    marginTop: 2,
+                  }}
+                >
+                  <Ionicons name="time-outline" size={12} color={Colors.textMuted} />
+                  <AppText size={11} color={Colors.textMuted}>
+                    Exported{' '}
+                    {pendingRestore.exportedAt
+                      ? new Date(pendingRestore.exportedAt).toLocaleString()
+                      : 'unknown date'}
+                  </AppText>
+                </View>
+              </View>
+
+              {/* Action buttons */}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  borderTopWidth: 1,
+                  borderTopColor: Colors.expense + '33',
+                }}
+              >
+                <Pressable
+                  onPress={handleCancelRestore}
+                  style={({ pressed }) => ({
+                    flex: 1,
+                    paddingVertical: 14,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    opacity: pressed ? 0.7 : 1,
+                    borderRightWidth: 1,
+                    borderRightColor: Colors.expense + '33',
+                  })}
+                >
+                  <AppText weight="semiBold" size={14} color={Colors.textSecondary}>
+                    Cancel
+                  </AppText>
+                </Pressable>
+                <Pressable
+                  onPress={handleConfirmRestore}
+                  style={({ pressed }) => ({
+                    flex: 1,
+                    paddingVertical: 14,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: pressed ? Colors.expense + '33' : 'transparent',
+                  })}
+                >
+                  <AppText weight="bold" size={14} color={Colors.expense}>
+                    Restore
+                  </AppText>
+                </Pressable>
+              </View>
+            </Animated.View>
+          ) : null}
+
           <View
             style={{
-              marginTop: Spacing.md,
+              marginTop: pendingRestore ? 0 : Spacing.md,
               padding: 10,
               borderRadius: 8,
               backgroundColor: Colors.surfaceHigh,
@@ -377,7 +541,9 @@ export default function ManageDataScreen() {
         </Card>
 
         {status ? (
-          <View
+          <Animated.View
+            entering={FadeIn.duration(200)}
+            exiting={FadeOut.duration(180)}
             style={{
               backgroundColor: COLORS_BY_KIND[status.kind] + '22',
               borderWidth: 1,
@@ -393,13 +559,47 @@ export default function ManageDataScreen() {
             <AppText size={13} color={COLORS_BY_KIND[status.kind]} style={{ flex: 1 }}>
               {status.message}
             </AppText>
-          </View>
+          </Animated.View>
         ) : null}
 
         <AppText size={11} color={Colors.textDim} style={{ textAlign: 'center', lineHeight: 16 }}>
           Backup schema v1 · Use the same format to move FinPulse to a new device.
         </AppText>
       </ScrollView>
+    </View>
+  );
+}
+
+function RestoreStat({
+  icon,
+  label,
+  value,
+}: {
+  icon: keyof typeof import('@expo/vector-icons').Ionicons.glyphMap;
+  label: string;
+  value: number;
+}) {
+  return (
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
+        paddingVertical: 6,
+        paddingHorizontal: 10,
+        borderRadius: Radius.sm,
+        backgroundColor: Colors.surface,
+        borderWidth: 1,
+        borderColor: Colors.borderSubtle,
+      }}
+    >
+      <Ionicons name={icon} size={12} color={Colors.textMuted} />
+      <AppText weight="bold" size={13} style={{ fontVariant: ['tabular-nums'] }}>
+        {value}
+      </AppText>
+      <AppText size={11} color={Colors.textMuted}>
+        {label}
+      </AppText>
     </View>
   );
 }
