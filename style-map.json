@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": 1777758639252,
+  "generatedAt": 1777758908856,
   "entries": {
     "HomeScreen@app/(tabs)/index.tsx:32": {
       "element": {
@@ -2671,58 +2671,6 @@
               "raw": "'100%'"
             }
           }
-        }
-      ]
-    },
-    "RootLayout@app/_layout.tsx:35": {
-      "element": {
-        "file": "app/_layout.tsx",
-        "line": 35
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/_layout.tsx",
-          "properties": {
-            "flex": {
-              "line": 35,
-              "col": 43,
-              "endCol": 44,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "RootLayout@app/_layout.tsx:37": {
-      "element": {
-        "file": "app/_layout.tsx",
-        "line": 37
-      },
-      "styles": [
-        {
-          "origin": "inline",
-          "file": "app/_layout.tsx",
-          "properties": {
-            "flex": {
-              "line": 37,
-              "col": 29,
-              "endCol": 30,
-              "raw": "1"
-            }
-          }
-        }
-      ]
-    },
-    "RootLayout@app/_layout.tsx:38": {
-      "element": {
-        "file": "app/_layout.tsx",
-        "line": 38
-      },
-      "styles": [
-        {
-          "origin": "dynamic",
-          "resolvable": false
         }
       ]
     },
@@ -14183,6 +14131,654 @@
               "col": 31,
               "endCol": 41,
               "raw": "'absolute'"
+            }
+          }
+        }
+      ]
+    },
+    "RootLayout@app/_layout.tsx:35": {
+      "element": {
+        "file": "app/_layout.tsx",
+        "line": 35
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/_layout.tsx",
+          "properties": {
+            "flex": {
+              "line": 35,
+              "col": 43,
+              "endCol": 44,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "RootLayout@app/_layout.tsx:37": {
+      "element": {
+        "file": "app/_layout.tsx",
+        "line": 37
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/_layout.tsx",
+          "properties": {
+            "flex": {
+              "line": 37,
+              "col": 29,
+              "endCol": 30,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "RootLayout@app/_layout.tsx:38": {
+      "element": {
+        "file": "app/_layout.tsx",
+        "line": 38
+      },
+      "styles": [
+        {
+          "origin": "dynamic",
+          "resolvable": false
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:76": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 76
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flex": {
+              "line": 76,
+              "col": 27,
+              "endCol": 28,
+              "raw": "1"
+            },
+            "alignItems": {
+              "line": 76,
+              "col": 70,
+              "endCol": 78,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 76,
+              "col": 96,
+              "endCol": 104,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:83": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 83
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flex": {
+              "line": 83,
+              "col": 25,
+              "endCol": 26,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:84": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 84
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 86,
+              "col": 25,
+              "endCol": 30,
+              "raw": "'row'"
+            },
+            "justifyContent": {
+              "line": 87,
+              "col": 26,
+              "endCol": 41,
+              "raw": "'space-between'"
+            },
+            "alignItems": {
+              "line": 88,
+              "col": 22,
+              "endCol": 30,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:96": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 96
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "width": {
+              "line": 96,
+              "col": 30,
+              "endCol": 32,
+              "raw": "40"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:104": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 104
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 106,
+              "col": 27,
+              "endCol": 32,
+              "raw": "'row'"
+            },
+            "padding": {
+              "line": 109,
+              "col": 21,
+              "endCol": 22,
+              "raw": "4"
+            },
+            "borderWidth": {
+              "line": 110,
+              "col": 25,
+              "endCol": 26,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:115": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 115
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flex": {
+              "line": 119,
+              "col": 22,
+              "endCol": 23,
+              "raw": "1"
+            },
+            "paddingVertical": {
+              "line": 120,
+              "col": 33,
+              "endCol": 35,
+              "raw": "10"
+            },
+            "borderRadius": {
+              "line": 121,
+              "col": 30,
+              "endCol": 31,
+              "raw": "8"
+            },
+            "alignItems": {
+              "line": 123,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:135": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 135
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 135,
+              "col": 96,
+              "endCol": 97,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:138": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 138
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 138,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 138,
+              "col": 59,
+              "endCol": 69,
+              "raw": "'baseline'"
+            },
+            "gap": {
+              "line": 138,
+              "col": 76,
+              "endCol": 77,
+              "raw": "8"
+            },
+            "marginTop": {
+              "line": 138,
+              "col": 90,
+              "endCol": 91,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:142": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 142
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flex": {
+              "line": 149,
+              "col": 22,
+              "endCol": 23,
+              "raw": "1"
+            },
+            "fontFamily": {
+              "line": 151,
+              "col": 28,
+              "endCol": 43,
+              "raw": "'Inter_700Bold'"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:161": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 161
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 161,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "flexWrap": {
+              "line": 161,
+              "col": 57,
+              "endCol": 63,
+              "raw": "'wrap'"
+            },
+            "gap": {
+              "line": 161,
+              "col": 70,
+              "endCol": 71,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:163": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 163
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 167,
+              "col": 33,
+              "endCol": 38,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 168,
+              "col": 30,
+              "endCol": 38,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 169,
+              "col": 23,
+              "endCol": 24,
+              "raw": "8"
+            },
+            "paddingHorizontal": {
+              "line": 170,
+              "col": 37,
+              "endCol": 39,
+              "raw": "12"
+            },
+            "paddingVertical": {
+              "line": 171,
+              "col": 35,
+              "endCol": 36,
+              "raw": "8"
+            },
+            "borderWidth": {
+              "line": 174,
+              "col": 31,
+              "endCol": 32,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:190": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 190
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 190,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "flexWrap": {
+              "line": 190,
+              "col": 57,
+              "endCol": 63,
+              "raw": "'wrap'"
+            },
+            "gap": {
+              "line": 190,
+              "col": 70,
+              "endCol": 71,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:192": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 192
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 199,
+              "col": 33,
+              "endCol": 38,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 200,
+              "col": 30,
+              "endCol": 38,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 201,
+              "col": 23,
+              "endCol": 24,
+              "raw": "6"
+            },
+            "paddingHorizontal": {
+              "line": 202,
+              "col": 37,
+              "endCol": 39,
+              "raw": "12"
+            },
+            "paddingVertical": {
+              "line": 203,
+              "col": 35,
+              "endCol": 36,
+              "raw": "8"
+            },
+            "borderWidth": {
+              "line": 206,
+              "col": 31,
+              "endCol": 32,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:223": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 223
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 223,
+              "col": 42,
+              "endCol": 47,
+              "raw": "'row'"
+            },
+            "flexWrap": {
+              "line": 223,
+              "col": 59,
+              "endCol": 65,
+              "raw": "'wrap'"
+            },
+            "gap": {
+              "line": 223,
+              "col": 72,
+              "endCol": 73,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:241": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 241
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 241,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "flexWrap": {
+              "line": 241,
+              "col": 57,
+              "endCol": 63,
+              "raw": "'wrap'"
+            },
+            "gap": {
+              "line": 241,
+              "col": 70,
+              "endCol": 71,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:256": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 256
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 256,
+              "col": 96,
+              "endCol": 97,
+              "raw": "1"
+            },
+            "marginBottom": {
+              "line": 256,
+              "col": 113,
+              "endCol": 114,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:259": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 259
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "fontFamily": {
+              "line": 264,
+              "col": 53,
+              "endCol": 71,
+              "raw": "'Inter_400Regular'"
+            },
+            "paddingVertical": {
+              "line": 264,
+              "col": 112,
+              "endCol": 113,
+              "raw": "4"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:270": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 270
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 270,
+              "col": 96,
+              "endCol": 97,
+              "raw": "1"
+            },
+            "marginBottom": {
+              "line": 270,
+              "col": 113,
+              "endCol": 114,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "EditTransactionScreen@app/transactions/edit.tsx:273": {
+      "element": {
+        "file": "app/transactions/edit.tsx",
+        "line": 273
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/transactions/edit.tsx",
+          "properties": {
+            "fontFamily": {
+              "line": 282,
+              "col": 26,
+              "endCol": 44,
+              "raw": "'Inter_400Regular'"
+            },
+            "minHeight": {
+              "line": 284,
+              "col": 25,
+              "endCol": 27,
+              "raw": "60"
+            },
+            "textAlignVertical": {
+              "line": 285,
+              "col": 33,
+              "endCol": 38,
+              "raw": "'top'"
             }
           }
         }

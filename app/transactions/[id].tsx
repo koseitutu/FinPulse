@@ -33,6 +33,10 @@ export default function TransactionDetailScreen() {
   const acc = accounts.find((a) => a.id === tx.accountId);
   const color = tx.type === 'income' ? Colors.income : cat?.color ?? Colors.expense;
 
+  const handleEdit = () => {
+    router.push({ pathname: '/transactions/edit', params: { editId: tx.id } });
+  };
+
   const handleDelete = () => {
     const doDelete = () => {
       deleteTransaction(tx.id);
@@ -62,7 +66,10 @@ export default function TransactionDetailScreen() {
         <AppText weight="semiBold" size={16}>
           Transaction
         </AppText>
-        <IconButton icon="trash" color={Colors.expense} onPress={handleDelete} />
+        <View style={{ flexDirection: 'row', gap: 4 }}>
+          <IconButton icon="pencil" color={Colors.gold} onPress={handleEdit} />
+          <IconButton icon="trash" color={Colors.expense} onPress={handleDelete} />
+        </View>
       </View>
 
       <ScrollView contentContainerStyle={{ padding: Spacing.lg, gap: Spacing.lg, paddingBottom: 120 }}>

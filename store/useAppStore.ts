@@ -189,9 +189,27 @@ export const useAppStore = create<AppState>()(
         return added;
       },
       updateTransaction: (id, patch) => {
-        set((s) => ({
-          transactions: s.transactions.map((t) => (t.id === id ? { ...t, ...patch } : t)),
-        }));
+        const old = get().transactions.find((t) => t.id === id);
+        if (!old) return;
+        const updated = { ...old, ...patch };
+        set((s) => {
+          const accounts = s.accounts.map((a) => {
+            let { balance } = a;
+            // Reverse the old transaction's effect
+            if (a.id === old.accountId) {
+              balance -= old.type === 'income' ? old.amount : -old.amount;
+            }
+            // Apply the updated transaction's effect
+            if (a.id === updated.accountId) {
+              balance += updated.type === 'income' ? updated.amount : -updated.amount;
+            }
+            return { ...a, balance };
+          });
+          return {
+            transactions: s.transactions.map((t) => (t.id === id ? updated : t)),
+            accounts,
+          };
+        });
       },
       deleteTransaction: (id) => {
         const t = get().transactions.find((x) => x.id === id);
