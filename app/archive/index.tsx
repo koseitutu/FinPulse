@@ -3,10 +3,11 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency, useScaledFont, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Empty, IconButton } from '@/components/ui';
 import { useArchivedTransactions, useAppStore } from '@/store/useAppStore';
 import { formatDate } from '@/utils/finance';
+import { TransactionItem } from '@/components/transaction-item';
 
 export default function ArchiveScreen() {
   const insets = useSafeAreaInsets();
@@ -118,49 +119,33 @@ export default function ArchiveScreen() {
             subtitle={`Set retention threshold in Settings to archive transactions older than ${archiveConfig.autoArchiveMonths} months.`}
           />
         ) : (
-          <View style={{ gap: 8 }}>
-            {filtered.map((t) => {
+          <View
+            style={{
+              backgroundColor: Colors.surface,
+              borderRadius: Radius.lg,
+              borderWidth: 1,
+              borderColor: Colors.borderSubtle,
+              overflow: 'hidden',
+            }}
+          >
+            {filtered.map((t, idx) => {
               const cat = categories.find((c) => c.id === t.categoryId);
-              const color = t.type === 'income' ? Colors.income : cat?.color ?? Colors.expense;
               return (
-                <View
-                  key={t.id}
-                  style={{
-                    backgroundColor: Colors.surface,
-                    borderRadius: Radius.md,
-                    padding: Spacing.md,
-                    borderWidth: 1,
-                    borderColor: Colors.borderSubtle,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    gap: 10,
-                  }}
-                >
-                  <View
-                    style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 18,
-                      backgroundColor: color + '22',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <Ionicons name={(cat?.icon as never) ?? 'pricetag'} size={16} color={color} />
-                  </View>
+                <View key={t.id} style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={{ flex: 1 }}>
-                    <AppText size={13} weight="semiBold">
-                      {t.merchant || cat?.name}
-                    </AppText>
-                    <AppText size={11} color={Colors.textMuted}>
-                      {formatDate(t.date)}
-                    </AppText>
+                    <TransactionItem
+                      transaction={t}
+                      category={cat}
+                      showSeparator={idx > 0}
+                      noLink
+                      dateLabel={formatDate(t.date)}
+                    />
                   </View>
-                  <AppText size={13} weight="semiBold" color={t.type === 'income' ? Colors.income : Colors.text}>
-                    {t.type === 'income' ? '+' : '-'}
-                    {formatCurrency(t.amount, t.currency)}
-                  </AppText>
-                  <Pressable onPress={() => restoreTransaction(t.id)} hitSlop={8} style={{ padding: 4 }}>
+                  <Pressable
+                    onPress={() => restoreTransaction(t.id)}
+                    hitSlop={8}
+                    style={{ paddingRight: Spacing.md, paddingLeft: 4 }}
+                  >
                     <Ionicons name="arrow-undo" size={16} color={Colors.gold} />
                   </Pressable>
                 </View>

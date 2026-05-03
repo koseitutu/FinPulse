@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { Alert, FlatList, Pressable, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Link, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Animated, {
   FadeIn,
@@ -10,8 +10,9 @@ import Animated, {
   SlideInDown,
   SlideOutDown,
 } from 'react-native-reanimated';
-import { Colors, Radius, Spacing, formatCompact, formatCurrency, useScaledFont, useTheme } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Chip, Empty, IconButton } from '@/components/ui';
+import { TransactionItem } from '@/components/transaction-item';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { formatRelative } from '@/utils/finance';
 
@@ -319,129 +320,44 @@ export default function TransactionsScreen() {
                   const cat = categories.find((c) => c.id === t.categoryId);
                   const sub = t.subcategoryId ? categories.find((c) => c.id === t.subcategoryId) : null;
                   const acc = accounts.find((a) => a.id === t.accountId);
-                  const color = t.type === 'income' ? Colors.income : cat?.color ?? Colors.expense;
-                  const isSelected = selectedIds.has(t.id);
-
-                  const rowContent = (
-                    <Pressable
-                      onLongPress={selectMode ? undefined : enterSelectMode}
-                      onPress={
-                        selectMode
-                          ? () => toggleSelect(t.id)
-                          : undefined
-                      }
-                      style={({ pressed }) => ({
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        gap: 12,
-                        padding: Spacing.md,
-                        borderTopWidth: idx === 0 ? 0 : 1,
-                        borderTopColor: Colors.borderSubtle,
-                        opacity: pressed ? 0.7 : 1,
-                        backgroundColor: isSelected ? Colors.gold + '15' : 'transparent',
-                      })}
-                    >
-                      {/* Checkbox in select mode */}
-                      {selectMode && (
-                        <Animated.View entering={FadeIn.duration(150)} exiting={FadeOut.duration(100)}>
-                          <View
-                            style={{
-                              width: 22,
-                              height: 22,
-                              borderRadius: 11,
-                              borderWidth: 2,
-                              borderColor: isSelected ? Colors.gold : Colors.border,
-                              backgroundColor: isSelected ? Colors.gold : 'transparent',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            {isSelected && (
-                              <Ionicons name="checkmark" size={13} color={Colors.bg} />
-                            )}
-                          </View>
-                        </Animated.View>
-                      )}
-
-                      {/* Category icon */}
-                      <View
-                        style={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: 20,
-                          backgroundColor: color + '22',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        <Ionicons name={(cat?.icon as never) ?? 'pricetag'} size={18} color={color} />
-                      </View>
-
-                      {/* Details */}
-                      <View style={{ flex: 1 }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                          <AppText weight="semiBold" size={14}>
-                            {t.merchant || cat?.name || 'Transaction'}
-                          </AppText>
-                          {t.isRecurring ? (
-                            <Ionicons name="repeat" size={11} color={Colors.gold} />
-                          ) : null}
-                        </View>
-                        <AppText size={11} color={Colors.textMuted}>
-                          {cat?.name}
-                          {sub ? ` · ${sub.name}` : ''}
-                          {acc ? ` · ${acc.name}` : ''}
-                        </AppText>
-                        {t.tagIds.length > 0 ? (
-                          <View style={{ flexDirection: 'row', gap: 4, marginTop: 4 }}>
-                            {t.tagIds.slice(0, 3).map((tid) => {
-                              const tag = tags.find((x) => x.id === tid);
-                              if (!tag) return null;
-                              return (
-                                <View
-                                  key={tid}
-                                  style={{
-                                    paddingHorizontal: 6,
-                                    paddingVertical: 1,
-                                    borderRadius: 4,
-                                    backgroundColor: tag.color + '22',
-                                  }}
-                                >
-                                  <AppText size={9} weight="medium" color={tag.color}>
-                                    #{tag.name}
-                                  </AppText>
-                                </View>
-                              );
-                            })}
-                          </View>
-                        ) : null}
-                      </View>
-
-                      {/* Amount */}
-                      <AppText
-                        weight="semiBold"
-                        size={14}
-                        color={t.type === 'income' ? Colors.income : Colors.text}
-                        style={{ fontVariant: ['tabular-nums'] }}
-                      >
-                        {t.type === 'income' ? '+' : '-'}
-                        {formatCurrency(t.amount, t.currency)}
-                      </AppText>
-                    </Pressable>
-                  );
-
-                  if (selectMode) {
-                    return <View key={t.id}>{rowContent}</View>;
-                  }
+                  const tagItems = t.tagIds.map((tid) => tags.find((x) => x.id === tid)).filter(Boolean) as typeof tags;
 
                   return (
-                    <Link
+                    <TransactionItem
                       key={t.id}
-                      href={{ pathname: '/transactions/[id]', params: { id: t.id } }}
-                      asChild
-                    >
-                      {rowContent}
-                    </Link>
+                      transaction={t}
+                      category={cat}
+                      subcategory={sub ?? undefined}
+                      account={acc}
+                      tags={tagItems}
+                      showSeparator={idx > 0}
+                      selectMode={selectMode}
+                      isSelected={selectedIds.has(t.id)}
+                      onLongPress={enterSelectMode}
+                      onPress={selectMode ? () => toggleSelect(t.id) : undefined}
+                      noLink={selectMode}
+                      renderBelow={
+                        tagItems.length > 0 ? (
+                          <View style={{ flexDirection: 'row', gap: 4, marginTop: 4 }}>
+                            {tagItems.slice(0, 3).map((tag) => (
+                              <View
+                                key={tag.id}
+                                style={{
+                                  paddingHorizontal: 6,
+                                  paddingVertical: 1,
+                                  borderRadius: 4,
+                                  backgroundColor: tag.color + '22',
+                                }}
+                              >
+                                <AppText size={9} weight="medium" color={tag.color}>
+                                  #{tag.name}
+                                </AppText>
+                              </View>
+                            ))}
+                          </View>
+                        ) : undefined
+                      }
+                    />
                   );
                 })}
               </View>

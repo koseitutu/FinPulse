@@ -6,8 +6,9 @@ import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/consta
 import { AppText, Card, IconCircle, ProgressBar, SectionHeader } from './ui';
 import { Sparkline } from './charts';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
-import { filterMonth, formatRelative, sumByType } from '@/utils/finance';
+import { filterMonth, sumByType } from '@/utils/finance';
 import type { WidgetKey } from '@/store/types';
+import { TransactionItem } from './transaction-item';
 
 export function BalanceWidget() {
   const accounts = useAppStore((s) => s.accounts);
@@ -237,40 +238,18 @@ export function RecentWidget() {
           </Link>
         }
       />
-      <View style={{ gap: 12 }}>
-        {txs.map((t) => {
+      <View style={{ marginHorizontal: -Spacing.lg }}>
+        {txs.map((t, idx) => {
           const cat = categories.find((c) => c.id === t.categoryId);
           const acc = accounts.find((a) => a.id === t.accountId);
-          const color = t.type === 'income' ? Colors.income : cat?.color ?? Colors.expense;
           return (
-            <Link key={t.id} href={{ pathname: '/transactions/[id]', params: { id: t.id } }} asChild>
-              <Pressable style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-                <View
-                  style={{
-                    width: 38,
-                    height: 38,
-                    borderRadius: 19,
-                    backgroundColor: color + '22',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <Ionicons name={(cat?.icon as never) ?? 'pricetag'} size={18} color={color} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <AppText weight="semiBold" size={13}>
-                    {t.merchant || cat?.name || 'Transaction'}
-                  </AppText>
-                  <AppText size={11} color={Colors.textMuted}>
-                    {formatRelative(t.date)} · {acc?.name}
-                  </AppText>
-                </View>
-                <AppText weight="semiBold" size={13} color={t.type === 'income' ? Colors.income : Colors.text}>
-                  {t.type === 'income' ? '+' : '-'}
-                  {formatCompact(t.amount, t.currency)}
-                </AppText>
-              </Pressable>
-            </Link>
+            <TransactionItem
+              key={t.id}
+              transaction={t}
+              category={cat}
+              account={acc}
+              showSeparator={idx > 0}
+            />
           );
         })}
       </View>

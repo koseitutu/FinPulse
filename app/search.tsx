@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Link, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, IconButton } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
-import { formatRelative } from '@/utils/finance';
+import { TransactionItem } from '@/components/transaction-item';
 
 export default function SearchScreen() {
   const insets = useSafeAreaInsets();
@@ -101,44 +101,30 @@ export default function SearchScreen() {
           <>
             {results.txMatches.length > 0 ? (
               <Group title="Transactions" count={results.txMatches.length}>
-                {results.txMatches.map((t) => {
-                  const cat = categories.find((c) => c.id === t.categoryId);
-                  const color = t.type === 'income' ? Colors.income : cat?.color ?? Colors.expense;
-                  return (
-                    <Link
-                      key={t.id}
-                      href={{ pathname: '/transactions/[id]', params: { id: t.id } }}
-                      asChild
-                    >
-                      <Pressable style={{ flexDirection: 'row', alignItems: 'center', gap: 10, paddingVertical: 10 }}>
-                        <View
-                          style={{
-                            width: 32,
-                            height: 32,
-                            borderRadius: 16,
-                            backgroundColor: color + '22',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <Ionicons name={(cat?.icon as never) ?? 'pricetag'} size={14} color={color} />
-                        </View>
-                        <View style={{ flex: 1 }}>
-                          <AppText size={13} weight="semiBold">
-                            {t.merchant || cat?.name}
-                          </AppText>
-                          <AppText size={11} color={Colors.textMuted}>
-                            {formatRelative(t.date)}
-                          </AppText>
-                        </View>
-                        <AppText size={13} weight="semiBold" color={t.type === 'income' ? Colors.income : Colors.text}>
-                          {t.type === 'income' ? '+' : '-'}
-                          {formatCompact(t.amount, t.currency)}
-                        </AppText>
-                      </Pressable>
-                    </Link>
-                  );
-                })}
+                <View
+                  style={{
+                    backgroundColor: Colors.surface,
+                    borderRadius: Radius.lg,
+                    borderWidth: 1,
+                    borderColor: Colors.borderSubtle,
+                    overflow: 'hidden',
+                    marginHorizontal: -4,
+                  }}
+                >
+                  {results.txMatches.map((t, idx) => {
+                    const cat = categories.find((c) => c.id === t.categoryId);
+                    const acc = accounts.find((a) => a.id === t.accountId);
+                    return (
+                      <TransactionItem
+                        key={t.id}
+                        transaction={t}
+                        category={cat}
+                        account={acc}
+                        showSeparator={idx > 0}
+                      />
+                    );
+                  })}
+                </View>
               </Group>
             ) : null}
 
