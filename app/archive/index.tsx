@@ -119,24 +119,22 @@ export default function ArchiveScreen() {
             subtitle={`Set retention threshold in Settings to archive transactions older than ${archiveConfig.autoArchiveMonths} months.`}
           />
         ) : (
-          <View
-            style={{
-              backgroundColor: Colors.surface,
-              borderRadius: Radius.lg,
-              borderWidth: 1,
-              borderColor: Colors.borderSubtle,
-              overflow: 'hidden',
-            }}
-          >
-            {filtered.map((t, idx) => {
+          <View style={{ gap: 8 }}>
+            {filtered.map((t) => {
               const cat = categories.find((c) => c.id === t.categoryId);
               return (
-                <View key={t.id} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View
+                  key={t.id}
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                >
                   <View style={{ flex: 1 }}>
                     <TransactionItem
                       transaction={t}
                       category={cat}
-                      showSeparator={idx > 0}
                       noLink
                       dateLabel={formatDate(t.date)}
                     />
@@ -144,7 +142,14 @@ export default function ArchiveScreen() {
                   <Pressable
                     onPress={() => restoreTransaction(t.id)}
                     hitSlop={8}
-                    style={{ paddingRight: Spacing.md, paddingLeft: 4 }}
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: 18,
+                      backgroundColor: Colors.gold + '18',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
                   >
                     <Ionicons name="arrow-undo" size={16} color={Colors.gold} />
                   </Pressable>

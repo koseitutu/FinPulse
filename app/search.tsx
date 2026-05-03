@@ -101,17 +101,8 @@ export default function SearchScreen() {
           <>
             {results.txMatches.length > 0 ? (
               <Group title="Transactions" count={results.txMatches.length}>
-                <View
-                  style={{
-                    backgroundColor: Colors.surface,
-                    borderRadius: Radius.lg,
-                    borderWidth: 1,
-                    borderColor: Colors.borderSubtle,
-                    overflow: 'hidden',
-                    marginHorizontal: -4,
-                  }}
-                >
-                  {results.txMatches.map((t, idx) => {
+                <View style={{ gap: 8 }}>
+                  {results.txMatches.map((t) => {
                     const cat = categories.find((c) => c.id === t.categoryId);
                     const acc = accounts.find((a) => a.id === t.accountId);
                     return (
@@ -120,7 +111,6 @@ export default function SearchScreen() {
                         transaction={t}
                         category={cat}
                         account={acc}
-                        showSeparator={idx > 0}
                       />
                     );
                   })}

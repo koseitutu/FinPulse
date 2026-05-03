@@ -306,17 +306,9 @@ export default function TransactionsScreen() {
                 </AppText>
               </View>
 
-              {/* Transaction rows */}
-              <View
-                style={{
-                  backgroundColor: Colors.surface,
-                  borderRadius: Radius.lg,
-                  borderWidth: 1,
-                  borderColor: Colors.borderSubtle,
-                  overflow: 'hidden',
-                }}
-              >
-                {item.items.map((t, idx) => {
+              {/* Transaction cards */}
+              <View style={{ gap: 8 }}>
+                {item.items.map((t) => {
                   const cat = categories.find((c) => c.id === t.categoryId);
                   const sub = t.subcategoryId ? categories.find((c) => c.id === t.subcategoryId) : null;
                   const acc = accounts.find((a) => a.id === t.accountId);
@@ -330,7 +322,6 @@ export default function TransactionsScreen() {
                       subcategory={sub ?? undefined}
                       account={acc}
                       tags={tagItems}
-                      showSeparator={idx > 0}
                       selectMode={selectMode}
                       isSelected={selectedIds.has(t.id)}
                       onLongPress={enterSelectMode}

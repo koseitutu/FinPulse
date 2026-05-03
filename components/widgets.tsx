@@ -238,8 +238,8 @@ export function RecentWidget() {
           </Link>
         }
       />
-      <View style={{ marginHorizontal: -Spacing.lg }}>
-        {txs.map((t, idx) => {
+      <View style={{ gap: 8 }}>
+        {txs.map((t) => {
           const cat = categories.find((c) => c.id === t.categoryId);
           const acc = accounts.find((a) => a.id === t.accountId);
           return (
@@ -248,7 +248,6 @@ export function RecentWidget() {
               transaction={t}
               category={cat}
               account={acc}
-              showSeparator={idx > 0}
             />
           );
         })}

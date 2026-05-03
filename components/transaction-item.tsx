@@ -2,7 +2,7 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
-import { Colors, Spacing, formatCurrency } from '@/constants/theme';
+import { Colors, Radius, Spacing, formatCurrency } from '@/constants/theme';
 import { AppText } from '@/components/ui';
 import { formatRelative } from '@/utils/finance';
 import type { Transaction, Category, Account, Tag } from '@/store/types';
@@ -13,9 +13,8 @@ export interface TransactionItemProps {
   subcategory?: Category;
   account?: Account;
   tags?: Tag[];
-  /** Show a separator line above the row (skip for first item) */
+  /** @deprecated Cards are self-contained — no longer draws a separator line. Kept for API compat. */
   showSeparator?: boolean;
-  /** Whether multi-select mode is active */
   selectMode?: boolean;
   isSelected?: boolean;
   onLongPress?: () => void;
@@ -34,7 +33,7 @@ export function TransactionItem({
   subcategory: sub,
   account: acc,
   tags = [],
-  showSeparator = false,
+  showSeparator: _deprecated,
   selectMode = false,
   isSelected = false,
   onLongPress,
@@ -46,7 +45,6 @@ export function TransactionItem({
   const color = t.type === 'income' ? Colors.income : cat?.color ?? Colors.expense;
   const amountColor = t.type === 'income' ? Colors.income : Colors.expense;
 
-  // Category • Account label
   const metaLine = [cat?.name, sub?.name, acc?.name].filter(Boolean).join(' · ');
   const rightDate = dateLabel ?? formatRelative(t.date);
 
@@ -55,15 +53,21 @@ export function TransactionItem({
       onLongPress={selectMode ? undefined : onLongPress}
       onPress={onPress}
       style={({ pressed }) => ({
+        // Card appearance
+        backgroundColor: isSelected ? Colors.gold + '18' : Colors.surface,
+        borderRadius: Radius.lg,
+        borderCurve: 'continuous',
+        borderWidth: 1,
+        borderColor: isSelected ? Colors.gold + '55' : Colors.border,
+        boxShadow: '0 1px 3px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)',
+        overflow: 'hidden',
+        // Row layout
         flexDirection: 'row',
         alignItems: 'center',
         gap: 12,
         paddingHorizontal: Spacing.md,
-        paddingVertical: 11,
-        borderTopWidth: showSeparator ? 1 : 0,
-        borderTopColor: Colors.borderSubtle,
-        opacity: pressed ? 0.7 : 1,
-        backgroundColor: isSelected ? Colors.gold + '15' : 'transparent',
+        paddingVertical: 13,
+        opacity: pressed ? 0.72 : 1,
       })}
     >
       {/* Checkbox in select mode */}
