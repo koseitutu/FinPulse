@@ -89,7 +89,7 @@ export interface DashboardConfig {
 }
 
 export interface ArchiveConfig {
-  autoArchiveMonths: 6 | 12 | 24;
+  autoArchiveMonths: 3 | 6 | 12 | 24;
   lastArchiveDate?: string;
 }
 

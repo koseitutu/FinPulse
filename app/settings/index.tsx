@@ -9,7 +9,7 @@ import { useAppStore } from '@/store/useAppStore';
 import type { FontScale } from '@/store/types';
 
 const CURRENCIES = ['GHS', 'USD', 'EUR', 'GBP', 'NGN'];
-const RETENTIONS: (6 | 12 | 24)[] = [6, 12, 24];
+const RETENTIONS: (3 | 6 | 12 | 24)[] = [3, 6, 12, 24];
 
 const FONT_SIZES: { key: FontScale; label: string; preview: number }[] = [
   { key: 'small', label: 'Small', preview: 12 },
@@ -332,7 +332,7 @@ export default function SettingsScreen() {
                 }}
               >
                 <AppText weight="semiBold" size={14}>
-                  {m === 6 ? '6 months' : m === 12 ? '1 year' : '2 years'}
+                  {m === 3 ? '3 months' : m === 6 ? '6 months' : m === 12 ? '1 year' : '2 years'}
                 </AppText>
               </Pressable>
             ))}

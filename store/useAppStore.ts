@@ -92,7 +92,7 @@ interface AppState {
 
   archiveOld: (months: number) => number;
   restoreTransaction: (id: string) => void;
-  setAutoArchive: (months: 6 | 12 | 24) => void;
+  setAutoArchive: (months: 3 | 6 | 12 | 24) => void;
 
   /**
    * Replace the entire store with a previously exported backup. Used by the

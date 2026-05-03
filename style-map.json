@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": 1777770335499,
+  "generatedAt": 1777770521751,
   "entries": {
     "TransactionDivider@components/transaction-item.tsx:13": {
       "element": {
@@ -755,6 +755,1266 @@
               "col": 31,
               "endCol": 41,
               "raw": "'absolute'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:47": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 47
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 47,
+              "col": 25,
+              "endCol": 26,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:48": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 48
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 50,
+              "col": 25,
+              "endCol": 30,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 51,
+              "col": 22,
+              "endCol": 30,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 52,
+              "col": 26,
+              "endCol": 41,
+              "raw": "'space-between'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:60": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 60
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "width": {
+              "line": 60,
+              "col": 30,
+              "endCol": 32,
+              "raw": "40"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:66": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 66
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 66,
+              "col": 96,
+              "endCol": 97,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:69": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 69
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "fontFamily": {
+              "line": 77,
+              "col": 26,
+              "endCol": 45,
+              "raw": "'Inter_600SemiBold'"
+            },
+            "paddingVertical": {
+              "line": 79,
+              "col": 31,
+              "endCol": 32,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:86": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 86
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 88,
+              "col": 29,
+              "endCol": 34,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 89,
+              "col": 26,
+              "endCol": 34,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 90,
+              "col": 30,
+              "endCol": 45,
+              "raw": "'space-between'"
+            },
+            "paddingVertical": {
+              "line": 91,
+              "col": 31,
+              "endCol": 32,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:94": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 94
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 94,
+              "col": 42,
+              "endCol": 47,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 94,
+              "col": 61,
+              "endCol": 69,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 94,
+              "col": 76,
+              "endCol": 78,
+              "raw": "12"
+            },
+            "flex": {
+              "line": 94,
+              "col": 86,
+              "endCol": 87,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:95": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 95
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "width": {
+              "line": 97,
+              "col": 25,
+              "endCol": 27,
+              "raw": "40"
+            },
+            "height": {
+              "line": 98,
+              "col": 26,
+              "endCol": 28,
+              "raw": "40"
+            },
+            "borderRadius": {
+              "line": 99,
+              "col": 32,
+              "endCol": 34,
+              "raw": "20"
+            },
+            "alignItems": {
+              "line": 101,
+              "col": 30,
+              "endCol": 38,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 102,
+              "col": 34,
+              "endCol": 42,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:111": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 111
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 111,
+              "col": 35,
+              "endCol": 36,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:136": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 136
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 136,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 136,
+              "col": 52,
+              "endCol": 53,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:140": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 140
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 147,
+              "col": 26,
+              "endCol": 27,
+              "raw": "1"
+            },
+            "minHeight": {
+              "line": 148,
+              "col": 31,
+              "endCol": 33,
+              "raw": "64"
+            },
+            "borderWidth": {
+              "line": 153,
+              "col": 33,
+              "endCol": 34,
+              "raw": "1"
+            },
+            "alignItems": {
+              "line": 155,
+              "col": 32,
+              "endCol": 40,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 156,
+              "col": 36,
+              "endCol": 44,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 157,
+              "col": 25,
+              "endCol": 26,
+              "raw": "4"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:178": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 178
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "borderWidth": {
+              "line": 184,
+              "col": 27,
+              "endCol": 28,
+              "raw": "1"
+            },
+            "gap": {
+              "line": 186,
+              "col": 19,
+              "endCol": 20,
+              "raw": "4"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:189": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 189
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 193,
+              "col": 38,
+              "endCol": 39,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:209": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 209
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 209,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "flexWrap": {
+              "line": 209,
+              "col": 57,
+              "endCol": 63,
+              "raw": "'wrap'"
+            },
+            "gap": {
+              "line": 209,
+              "col": 70,
+              "endCol": 71,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:211": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 211
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "paddingHorizontal": {
+              "line": 215,
+              "col": 37,
+              "endCol": 39,
+              "raw": "14"
+            },
+            "paddingVertical": {
+              "line": 216,
+              "col": 35,
+              "endCol": 36,
+              "raw": "8"
+            },
+            "borderWidth": {
+              "line": 219,
+              "col": 31,
+              "endCol": 32,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:229": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 229
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "marginTop": {
+              "line": 229,
+              "col": 74,
+              "endCol": 76,
+              "raw": "10"
+            },
+            "lineHeight": {
+              "line": 229,
+              "col": 90,
+              "endCol": 92,
+              "raw": "16"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:237": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 237
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "letterSpacing": {
+              "line": 237,
+              "col": 96,
+              "endCol": 97,
+              "raw": "1"
+            },
+            "marginBottom": {
+              "line": 237,
+              "col": 113,
+              "endCol": 114,
+              "raw": "6"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:240": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 240
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "fontFamily": {
+              "line": 253,
+              "col": 26,
+              "endCol": 45,
+              "raw": "'Inter_600SemiBold'"
+            },
+            "paddingVertical": {
+              "line": 255,
+              "col": 31,
+              "endCol": 32,
+              "raw": "8"
+            },
+            "letterSpacing": {
+              "line": 256,
+              "col": 29,
+              "endCol": 30,
+              "raw": "4"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:259": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 259
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 261,
+              "col": 29,
+              "endCol": 34,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 262,
+              "col": 26,
+              "endCol": 34,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 263,
+              "col": 30,
+              "endCol": 45,
+              "raw": "'space-between'"
+            },
+            "paddingVertical": {
+              "line": 264,
+              "col": 31,
+              "endCol": 33,
+              "raw": "10"
+            },
+            "borderTopWidth": {
+              "line": 265,
+              "col": 30,
+              "endCol": 31,
+              "raw": "1"
+            },
+            "marginTop": {
+              "line": 267,
+              "col": 25,
+              "endCol": 26,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:270": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 270
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 270,
+              "col": 33,
+              "endCol": 34,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:319": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 319
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 319,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 319,
+              "col": 52,
+              "endCol": 53,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:321": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 321
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 325,
+              "col": 24,
+              "endCol": 25,
+              "raw": "1"
+            },
+            "paddingVertical": {
+              "line": 326,
+              "col": 35,
+              "endCol": 37,
+              "raw": "12"
+            },
+            "borderWidth": {
+              "line": 329,
+              "col": 31,
+              "endCol": 32,
+              "raw": "1"
+            },
+            "alignItems": {
+              "line": 331,
+              "col": 30,
+              "endCol": 38,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:340": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 340
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 340,
+              "col": 40,
+              "endCol": 45,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 340,
+              "col": 52,
+              "endCol": 54,
+              "raw": "10"
+            },
+            "marginTop": {
+              "line": 340,
+              "col": 67,
+              "endCol": 68,
+              "raw": "4"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:341": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 341
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 344,
+              "col": 22,
+              "endCol": 23,
+              "raw": "1"
+            },
+            "paddingVertical": {
+              "line": 346,
+              "col": 33,
+              "endCol": 35,
+              "raw": "12"
+            },
+            "alignItems": {
+              "line": 348,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            },
+            "flexDirection": {
+              "line": 349,
+              "col": 31,
+              "endCol": 36,
+              "raw": "'row'"
+            },
+            "justifyContent": {
+              "line": 350,
+              "col": 32,
+              "endCol": 40,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 351,
+              "col": 21,
+              "endCol": 22,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:360": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 360
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 362,
+              "col": 24,
+              "endCol": 25,
+              "raw": "1"
+            },
+            "paddingVertical": {
+              "line": 364,
+              "col": 35,
+              "endCol": 37,
+              "raw": "12"
+            },
+            "alignItems": {
+              "line": 366,
+              "col": 30,
+              "endCol": 38,
+              "raw": "'center'"
+            },
+            "borderWidth": {
+              "line": 367,
+              "col": 31,
+              "endCol": 32,
+              "raw": "1"
+            },
+            "flexDirection": {
+              "line": 369,
+              "col": 33,
+              "endCol": 38,
+              "raw": "'row'"
+            },
+            "justifyContent": {
+              "line": 370,
+              "col": 34,
+              "endCol": 42,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 371,
+              "col": 23,
+              "endCol": 24,
+              "raw": "8"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:380": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 380
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "padding": {
+              "line": 383,
+              "col": 25,
+              "endCol": 27,
+              "raw": "10"
+            },
+            "borderRadius": {
+              "line": 384,
+              "col": 30,
+              "endCol": 31,
+              "raw": "8"
+            },
+            "marginTop": {
+              "line": 385,
+              "col": 27,
+              "endCol": 29,
+              "raw": "10"
+            },
+            "flexDirection": {
+              "line": 386,
+              "col": 31,
+              "endCol": 36,
+              "raw": "'row'"
+            },
+            "gap": {
+              "line": 387,
+              "col": 21,
+              "endCol": 22,
+              "raw": "8"
+            },
+            "alignItems": {
+              "line": 388,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:401": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 401
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "gap": {
+              "line": 401,
+              "col": 30,
+              "endCol": 31,
+              "raw": "2"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:403": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 403
+      },
+      "styles": [
+        {
+          "origin": "dynamic",
+          "resolvable": false
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:412": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 412
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "width": {
+              "line": 414,
+              "col": 27,
+              "endCol": 29,
+              "raw": "34"
+            },
+            "height": {
+              "line": 415,
+              "col": 28,
+              "endCol": 30,
+              "raw": "34"
+            },
+            "borderRadius": {
+              "line": 416,
+              "col": 34,
+              "endCol": 36,
+              "raw": "10"
+            },
+            "alignItems": {
+              "line": 418,
+              "col": 32,
+              "endCol": 40,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 419,
+              "col": 36,
+              "endCol": 44,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:424": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 424
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 424,
+              "col": 37,
+              "endCol": 38,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:435": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 435
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "height": {
+              "line": 435,
+              "col": 35,
+              "endCol": 36,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:437": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 437
+      },
+      "styles": [
+        {
+          "origin": "dynamic",
+          "resolvable": false
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:446": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 446
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "width": {
+              "line": 448,
+              "col": 27,
+              "endCol": 29,
+              "raw": "34"
+            },
+            "height": {
+              "line": 449,
+              "col": 28,
+              "endCol": 30,
+              "raw": "34"
+            },
+            "borderRadius": {
+              "line": 450,
+              "col": 34,
+              "endCol": 36,
+              "raw": "10"
+            },
+            "alignItems": {
+              "line": 452,
+              "col": 32,
+              "endCol": 40,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 453,
+              "col": 36,
+              "endCol": 44,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:458": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 458
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 458,
+              "col": 37,
+              "endCol": 38,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:469": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 469
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "height": {
+              "line": 469,
+              "col": 35,
+              "endCol": 36,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:471": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 471
+      },
+      "styles": [
+        {
+          "origin": "dynamic",
+          "resolvable": false
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:480": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 480
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "width": {
+              "line": 482,
+              "col": 27,
+              "endCol": 29,
+              "raw": "34"
+            },
+            "height": {
+              "line": 483,
+              "col": 28,
+              "endCol": 30,
+              "raw": "34"
+            },
+            "borderRadius": {
+              "line": 484,
+              "col": 34,
+              "endCol": 36,
+              "raw": "10"
+            },
+            "backgroundColor": {
+              "line": 485,
+              "col": 37,
+              "endCol": 48,
+              "raw": "'#2EC4B622'"
+            },
+            "alignItems": {
+              "line": 486,
+              "col": 32,
+              "endCol": 40,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 487,
+              "col": 36,
+              "endCol": 44,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:492": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 492
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 492,
+              "col": 37,
+              "endCol": 38,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:509": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 509
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 511,
+              "col": 31,
+              "endCol": 36,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 512,
+              "col": 28,
+              "endCol": 36,
+              "raw": "'center'"
+            },
+            "gap": {
+              "line": 513,
+              "col": 21,
+              "endCol": 23,
+              "raw": "10"
+            },
+            "paddingVertical": {
+              "line": 514,
+              "col": 33,
+              "endCol": 35,
+              "raw": "12"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:518": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 518
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flex": {
+              "line": 518,
+              "col": 64,
+              "endCol": 65,
+              "raw": "1"
+            }
+          }
+        }
+      ]
+    },
+    "SettingsScreen@app/settings/index.tsx:526": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 526
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "textAlign": {
+              "line": 526,
+              "col": 70,
+              "endCol": 78,
+              "raw": "'center'"
+            }
+          }
+        }
+      ]
+    },
+    "AlertRow@app/settings/index.tsx:546": {
+      "element": {
+        "file": "app/settings/index.tsx",
+        "line": 546
+      },
+      "styles": [
+        {
+          "origin": "inline",
+          "file": "app/settings/index.tsx",
+          "properties": {
+            "flexDirection": {
+              "line": 548,
+              "col": 23,
+              "endCol": 28,
+              "raw": "'row'"
+            },
+            "alignItems": {
+              "line": 549,
+              "col": 20,
+              "endCol": 28,
+              "raw": "'center'"
+            },
+            "justifyContent": {
+              "line": 550,
+              "col": 24,
+              "endCol": 39,
+              "raw": "'space-between'"
+            },
+            "paddingVertical": {
+              "line": 551,
+              "col": 25,
+              "endCol": 27,
+              "raw": "12"
             }
           }
         }
