@@ -79,27 +79,27 @@ export interface Palette {
 }
 
 export const darkPalette: Palette = {
-  bg: '#070E1C',
-  bgElevated: '#0A1628',
-  surface: '#111E33',
-  surfaceAlt: '#172842',
-  surfaceHigh: '#1E3354',
-  border: '#22375A',
-  borderSubtle: '#18283F',
+  bg: '#2D1B69',
+  bgElevated: '#341E74',
+  surface: '#3D2B79',
+  surfaceAlt: '#4A3585',
+  surfaceHigh: '#573F92',
+  border: '#5B469E',
+  borderSubtle: '#382270',
 
   text: '#FFFFFF',
-  textSecondary: '#A9B6CC',
-  textMuted: '#6C7E9B',
-  textDim: '#4A5A78',
+  textSecondary: '#C9BAFF',
+  textMuted: '#9B8FCC',
+  textDim: '#6B5FA0',
 
   gold: '#F4B942',
   goldSoft: '#F4B94233',
-  goldDim: '#8D6B26',
+  goldDim: '#C8921F',
 
   income: '#2ECC71',
   incomeSoft: '#2ECC7122',
-  expense: '#E74C3C',
-  expenseSoft: '#E74C3C22',
+  expense: '#FF6B6B',
+  expenseSoft: '#FF6B6B22',
   info: '#4DA6FF',
   warn: '#F4B942',
 
@@ -107,25 +107,25 @@ export const darkPalette: Palette = {
     '#F4B942',
     '#4DA6FF',
     '#2ECC71',
-    '#E74C3C',
-    '#B24DFF',
+    '#FF6B6B',
+    '#C084FC',
     '#FF8C42',
     '#2EC4B6',
     '#FFD166',
   ],
 
-  shadow: 'rgba(0,0,0,0.35)',
-  overlay: 'rgba(0,0,0,0.55)',
-  inverseText: '#0A1628',
+  shadow: 'rgba(0,0,0,0.50)',
+  overlay: 'rgba(0,0,0,0.65)',
+  inverseText: '#2D1B69',
 
-  // Dark mode keeps the neutral navy card — tones collapse to the
-  // regular surface so the existing dark design is preserved.
+  // Dark (purple) mode — tones use the purple surface palette so cards
+  // stay cohesive against the rich purple background.
   tones: {
-    purple: { bg: '#111E33', border: '#22375A', accent: '#B24DFF' },
-    blue: { bg: '#111E33', border: '#22375A', accent: '#4DA6FF' },
-    teal: { bg: '#111E33', border: '#22375A', accent: '#2EC4B6' },
-    coral: { bg: '#111E33', border: '#22375A', accent: '#FF8C7A' },
-    amber: { bg: '#111E33', border: '#22375A', accent: '#F4B942' },
+    purple: { bg: '#3D2B79', border: '#5B469E', accent: '#C084FC' },
+    blue: { bg: '#3D2B79', border: '#5B469E', accent: '#4DA6FF' },
+    teal: { bg: '#3D2B79', border: '#5B469E', accent: '#2EC4B6' },
+    coral: { bg: '#3D2B79', border: '#5B469E', accent: '#FF8C7A' },
+    amber: { bg: '#3D2B79', border: '#5B469E', accent: '#F4B942' },
   },
 };
 
