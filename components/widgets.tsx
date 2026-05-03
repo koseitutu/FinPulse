@@ -8,7 +8,7 @@ import { Sparkline } from './charts';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { filterMonth, sumByType } from '@/utils/finance';
 import type { WidgetKey } from '@/store/types';
-import { TransactionItem } from './transaction-item';
+import { TransactionDivider, TransactionItem } from './transaction-item';
 
 export function BalanceWidget() {
   const accounts = useAppStore((s) => s.accounts);
@@ -238,17 +238,28 @@ export function RecentWidget() {
           </Link>
         }
       />
-      <View style={{ gap: 8 }}>
-        {txs.map((t) => {
+      <View
+        style={{
+          borderRadius: Radius.lg,
+          borderCurve: 'continuous',
+          borderWidth: 1,
+          borderColor: Colors.border,
+          overflow: 'hidden',
+        }}
+      >
+        {txs.map((t, idx) => {
           const cat = categories.find((c) => c.id === t.categoryId);
           const acc = accounts.find((a) => a.id === t.accountId);
           return (
-            <TransactionItem
-              key={t.id}
-              transaction={t}
-              category={cat}
-              account={acc}
-            />
+            <React.Fragment key={t.id}>
+              {idx > 0 && <TransactionDivider />}
+              <TransactionItem
+                transaction={t}
+                category={cat}
+                account={acc}
+                grouped
+              />
+            </React.Fragment>
           );
         })}
       </View>

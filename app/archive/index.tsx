@@ -7,7 +7,7 @@ import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from 
 import { AppText, Button, Card, Empty, IconButton } from '@/components/ui';
 import { useArchivedTransactions, useAppStore } from '@/store/useAppStore';
 import { formatDate } from '@/utils/finance';
-import { TransactionItem } from '@/components/transaction-item';
+import { TransactionDivider, TransactionItem } from '@/components/transaction-item';
 
 export default function ArchiveScreen() {
   const insets = useSafeAreaInsets();
@@ -119,41 +119,56 @@ export default function ArchiveScreen() {
             subtitle={`Set retention threshold in Settings to archive transactions older than ${archiveConfig.autoArchiveMonths} months.`}
           />
         ) : (
-          <View style={{ gap: 8 }}>
-            {filtered.map((t) => {
+          <View
+            style={{
+              backgroundColor: Colors.surface,
+              borderRadius: Radius.lg,
+              borderCurve: 'continuous',
+              borderWidth: 1,
+              borderColor: Colors.border,
+              overflow: 'hidden',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+            }}
+          >
+            {filtered.map((t, idx) => {
               const cat = categories.find((c) => c.id === t.categoryId);
               return (
-                <View
-                  key={t.id}
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    gap: 8,
-                  }}
-                >
-                  <View style={{ flex: 1 }}>
-                    <TransactionItem
-                      transaction={t}
-                      category={cat}
-                      noLink
-                      dateLabel={formatDate(t.date)}
-                    />
-                  </View>
-                  <Pressable
-                    onPress={() => restoreTransaction(t.id)}
-                    hitSlop={8}
+                <React.Fragment key={t.id}>
+                  {idx > 0 && <TransactionDivider />}
+                  <View
                     style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 18,
-                      backgroundColor: Colors.gold + '18',
+                      flexDirection: 'row',
                       alignItems: 'center',
-                      justifyContent: 'center',
+                      gap: 8,
+                      paddingRight: Spacing.sm,
                     }}
                   >
-                    <Ionicons name="arrow-undo" size={16} color={Colors.gold} />
-                  </Pressable>
-                </View>
+                    <View style={{ flex: 1 }}>
+                      <TransactionItem
+                        transaction={t}
+                        category={cat}
+                        noLink
+                        grouped
+                        dateLabel={formatDate(t.date)}
+                      />
+                    </View>
+                    <Pressable
+                      onPress={() => restoreTransaction(t.id)}
+                      hitSlop={8}
+                      style={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: 18,
+                        backgroundColor: Colors.gold + '18',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Ionicons name="arrow-undo" size={16} color={Colors.gold} />
+                    </Pressable>
+                  </View>
+                </React.Fragment>
               );
             })}
           </View>

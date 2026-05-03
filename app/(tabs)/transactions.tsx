@@ -12,7 +12,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Chip, Empty, IconButton } from '@/components/ui';
-import { TransactionItem } from '@/components/transaction-item';
+import { TransactionDivider, TransactionItem } from '@/components/transaction-item';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
 import { formatRelative } from '@/utils/finance';
 
@@ -306,49 +306,62 @@ export default function TransactionsScreen() {
                 </AppText>
               </View>
 
-              {/* Transaction cards */}
-              <View style={{ gap: 8 }}>
-                {item.items.map((t) => {
+              {/* Transaction cards with dividers */}
+              <View
+                style={{
+                  backgroundColor: Colors.surface,
+                  borderRadius: Radius.lg,
+                  borderCurve: 'continuous',
+                  borderWidth: 1,
+                  borderColor: Colors.border,
+                  overflow: 'hidden',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
+                }}
+              >
+                {item.items.map((t, idx) => {
                   const cat = categories.find((c) => c.id === t.categoryId);
                   const sub = t.subcategoryId ? categories.find((c) => c.id === t.subcategoryId) : null;
                   const acc = accounts.find((a) => a.id === t.accountId);
                   const tagItems = t.tagIds.map((tid) => tags.find((x) => x.id === tid)).filter(Boolean) as typeof tags;
 
                   return (
-                    <TransactionItem
-                      key={t.id}
-                      transaction={t}
-                      category={cat}
-                      subcategory={sub ?? undefined}
-                      account={acc}
-                      tags={tagItems}
-                      selectMode={selectMode}
-                      isSelected={selectedIds.has(t.id)}
-                      onLongPress={enterSelectMode}
-                      onPress={selectMode ? () => toggleSelect(t.id) : undefined}
-                      noLink={selectMode}
-                      renderBelow={
-                        tagItems.length > 0 ? (
-                          <View style={{ flexDirection: 'row', gap: 4, marginTop: 4 }}>
-                            {tagItems.slice(0, 3).map((tag) => (
-                              <View
-                                key={tag.id}
-                                style={{
-                                  paddingHorizontal: 6,
-                                  paddingVertical: 1,
-                                  borderRadius: 4,
-                                  backgroundColor: tag.color + '22',
-                                }}
-                              >
-                                <AppText size={9} weight="medium" color={tag.color}>
-                                  #{tag.name}
-                                </AppText>
-                              </View>
-                            ))}
-                          </View>
-                        ) : undefined
-                      }
-                    />
+                    <React.Fragment key={t.id}>
+                      {idx > 0 && <TransactionDivider />}
+                      <TransactionItem
+                        transaction={t}
+                        category={cat}
+                        subcategory={sub ?? undefined}
+                        account={acc}
+                        tags={tagItems}
+                        selectMode={selectMode}
+                        isSelected={selectedIds.has(t.id)}
+                        onLongPress={enterSelectMode}
+                        onPress={selectMode ? () => toggleSelect(t.id) : undefined}
+                        noLink={selectMode}
+                        grouped
+                        renderBelow={
+                          tagItems.length > 0 ? (
+                            <View style={{ flexDirection: 'row', gap: 4, marginTop: 4 }}>
+                              {tagItems.slice(0, 3).map((tag) => (
+                                <View
+                                  key={tag.id}
+                                  style={{
+                                    paddingHorizontal: 6,
+                                    paddingVertical: 1,
+                                    borderRadius: 4,
+                                    backgroundColor: tag.color + '22',
+                                  }}
+                                >
+                                  <AppText size={9} weight="medium" color={tag.color}>
+                                    #{tag.name}
+                                  </AppText>
+                                </View>
+                              ))}
+                            </View>
+                          ) : undefined
+                        }
+                      />
+                    </React.Fragment>
                   );
                 })}
               </View>

@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, IconButton } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
-import { TransactionItem } from '@/components/transaction-item';
+import { TransactionDivider, TransactionItem } from '@/components/transaction-item';
 
 export default function SearchScreen() {
   const insets = useSafeAreaInsets();
@@ -101,17 +101,29 @@ export default function SearchScreen() {
           <>
             {results.txMatches.length > 0 ? (
               <Group title="Transactions" count={results.txMatches.length}>
-                <View style={{ gap: 8 }}>
-                  {results.txMatches.map((t) => {
+                <View
+                  style={{
+                    borderRadius: Radius.md,
+                    borderCurve: 'continuous',
+                    borderWidth: 1,
+                    borderColor: Colors.border,
+                    overflow: 'hidden',
+                    marginTop: 6,
+                  }}
+                >
+                  {results.txMatches.map((t, idx) => {
                     const cat = categories.find((c) => c.id === t.categoryId);
                     const acc = accounts.find((a) => a.id === t.accountId);
                     return (
-                      <TransactionItem
-                        key={t.id}
-                        transaction={t}
-                        category={cat}
-                        account={acc}
-                      />
+                      <React.Fragment key={t.id}>
+                        {idx > 0 && <TransactionDivider />}
+                        <TransactionItem
+                          transaction={t}
+                          category={cat}
+                          account={acc}
+                          grouped
+                        />
+                      </React.Fragment>
                     );
                   })}
                 </View>

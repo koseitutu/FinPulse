@@ -7,6 +7,20 @@ import { AppText } from '@/components/ui';
 import { formatRelative } from '@/utils/finance';
 import type { Transaction, Category, Account, Tag } from '@/store/types';
 
+/** Thin horizontal rule used between transaction rows in lists. */
+export function TransactionDivider() {
+  return (
+    <View
+      style={{
+        height: 1,
+        backgroundColor: Colors.border,
+        opacity: 0.55,
+        marginHorizontal: Spacing.xs,
+      }}
+    />
+  );
+}
+
 export interface TransactionItemProps {
   transaction: Transaction;
   category?: Category;
@@ -25,6 +39,8 @@ export interface TransactionItemProps {
   renderBelow?: React.ReactNode;
   /** Override right-side second line. Defaults to formatRelative(date) */
   dateLabel?: string;
+  /** When true, strips the standalone card border/shadow (item is inside a grouped container) */
+  grouped?: boolean;
 }
 
 export function TransactionItem({
@@ -41,6 +57,7 @@ export function TransactionItem({
   noLink = false,
   renderBelow,
   dateLabel,
+  grouped = false,
 }: TransactionItemProps) {
   const color = t.type === 'income' ? Colors.income : cat?.color ?? Colors.expense;
   const amountColor = t.type === 'income' ? Colors.income : Colors.expense;
@@ -53,14 +70,18 @@ export function TransactionItem({
       onLongPress={selectMode ? undefined : onLongPress}
       onPress={onPress}
       style={({ pressed }) => ({
-        // Card appearance
+        // Card appearance — when grouped, the parent container provides border/shadow
         backgroundColor: isSelected ? Colors.gold + '18' : Colors.surface,
-        borderRadius: Radius.lg,
-        borderCurve: 'continuous',
-        borderWidth: 1,
-        borderColor: isSelected ? Colors.gold + '55' : Colors.border,
-        boxShadow: '0 1px 3px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)',
-        overflow: 'hidden',
+        ...(grouped
+          ? {}
+          : {
+              borderRadius: Radius.lg,
+              borderCurve: 'continuous',
+              borderWidth: 1,
+              borderColor: isSelected ? Colors.gold + '55' : Colors.border,
+              boxShadow: '0 1px 3px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)',
+              overflow: 'hidden',
+            }),
         // Row layout
         flexDirection: 'row',
         alignItems: 'center',
