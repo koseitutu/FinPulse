@@ -288,6 +288,6 @@ export const formatCompact = (amount: number, currency = 'GHS') => {
   let str: string;
   if (abs >= 1_000_000) str = (abs / 1_000_000).toFixed(1) + 'M';
   else if (abs >= 1_000) str = (abs / 1_000).toFixed(1) + 'k';
-  else str = abs.toFixed(0);
+  else str = abs.toFixed(2);
   return `${amount < 0 ? '-' : ''}${currency} ${str}`;
 };
