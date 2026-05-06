@@ -5,6 +5,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, Card, Chip, IconButton, SectionHeader } from '@/components/ui';
+import { DatePickerField } from '@/components/date-picker-field';
 import { useAppStore } from '@/store/useAppStore';
 import type { TxType } from '@/store/types';
 
@@ -34,7 +35,7 @@ export default function NewTransactionScreen() {
   const [categoryId, setCategoryId] = useState<string>(params.categoryId ?? '');
   const [subcategoryId, setSubcategoryId] = useState<string>('');
   const [tagIds, setTagIds] = useState<string[]>([]);
-  const [date] = useState<string>(params.date ?? new Date().toISOString());
+  const [date, setDate] = useState<string>(params.date ?? new Date().toISOString());
 
   const parentCats = useMemo(() => categories.filter((c) => !c.parentId && c.type === type), [categories, type]);
   const subCats = useMemo(() => categories.filter((c) => c.parentId === categoryId), [categories, categoryId]);
@@ -245,6 +246,9 @@ export default function NewTransactionScreen() {
             ))}
           </View>
         </View>
+
+        {/* Date */}
+        <DatePickerField value={date} onChange={setDate} label="DATE" />
 
         {/* Merchant */}
         <Card tone="blue">
