@@ -135,6 +135,7 @@ const defaultPrefs: Preferences = {
   theme: 'dark',
   name: 'Kwame',
   fontScale: 'medium',
+  fiscalMonthStartDay: 1,
   alerts: {
     budget50: true,
     budget80: true,

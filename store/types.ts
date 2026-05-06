@@ -115,4 +115,9 @@ export interface Preferences {
    * Defaults to 'medium' (1.0×). Small = 0.88×, Large = 1.15×.
    */
   fontScale: FontScale;
+  /**
+   * Day of the month when the user's fiscal month starts (e.g. salary day).
+   * Defaults to 1 (standard calendar month). Range: 1–28.
+   */
+  fiscalMonthStartDay: number;
 }

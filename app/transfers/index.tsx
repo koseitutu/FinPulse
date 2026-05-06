@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing, formatCompact, useTheme } from '@/constants/theme';
 import { AppText, Button, Empty, IconButton } from '@/components/ui';
 import { useAppStore } from '@/store/useAppStore';
-import { formatRelative } from '@/utils/finance';
+import { formatRelative, getFiscalMonthRange } from '@/utils/finance';
 import type { Transfer } from '@/store/types';
 
 export default function TransfersScreen() {
@@ -44,16 +44,18 @@ export default function TransfersScreen() {
       });
   }, [transfers]);
 
-  // Quick stats: this month
+  // Quick stats: this fiscal month
+  const fiscalStartDay = useAppStore((s) => s.preferences.fiscalMonthStartDay) ?? 1;
   const thisMonthTotal = useMemo(() => {
     const now = new Date();
+    const { start, end } = getFiscalMonthRange(now, fiscalStartDay);
     return transfers
       .filter((t) => {
         const d = new Date(t.date);
-        return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+        return d >= start && d <= end;
       })
       .reduce((acc, t) => acc + t.fromAmount, 0);
-  }, [transfers]);
+  }, [transfers, fiscalStartDay]);
 
   const handleUndo = (t: Transfer) => {
     const from = accountMap.get(t.fromAccountId);

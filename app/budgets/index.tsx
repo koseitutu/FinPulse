@@ -16,7 +16,13 @@ import {
   SectionHeader,
 } from '@/components/ui';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
-import { daysInMonth, filterMonth, forecast, monthName } from '@/utils/finance';
+import {
+  fiscalDayOfMonth,
+  fiscalMonthDays,
+  forecast,
+  getOffsetFiscalMonthRange,
+  monthName,
+} from '@/utils/finance';
 import type { Category } from '@/store/types';
 
 type Filter = 'all' | 'on-track' | 'warning' | 'over' | 'unbudgeted';
@@ -38,18 +44,24 @@ export default function BudgetsScreen() {
   const currency = useAppStore((s) => s.preferences.currency);
   const updateCategory = useAppStore((s) => s.updateCategory);
 
+  const fiscalStartDay = useAppStore((s) => s.preferences.fiscalMonthStartDay) ?? 1;
   const [filter, setFilter] = useState<Filter>('all');
   const [monthOffset, setMonthOffset] = useState(0);
 
-  const now = useMemo(() => {
-    const d = new Date();
-    d.setMonth(d.getMonth() + monthOffset);
-    return d;
-  }, [monthOffset]);
+  const fiscalRange = useMemo(
+    () => getOffsetFiscalMonthRange(fiscalStartDay, monthOffset),
+    [fiscalStartDay, monthOffset]
+  );
+
+  const now = fiscalRange.start;
 
   const monthTx = useMemo(
-    () => filterMonth(txs, now.getFullYear(), now.getMonth()),
-    [txs, now]
+    () =>
+      txs.filter((t) => {
+        const d = new Date(t.date);
+        return d >= fiscalRange.start && d <= fiscalRange.end;
+      }),
+    [txs, fiscalRange]
   );
 
   const expenseTx = useMemo(() => monthTx.filter((t) => t.type === 'expense'), [monthTx]);
@@ -107,9 +119,8 @@ export default function BudgetsScreen() {
   const remaining = totalBudget - totalSpent;
 
   const isCurrentMonth = monthOffset === 0;
-  const dayCount = daysInMonth(now.getFullYear(), now.getMonth());
-  const today = new Date();
-  const dayOfMonth = isCurrentMonth ? today.getDate() : dayCount;
+  const dayCount = fiscalMonthDays(fiscalStartDay, fiscalRange.start);
+  const dayOfMonth = isCurrentMonth ? fiscalDayOfMonth(fiscalStartDay) : dayCount;
   const projected = isCurrentMonth ? forecast(totalSpent, dayOfMonth, dayCount) : totalSpent;
 
   const counts = useMemo(

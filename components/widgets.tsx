@@ -6,7 +6,7 @@ import { Colors, Radius, Spacing, formatCompact, formatCurrency } from '@/consta
 import { AppText, Card, IconCircle, ProgressBar, SectionHeader } from './ui';
 import { Sparkline } from './charts';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
-import { filterMonth, sumByType } from '@/utils/finance';
+import { filterFiscalMonth, sumByType } from '@/utils/finance';
 import type { WidgetKey } from '@/store/types';
 import { TransactionDivider, TransactionItem } from './transaction-item';
 
@@ -53,8 +53,8 @@ export function BalanceWidget() {
     return cum;
   }, [txs]);
 
-  const now = new Date();
-  const thisMonthTx = filterMonth(txs ?? [], now.getFullYear(), now.getMonth());
+  const fiscalStartDay = useAppStore((s) => s.preferences.fiscalMonthStartDay) ?? 1;
+  const thisMonthTx = filterFiscalMonth(txs ?? [], fiscalStartDay);
   const { income, expense } = sumByType(thisMonthTx);
   const safeTotal = Number.isFinite(total) ? total : 0;
   const safeIncome = Number.isFinite(income) ? income : 0;
@@ -152,8 +152,8 @@ export function BalanceWidget() {
 export function BudgetsWidget() {
   const categories = useAppStore((s) => s.categories);
   const txs = useActiveTransactions();
-  const now = new Date();
-  const monthTx = filterMonth(txs, now.getFullYear(), now.getMonth());
+  const fiscalStartDay = useAppStore((s) => s.preferences.fiscalMonthStartDay) ?? 1;
+  const monthTx = filterFiscalMonth(txs, fiscalStartDay);
 
   const budgets = categories
     .filter((c) => !c.parentId && c.type === 'expense' && c.budget)

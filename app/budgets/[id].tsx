@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Colors, Radius, Spacing, formatCompact, useScaledFont, useTheme } from '@/constants/theme';
 import { AppText, Button, IconButton, ProgressBar } from '@/components/ui';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
-import { daysInMonth, filterMonth } from '@/utils/finance';
+import { filterFiscalMonth, fiscalMonthDays } from '@/utils/finance';
 
 const QUICK = [100, 250, 500, 1000, 2000, 5000];
 
@@ -28,6 +28,7 @@ export default function BudgetEditScreen() {
   const updateCategory = useAppStore((s) => s.updateCategory);
   const txs = useActiveTransactions();
   const currency = useAppStore((s) => s.preferences.currency);
+  const fiscalStartDay = useAppStore((s) => s.preferences.fiscalMonthStartDay) ?? 1;
 
   const category = useMemo(() => categories.find((c) => c.id === id), [categories, id]);
 
@@ -71,8 +72,7 @@ export default function BudgetEditScreen() {
   const valid = amount.trim().length > 0 && !isNaN(parsed) && parsed > 0;
 
   // Current spend for preview
-  const now = new Date();
-  const monthTx = filterMonth(txs, now.getFullYear(), now.getMonth());
+  const monthTx = filterFiscalMonth(txs, fiscalStartDay);
   const spent = monthTx
     .filter((t) => {
       if (t.type !== 'expense') return false;
@@ -81,7 +81,7 @@ export default function BudgetEditScreen() {
     })
     .reduce((a, t) => a + t.amount, 0);
 
-  const dayCount = daysInMonth(now.getFullYear(), now.getMonth());
+  const dayCount = fiscalMonthDays(fiscalStartDay);
   const previewBudget = valid ? parsed : 0;
   const previewPct = previewBudget > 0 ? (spent / previewBudget) * 100 : 0;
   const previewRemaining = previewBudget - spent;

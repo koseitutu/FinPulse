@@ -6,7 +6,16 @@ import { Colors, Spacing, formatCompact, formatCurrency, useTheme } from '@/cons
 import { AppText, Card, Chip, ProgressBar, SectionHeader } from '@/components/ui';
 import { BarChart, Donut, LegendRow, LineChart } from '@/components/charts';
 import { useActiveTransactions, useAppStore } from '@/store/useAppStore';
-import { daysInMonth, filterMonth, forecast, groupByCategory, sumByType } from '@/utils/finance';
+import {
+  filterFiscalMonth,
+  fiscalDayOfMonth,
+  fiscalMonthDays,
+  forecast,
+  getFiscalMonthRange,
+  getOffsetFiscalMonthRange,
+  groupByCategory,
+  sumByType,
+} from '@/utils/finance';
 
 type Range = 'month' | '3m' | 'year';
 
@@ -17,11 +26,12 @@ export default function InsightsScreen() {
   const categories = useAppStore((s) => s.categories);
   const [range, setRange] = useState<Range>('month');
 
-  const now = new Date();
-  const thisMonth = filterMonth(txs, now.getFullYear(), now.getMonth());
+  const fiscalStartDay = useAppStore((s) => s.preferences.fiscalMonthStartDay) ?? 1;
+  const thisMonth = filterFiscalMonth(txs, fiscalStartDay);
   const { income, expense } = sumByType(thisMonth);
-  const days = daysInMonth(now.getFullYear(), now.getMonth());
-  const predicted = forecast(expense, now.getDate(), days);
+  const days = fiscalMonthDays(fiscalStartDay);
+  const currentDay = fiscalDayOfMonth(fiscalStartDay);
+  const predicted = forecast(expense, currentDay, days);
 
   const catBreakdown = useMemo(() => {
     const expenses = thisMonth.filter((t) => t.type === 'expense');
@@ -34,41 +44,45 @@ export default function InsightsScreen() {
     color: g.category?.color ?? Colors.gold,
   }));
 
-  // bar data: last 6 months expense
+  // bar data: last 6 fiscal months expense
   const bars = useMemo(() => {
     const arr: { label: string; value: number; highlight?: boolean }[] = [];
     for (let i = 5; i >= 0; i--) {
-      const d = new Date();
-      d.setMonth(d.getMonth() - i);
-      const ms = filterMonth(txs, d.getFullYear(), d.getMonth()).filter((t) => t.type === 'expense');
+      const range = getOffsetFiscalMonthRange(fiscalStartDay, -i);
+      const monthTxs = txs.filter((t) => {
+        const d = new Date(t.date);
+        return d >= range.start && d <= range.end;
+      });
+      const ms = monthTxs.filter((t) => t.type === 'expense');
       const total = ms.reduce((a, t) => a + t.amount, 0);
       arr.push({
-        label: d.toLocaleDateString('en-US', { month: 'short' }),
+        label: range.start.toLocaleDateString('en-US', { month: 'short' }),
         value: total,
         highlight: i === 0,
       });
     }
     return arr;
-  }, [txs]);
+  }, [txs, fiscalStartDay]);
 
-  // line data: daily cumulative this month expense
+  // line data: daily cumulative this fiscal month expense
   const line = useMemo(() => {
+    const { start } = getFiscalMonthRange(new Date(), fiscalStartDay);
     const arr = new Array(days).fill(0);
-    const today = new Date().getDate();
     thisMonth
       .filter((t) => t.type === 'expense')
       .forEach((t) => {
-        const d = new Date(t.date).getDate() - 1;
-        if (d >= 0) arr[d] += t.amount;
+        const d = new Date(t.date);
+        const dayIdx = Math.floor((d.getTime() - start.getTime()) / 86400000);
+        if (dayIdx >= 0 && dayIdx < days) arr[dayIdx] += t.amount;
       });
     const cum: number[] = [];
     let c = 0;
     arr.forEach((v, i) => {
       c += v;
-      if (i <= today - 1) cum.push(c);
+      if (i < currentDay) cum.push(c);
     });
     return cum;
-  }, [thisMonth, days]);
+  }, [thisMonth, days, currentDay, fiscalStartDay]);
 
   // Financial health score
   const savingsRate = income > 0 ? ((income - expense) / income) * 100 : 0;
@@ -132,7 +146,7 @@ export default function InsightsScreen() {
       <Card tone="amber">
         <SectionHeader
           title="Month forecast"
-          subtitle={`Day ${now.getDate()} of ${days}`}
+          subtitle={`Day ${currentDay} of ${days}`}
         />
         <View style={{ flexDirection: 'row', gap: 12, marginBottom: 14 }}>
           <View style={{ flex: 1 }}>
@@ -249,8 +263,8 @@ export default function InsightsScreen() {
 
 function TopMerchantsCard() {
   const txs = useActiveTransactions();
-  const now = new Date();
-  const month = filterMonth(txs, now.getFullYear(), now.getMonth());
+  const fiscalStartDay = useAppStore((s) => s.preferences.fiscalMonthStartDay) ?? 1;
+  const month = filterFiscalMonth(txs, fiscalStartDay);
   const byMerchant = new Map<string, number>();
   month
     .filter((t) => t.type === 'expense' && t.merchant)

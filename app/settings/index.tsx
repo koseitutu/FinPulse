@@ -10,6 +10,13 @@ import type { FontScale } from '@/store/types';
 
 const CURRENCIES = ['GHS', 'USD', 'EUR', 'GBP', 'NGN'];
 const RETENTIONS: (3 | 6 | 12 | 24)[] = [3, 6, 12, 24];
+const FISCAL_DAYS = [1, 5, 10, 15, 20, 25, 28];
+
+const ordinal = (n: number) => {
+  const s = ['th', 'st', 'nd', 'rd'];
+  const v = n % 100;
+  return `${n}${s[(v - 20) % 10] || s[v] || s[0]}`;
+};
 
 const FONT_SIZES: { key: FontScale; label: string; preview: number }[] = [
   { key: 'small', label: 'Small', preview: 12 },
@@ -229,6 +236,70 @@ export default function SettingsScreen() {
           <AppText size={11} color={Colors.textMuted} style={{ marginTop: 10, lineHeight: 16 }}>
             Each account keeps its own currency · the dashboard total sums only accounts in your
             preferred currency.
+          </AppText>
+        </Card>
+
+        <Card tone="amber">
+          <SectionHeader
+            title="Fiscal month start"
+            subtitle="Set the day your personal month begins (e.g. salary day)"
+          />
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                borderRadius: 20,
+                backgroundColor: Colors.gold + '22',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Ionicons name="calendar" size={18} color={Colors.gold} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <AppText size={14} weight="semiBold" color={Colors.text}>
+                Month starts on day {preferences.fiscalMonthStartDay ?? 1}
+              </AppText>
+              <AppText size={11} color={Colors.textMuted}>
+                {(preferences.fiscalMonthStartDay ?? 1) === 1
+                  ? 'Standard calendar month (1st to end)'
+                  : `Your month runs from the ${ordinal(preferences.fiscalMonthStartDay ?? 1)} to the ${ordinal((preferences.fiscalMonthStartDay ?? 1) - 1)} of next month`}
+              </AppText>
+            </View>
+          </View>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+            {FISCAL_DAYS.map((d) => {
+              const active = (preferences.fiscalMonthStartDay ?? 1) === d;
+              return (
+                <Pressable
+                  key={d}
+                  onPress={() => setPreferences({ fiscalMonthStartDay: d })}
+                  style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: Radius.md,
+                    backgroundColor: active ? Colors.gold + '22' : Colors.surface,
+                    borderWidth: 1,
+                    borderColor: active ? Colors.gold : Colors.border,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <AppText
+                    size={14}
+                    weight={active ? 'bold' : 'medium'}
+                    color={active ? Colors.gold : Colors.text}
+                  >
+                    {d}
+                  </AppText>
+                </Pressable>
+              );
+            })}
+          </View>
+          <AppText size={11} color={Colors.textMuted} style={{ marginTop: 10, lineHeight: 16 }}>
+            Budgets, insights, and monthly totals will reset on this day each month. Capped at 28 to
+            avoid short-month issues.
           </AppText>
         </Card>
 
