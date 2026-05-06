@@ -198,7 +198,7 @@ export default function ManageDataScreen() {
         flash('info', 'No transactions to export.');
         return;
       }
-      const csv = buildCSV(transactions, categories);
+      const csv = buildCSV(transactions, categories, accounts);
       const filename = `finpulse_transactions_${new Date().toISOString().slice(0, 10)}.csv`;
       const res = await saveTextFile(filename, csv, 'text/csv');
       if (res.ok) {
@@ -516,7 +516,7 @@ export default function ManageDataScreen() {
         <Card tone="teal">
           <SectionHeader
             title="Transactions CSV"
-            subtitle="For spreadsheets or importing into other apps · Date, Type, Amount, Currency, Category, Subcategory, Merchant, Notes"
+            subtitle="For spreadsheets or importing into other apps · Date, Merchant, Type, Category, Account, Amount, Currency, Notes"
           />
           <View style={{ gap: 10 }}>
             <ActionRow

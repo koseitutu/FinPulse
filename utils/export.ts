@@ -1,5 +1,5 @@
 import { Platform, Share } from 'react-native';
-import type { Category, Transaction } from '@/store/types';
+import type { Account, Category, Transaction } from '@/store/types';
 import { formatDate } from './finance';
 
 const escapeCsv = (v: string) => {
@@ -9,19 +9,25 @@ const escapeCsv = (v: string) => {
   return v;
 };
 
-export const buildCSV = (txs: Transaction[], categories: Category[]) => {
-  const header = ['Date', 'Type', 'Amount', 'Currency', 'Category', 'Subcategory', 'Merchant', 'Notes'];
+export const buildCSV = (
+  txs: Transaction[],
+  categories: Category[],
+  accounts?: Account[]
+) => {
+  const header = ['Date', 'Merchant', 'Type', 'Category', 'Subcategory', 'Account', 'Amount', 'Currency', 'Notes'];
   const rows = txs.map((t) => {
     const cat = categories.find((c) => c.id === t.categoryId);
     const sub = t.subcategoryId ? categories.find((c) => c.id === t.subcategoryId) : null;
+    const acct = accounts?.find((a) => a.id === t.accountId);
     return [
       formatDate(t.date),
+      t.merchant ?? '',
       t.type,
-      t.amount.toFixed(2),
-      t.currency,
       cat?.name ?? '',
       sub?.name ?? '',
-      t.merchant ?? '',
+      acct?.name ?? '',
+      (t.type === 'expense' ? '-' : '') + t.amount.toFixed(2),
+      t.currency,
       t.notes ?? '',
     ].map((v) => escapeCsv(String(v)));
   });
@@ -82,10 +88,14 @@ export const downloadWeb = (filename: string, content: string, mime: string) => 
   const a = g.document.createElement('a');
   a.href = url;
   a.download = filename;
+  a.style.display = 'none';
   g.document.body.appendChild(a);
   a.click();
-  a.remove();
-  g.URL.revokeObjectURL(url);
+  // Delay cleanup so the browser can initiate the download before we revoke
+  setTimeout(() => {
+    a.remove();
+    g.URL.revokeObjectURL(url);
+  }, 150);
 };
 
 export const shareText = async (title: string, message: string) => {

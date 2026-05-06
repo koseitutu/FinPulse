@@ -1,5 +1,6 @@
-import { Platform, Share } from 'react-native';
+import { Platform } from 'react-native';
 import { File, Paths } from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 import type { BackupData } from '@/store/useAppStore';
 
 export const CURRENT_BACKUP_SCHEMA: BackupData['schemaVersion'] = 1;
@@ -59,17 +60,21 @@ const downloadWeb = (filename: string, content: string, mime: string) => {
   const a = g.document.createElement('a');
   a.href = url;
   a.download = filename;
+  a.style.display = 'none';
   g.document.body.appendChild(a);
   a.click();
-  a.remove();
-  g.URL.revokeObjectURL(url);
+  // Delay cleanup so the browser can initiate the download before we revoke
+  setTimeout(() => {
+    a.remove();
+    g.URL.revokeObjectURL(url);
+  }, 150);
   return true;
 };
 
 /**
  * Save a text file to the user's device. On web triggers a browser download.
- * On native writes to the cache directory and opens the native share sheet so
- * the user can save the file to Drive / iCloud / email / etc.
+ * On native writes to the cache directory and opens the native share sheet
+ * (via expo-sharing) so the user can save the file to Drive / iCloud / email / etc.
  */
 export const saveTextFile = async (
   filename: string,
@@ -82,20 +87,31 @@ export const saveTextFile = async (
       return { ok: true };
     }
 
+    // Write file content to cache directory
     const file = new File(Paths.cache, filename);
     if (file.exists) file.delete();
     file.create();
     file.write(content);
 
-    const shareUrl = Platform.OS === 'android' && file.contentUri ? file.contentUri : file.uri;
-    await Share.share({
-      title: filename,
-      url: shareUrl,
-      message: Platform.OS === 'android' ? filename : undefined,
+    // Use expo-sharing to open the native share sheet with the actual file
+    const isAvailable = await Sharing.isAvailableAsync();
+    if (!isAvailable) {
+      return { ok: false, error: 'Sharing is not available on this device.' };
+    }
+
+    await Sharing.shareAsync(file.uri, {
+      mimeType: mime,
+      dialogTitle: filename,
+      UTI: mime === 'text/csv' ? 'public.comma-separated-values-text' : 'public.json',
     });
+
     return { ok: true, uri: file.uri };
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
+    // User dismissing the share sheet throws on some platforms — not an error
+    if (msg.includes('dismissed') || msg.includes('cancel')) {
+      return { ok: true, uri: undefined };
+    }
     return { ok: false, error: msg };
   }
 };
