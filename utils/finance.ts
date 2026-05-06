@@ -16,16 +16,28 @@ export const filterMonth = (txs: Transaction[], year: number, month: number) =>
 // --- Fiscal month utilities ---
 
 /**
+ * Returns the actual day to use for a given month, clamped to the last day of that month.
+ * E.g. if startDay=31 and month is February (28 days), returns 28.
+ */
+const clampDay = (year: number, month: number, startDay: number): number => {
+  const lastDay = new Date(year, month + 1, 0).getDate();
+  return Math.min(startDay, lastDay);
+};
+
+/**
  * Returns the start and end dates of the fiscal month period that contains `refDate`.
  * If startDay=1, this is equivalent to a standard calendar month.
  * E.g. startDay=15, refDate=Jan 20 -> period is Jan 15 to Feb 14.
  * E.g. startDay=15, refDate=Jan 10 -> period is Dec 15 to Jan 14.
+ *
+ * Supports days 1–31. If the selected day exceeds the number of days in a month,
+ * the last day of that month is used (e.g. day 31 in Feb → Feb 28/29).
  */
 export const getFiscalMonthRange = (
   refDate: Date,
   startDay: number
 ): { start: Date; end: Date } => {
-  const day = startDay < 1 ? 1 : startDay > 28 ? 28 : startDay;
+  const day = startDay < 1 ? 1 : startDay > 31 ? 31 : startDay;
 
   if (day === 1) {
     // Standard calendar month
@@ -38,15 +50,21 @@ export const getFiscalMonthRange = (
   const m = refDate.getMonth();
   const d = refDate.getDate();
 
-  if (d >= day) {
+  // Clamp the fiscal start day to the actual days in the relevant month
+  const clampedThisMonth = clampDay(y, m, day);
+  const clampedPrevMonth = clampDay(y, m - 1, day);
+
+  if (d >= clampedThisMonth) {
     // We are in the fiscal month that started this calendar month
-    const start = new Date(y, m, day);
-    const end = new Date(y, m + 1, day - 1, 23, 59, 59, 999);
+    const start = new Date(y, m, clampedThisMonth);
+    // End is the day before the next fiscal start
+    const nextMonthClamped = clampDay(y, m + 1, day);
+    const end = new Date(y, m + 1, nextMonthClamped - 1, 23, 59, 59, 999);
     return { start, end };
   } else {
     // We are still in the fiscal month that started last calendar month
-    const start = new Date(y, m - 1, day);
-    const end = new Date(y, m, day - 1, 23, 59, 59, 999);
+    const start = new Date(y, m - 1, clampedPrevMonth);
+    const end = new Date(y, m, clampedThisMonth - 1, 23, 59, 59, 999);
     return { start, end };
   }
 };

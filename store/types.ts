@@ -117,7 +117,9 @@ export interface Preferences {
   fontScale: FontScale;
   /**
    * Day of the month when the user's fiscal month starts (e.g. salary day).
-   * Defaults to 1 (standard calendar month). Range: 1–28.
+   * Defaults to 1 (standard calendar month). Range: 1–31.
+   * If the selected day exceeds the number of days in a given month,
+   * the last day of that month is used instead.
    */
   fiscalMonthStartDay: number;
 }

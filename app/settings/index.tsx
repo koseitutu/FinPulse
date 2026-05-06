@@ -10,7 +10,8 @@ import type { FontScale } from '@/store/types';
 
 const CURRENCIES = ['GHS', 'USD', 'EUR', 'GBP', 'NGN'];
 const RETENTIONS: (3 | 6 | 12 | 24)[] = [3, 6, 12, 24];
-const FISCAL_DAYS = [1, 5, 10, 15, 20, 25, 28];
+// All possible days of the month (1-31)
+const FISCAL_DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
 
 const ordinal = (n: number) => {
   const s = ['th', 'st', 'nd', 'rd'];
@@ -244,7 +245,7 @@ export default function SettingsScreen() {
             title="Fiscal month start"
             subtitle="Set the day your personal month begins (e.g. salary day)"
           />
-          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 14 }}>
             <View
               style={{
                 width: 40,
@@ -268,28 +269,42 @@ export default function SettingsScreen() {
               </AppText>
             </View>
           </View>
-          <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6 }}>
+          {/* Day grid — 7 columns for all 31 days */}
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: 5,
+              justifyContent: 'flex-start',
+            }}
+          >
             {FISCAL_DAYS.map((d) => {
               const active = (preferences.fiscalMonthStartDay ?? 1) === d;
               return (
                 <Pressable
                   key={d}
                   onPress={() => setPreferences({ fiscalMonthStartDay: d })}
-                  style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: Radius.md,
-                    backgroundColor: active ? Colors.gold + '22' : Colors.surface,
-                    borderWidth: 1,
+                  style={({ pressed }) => ({
+                    width: 38,
+                    height: 38,
+                    borderRadius: 19,
+                    backgroundColor: active
+                      ? Colors.gold
+                      : pressed
+                        ? Colors.gold + '11'
+                        : Colors.surface,
+                    borderWidth: 1.5,
                     borderColor: active ? Colors.gold : Colors.border,
                     alignItems: 'center',
                     justifyContent: 'center',
-                  }}
+                    opacity: pressed ? 0.8 : 1,
+                  })}
                 >
                   <AppText
-                    size={14}
+                    size={13}
                     weight={active ? 'bold' : 'medium'}
-                    color={active ? Colors.gold : Colors.text}
+                    color={active ? '#fff' : Colors.text}
+                    style={{ fontVariant: ['tabular-nums'] }}
                   >
                     {d}
                   </AppText>
@@ -297,9 +312,10 @@ export default function SettingsScreen() {
               );
             })}
           </View>
-          <AppText size={11} color={Colors.textMuted} style={{ marginTop: 10, lineHeight: 16 }}>
-            Budgets, insights, and monthly totals will reset on this day each month. Capped at 28 to
-            avoid short-month issues.
+          <AppText size={11} color={Colors.textMuted} style={{ marginTop: 12, lineHeight: 16 }}>
+            Budgets, insights, and monthly totals will reset on this day each month. If the selected
+            day does not exist in a shorter month (e.g. 31 in February), the last day of that month
+            is used instead.
           </AppText>
         </Card>
 
